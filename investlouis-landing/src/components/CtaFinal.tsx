@@ -3,20 +3,20 @@ import LeadForm from './LeadForm'
 export default function CtaFinal() {
   return (
     <section className="relative py-32 px-6 overflow-hidden">
-      {/* Glow */}
+      {/* Centered radial glow */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="w-[700px] h-[400px] bg-[#1D4ED8] opacity-[0.06] blur-[120px] rounded-full" />
+        <div className="w-[800px] h-[500px] bg-[#1D4ED8] opacity-[0.05] blur-[130px] rounded-full" />
       </div>
 
-      <div className="relative max-w-[560px] mx-auto text-center flex flex-col items-center gap-8">
+      <div className="relative max-w-[520px] mx-auto text-center flex flex-col items-center gap-10">
 
-        <div>
+        <div className="reveal">
           <p className="font-['Montserrat'] font-bold text-[10px] tracking-[2px] uppercase
-                        text-[#B8963E] mb-4">
+                        text-[#B8963E] mb-5">
             Dernière chance
           </p>
           <h2 className="font-['Montserrat'] font-black text-white text-[36px] lg:text-[44px]
-                         leading-[1.1] tracking-[-1px] mb-4">
+                         leading-[1.07] tracking-[-1.5px] mb-5">
             Tu perds contre des algos<br />
             <span className="text-[#3B82F6]">armés de ces outils.</span><br />
             Maintenant tu les as aussi.
@@ -27,7 +27,7 @@ export default function CtaFinal() {
           </p>
         </div>
 
-        <div className="w-full max-w-[380px]">
+        <div className="reveal reveal-delay-2 w-full">
           <LeadForm ctaLabel="Je Télécharge La Clé de la Rentabilité →" />
         </div>
 

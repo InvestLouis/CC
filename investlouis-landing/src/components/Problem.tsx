@@ -26,7 +26,7 @@ export default function Problem() {
     <section className="relative py-28 px-6">
       <div className="max-w-[1060px] mx-auto">
 
-        <div className="mb-14">
+        <div className="mb-14 reveal">
           <p className="font-['Montserrat'] font-bold text-[10px] tracking-[2px] uppercase
                         text-[#B8963E] mb-4">
             Le diagnostic
@@ -39,15 +39,15 @@ export default function Problem() {
         </div>
 
         {/* Structural table */}
-        <div className="border border-white/[0.07] rounded-xl overflow-hidden">
+        <div className="reveal border border-white/[0.07] rounded-xl overflow-hidden">
           <div className="grid grid-cols-[1fr_1fr_1fr] bg-[#0B1120] border-b border-white/[0.07]">
             <div className="px-6 py-3">
-              <span className="font-['Montserrat'] font-bold text-[9px] tracking-[2px] uppercase text-[#475569]">
+              <span className="font-['Montserrat'] font-bold text-[9px] tracking-[2px] uppercase text-[#334155]">
                 Problème actuel
               </span>
             </div>
             <div className="px-6 py-3 border-l border-white/[0.07]">
-              <span className="font-['Montserrat'] font-bold text-[9px] tracking-[2px] uppercase text-[#475569]">
+              <span className="font-['Montserrat'] font-bold text-[9px] tracking-[2px] uppercase text-[#334155]">
                 Coût réel
               </span>
             </div>
@@ -60,17 +60,18 @@ export default function Problem() {
 
           {rows.map((row, i) => (
             <div key={i}
-              className={`grid grid-cols-[1fr_1fr_1fr] ${i < rows.length - 1 ? 'border-b border-white/[0.05]' : ''}
-                          hover:bg-white/[0.02] transition-colors`}>
+              className={`grid grid-cols-[1fr_1fr_1fr] ${i < rows.length - 1 ? 'border-b border-white/[0.04]' : ''}
+                          hover:bg-white/[0.018] transition-colors duration-300 cursor-default`}
+              style={{ transitionTimingFunction: 'cubic-bezier(0.32,0.72,0,1)' }}>
               <div className="px-6 py-5 flex items-start gap-3">
-                <span className="mt-1 w-1.5 h-1.5 rounded-full bg-[#EF4444]/60 shrink-0" />
+                <span className="mt-[7px] w-1.5 h-1.5 rounded-full bg-[#EF4444]/50 shrink-0" />
                 <span className="text-[#94A3B8] text-[14px] leading-snug">{row.pain}</span>
               </div>
-              <div className="px-6 py-5 border-l border-white/[0.05] flex items-start">
+              <div className="px-6 py-5 border-l border-white/[0.04] flex items-start">
                 <span className="text-[#475569] text-[14px] leading-snug italic">{row.cost}</span>
               </div>
-              <div className="px-6 py-5 border-l border-white/[0.05] flex items-start gap-3">
-                <span className="mt-1 w-1.5 h-1.5 rounded-full bg-[#22C55E]/60 shrink-0" />
+              <div className="px-6 py-5 border-l border-white/[0.04] flex items-start gap-3">
+                <span className="mt-[7px] w-1.5 h-1.5 rounded-full bg-[#22C55E]/60 shrink-0" />
                 <span className="text-[#CBD5E1] text-[14px] leading-snug">{row.fix}</span>
               </div>
             </div>
@@ -78,12 +79,12 @@ export default function Problem() {
         </div>
 
         {/* Pullquote */}
-        <div className="mt-12 pl-6 border-l-2 border-[#B8963E]/40">
-          <p className="font-['Playfair_Display'] italic text-[#94A3B8] text-[18px] leading-relaxed">
+        <div className="reveal reveal-delay-2 mt-12 pl-6 border-l-2 border-[#B8963E]/30">
+          <p className="font-['Playfair_Display'] italic text-[#64748B] text-[18px] leading-relaxed">
             "Ce n'est pas une question de talent. C'est une question d'information.
             Les institutions gagnent parce qu'elles voient ce que tu ne vois pas encore."
           </p>
-          <p className="mt-3 font-['Montserrat'] font-bold text-[10px] tracking-[1.5px] uppercase text-[#475569]">
+          <p className="mt-3 font-['Montserrat'] font-bold text-[10px] tracking-[1.5px] uppercase text-[#334155]">
             Louis Ronchet · InvestLouis
           </p>
         </div>

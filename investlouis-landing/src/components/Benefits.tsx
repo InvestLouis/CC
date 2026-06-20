@@ -30,9 +30,9 @@ export default function Benefits() {
     <section className="py-28 px-6 bg-[#0B1120]">
       <div className="max-w-[1060px] mx-auto">
 
-        <div className="grid grid-cols-1 lg:grid-cols-[340px_1fr] gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-16 items-start">
 
-          <div>
+          <div className="reveal">
             <p className="font-['Montserrat'] font-bold text-[10px] tracking-[2px] uppercase
                           text-[#B8963E] mb-4">
               Ce que contient le guide
@@ -44,25 +44,28 @@ export default function Benefits() {
             </h2>
             <p className="text-[#475569] text-[15px] leading-relaxed">
               Chaque outil est expliqué avec des cas concrets sur des marchés réels.
-              Pas de théorie abstraite — comment le configurer, comment le lire, quand agir.
+              Comment le configurer, comment le lire, quand agir.
             </p>
           </div>
 
           <div className="flex flex-col gap-px">
-            {chapters.map((ch) => (
+            {chapters.map((ch, i) => (
               <div key={ch.num}
-                className="group flex gap-6 px-6 py-6 rounded-lg
-                           hover:bg-white/[0.03] transition-colors cursor-default">
-                <span className="font-['Montserrat'] font-black text-[28px] text-white/[0.08]
-                                 tabular-nums leading-none mt-1 group-hover:text-[#1D4ED8]/40
-                                 transition-colors shrink-0">
+                className={`reveal reveal-delay-${i + 1} group flex gap-6 px-6 py-6 rounded-xl
+                           hover:bg-white/[0.03] border border-transparent
+                           hover:border-white/[0.06]
+                           transition-all duration-500 cursor-default`}
+                style={{ transitionTimingFunction: 'cubic-bezier(0.32,0.72,0,1)' }}>
+                <span className="font-['Montserrat'] font-black text-[28px] text-white/[0.07]
+                                 tabular-nums leading-none mt-1
+                                 group-hover:text-[#1D4ED8]/30 transition-colors duration-500 shrink-0">
                   {ch.num}
                 </span>
                 <div>
                   <h3 className="font-['Montserrat'] font-bold text-white text-[16px] mb-0.5">
                     {ch.title}
                   </h3>
-                  <p className="font-['Montserrat'] text-[10px] tracking-[1px] uppercase text-[#1D4ED8] mb-2">
+                  <p className="font-['Montserrat'] text-[10px] tracking-[1px] uppercase text-[#1D4ED8] mb-2.5">
                     {ch.tool}
                   </p>
                   <p className="text-[#475569] text-[14px] leading-relaxed">{ch.desc}</p>
