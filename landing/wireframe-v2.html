@@ -1,0 +1,1815 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>InvestLouis — Page de Capture Premium</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy-0: #05080f;
+  --navy-1: #080d18;
+  --navy-2: #0A0F1C;
+  --navy-3: #0D1B2F;
+  --navy-4: #0f2040;
+  --blue-royal: #1E3A8A;
+  --blue-elec: #2563EB;
+  --blue-light: #3B82F6;
+  --blue-glow: rgba(37,99,235,0.18);
+  --gold: #D4AF37;
+  --gold-dim: rgba(212,175,55,0.15);
+  --gold-border: rgba(212,175,55,0.25);
+  --silver: #C8D0DC;
+  --white: #ffffff;
+  --text-muted: rgba(200,208,220,0.55);
+  --text-dim: rgba(200,208,220,0.35);
+  --border-subtle: rgba(255,255,255,0.055);
+  --border-blue: rgba(37,99,235,0.2);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--navy-0);
+  color: var(--silver);
+  overflow-x: hidden;
+}
+
+/* ─── GRAIN TEXTURE OVERLAY ────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.028;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ─── NAV ───────────────────────────────────── */
+.il-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 0 60px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(5,8,15,0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.nav-logo {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 17px;
+  letter-spacing: 2px;
+  color: var(--white);
+}
+
+.nav-logo span { color: var(--blue-elec); }
+
+.nav-amf {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+
+.nav-amf-dot {
+  width: 6px; height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+}
+
+.nav-cta {
+  background: transparent;
+  border: 1px solid var(--blue-border, rgba(37,99,235,0.4));
+  color: var(--blue-light);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 9px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.nav-cta:hover {
+  background: var(--blue-elec);
+  color: white;
+  border-color: var(--blue-elec);
+}
+
+/* ─── HERO ──────────────────────────────────── */
+.s-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 140px 40px 100px;
+  text-align: center;
+  overflow: hidden;
+  background: var(--navy-1);
+}
+
+/* Atmospheric glow layers */
+.s-hero::before {
+  content: '';
+  position: absolute;
+  top: -20%; left: 50%;
+  transform: translateX(-50%);
+  width: 900px; height: 900px;
+  background: radial-gradient(ellipse at center,
+    rgba(37,99,235,0.13) 0%,
+    rgba(30,58,138,0.07) 35%,
+    transparent 70%);
+  pointer-events: none;
+}
+
+.s-hero::after {
+  content: '';
+  position: absolute;
+  bottom: -100px; left: 50%;
+  transform: translateX(-50%);
+  width: 600px; height: 300px;
+  background: radial-gradient(ellipse,
+    rgba(212,175,55,0.04) 0%,
+    transparent 70%);
+  pointer-events: none;
+}
+
+/* Candlestick chart SVG bg */
+.hero-chart-bg {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.04;
+  pointer-events: none;
+}
+
+.hero-chart-bg svg {
+  width: 100%;
+  max-width: 900px;
+  height: auto;
+}
+
+/* Light ray */
+.hero-ray {
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 40%;
+  background: linear-gradient(to bottom, rgba(37,99,235,0.5), transparent);
+  pointer-events: none;
+}
+
+.hero-ray::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 180px; height: 180px;
+  background: radial-gradient(ellipse, rgba(37,99,235,0.25) 0%, transparent 70%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 820px;
+}
+
+/* Badge AMF */
+.hero-badge-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.badge-amf {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(212,175,55,0.08);
+  border: 1px solid var(--gold-border);
+  border-radius: 2px;
+  padding: 7px 16px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+
+.badge-free {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(37,99,235,0.08);
+  border: 1px solid rgba(37,99,235,0.25);
+  border-radius: 2px;
+  padding: 7px 16px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--blue-light);
+  text-transform: uppercase;
+}
+
+/* Eyebrow */
+.hero-eyebrow {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 24px;
+}
+
+/* H1 */
+.hero-h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: clamp(36px, 5.5vw, 68px);
+  line-height: 1.05;
+  letter-spacing: -1px;
+  color: var(--white);
+  margin-bottom: 10px;
+}
+
+.hero-h1 .word-blue { color: var(--blue-elec); }
+.hero-h1 .word-outline {
+  -webkit-text-stroke: 1px rgba(255,255,255,0.3);
+  color: transparent;
+}
+
+/* Gold rule */
+.gold-rule {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 24px auto;
+}
+
+.gold-rule-line {
+  height: 1px;
+  width: 60px;
+  background: linear-gradient(90deg, transparent, var(--gold));
+}
+
+.gold-rule-line.right {
+  background: linear-gradient(90deg, var(--gold), transparent);
+}
+
+.gold-rule-diamond {
+  width: 5px; height: 5px;
+  background: var(--gold);
+  transform: rotate(45deg);
+  flex-shrink: 0;
+}
+
+/* Subtitle */
+.hero-sub {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(15px, 1.8vw, 20px);
+  font-weight: 400;
+  color: var(--text-muted);
+  line-height: 1.8;
+  max-width: 580px;
+  margin: 0 auto 56px;
+  font-style: italic;
+}
+
+/* PDF Mockup + Form side by side */
+.hero-split {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 48px;
+  align-items: start;
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+/* PDF Card */
+.pdf-3d {
+  position: relative;
+  transform: perspective(1000px) rotateY(-12deg) rotateX(2deg);
+  transform-style: preserve-3d;
+}
+
+.pdf-card-premium {
+  background: linear-gradient(160deg, #1a3070 0%, #0c1a3a 60%, #080d18 100%);
+  border: 1px solid rgba(37,99,235,0.25);
+  border-radius: 10px;
+  padding: 28px 22px 26px;
+  box-shadow:
+    0 40px 80px rgba(0,0,0,0.8),
+    0 0 60px rgba(37,99,235,0.08),
+    inset 0 1px 0 rgba(255,255,255,0.06);
+  position: relative;
+  overflow: hidden;
+}
+
+.pdf-card-premium::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(37,99,235,0.5), transparent);
+}
+
+.pdf-card-premium::after {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 150px; height: 150px;
+  background: radial-gradient(circle, rgba(37,99,235,0.12) 0%, transparent 70%);
+}
+
+.pdf-logo-text {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+
+.pdf-logo-text span { color: var(--blue-elec); }
+
+.pdf-sub-text {
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  font-weight: 600;
+}
+
+.pdf-hr {
+  height: 1px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+  margin-bottom: 18px;
+  opacity: 0.5;
+}
+
+.pdf-title-text {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+/* Mini chart inside PDF */
+.pdf-mini-chart {
+  margin-bottom: 18px;
+  opacity: 0.6;
+}
+
+.pdf-tag-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.pdf-tag {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 2px;
+  border: 1px solid;
+}
+
+.pdf-tag-gold {
+  color: var(--gold);
+  border-color: var(--gold-border);
+  background: var(--gold-dim);
+}
+
+.pdf-tag-blue {
+  color: var(--blue-light);
+  border-color: rgba(37,99,235,0.3);
+  background: rgba(37,99,235,0.08);
+}
+
+.pdf-free-sticker {
+  position: absolute;
+  top: -14px; right: -14px;
+  background: var(--gold);
+  color: var(--navy-2);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 50px;
+  box-shadow: 0 4px 20px rgba(212,175,55,0.35);
+}
+
+/* Form */
+.hero-form-col {
+  padding-top: 10px;
+}
+
+.form-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 20px;
+  display: block;
+}
+
+.form-field-wrap {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.form-field-icon {
+  position: absolute;
+  left: 16px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-dim);
+  pointer-events: none;
+}
+
+.il-input {
+  width: 100%;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 6px;
+  padding: 14px 16px 14px 42px;
+  color: var(--white);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.il-input:focus {
+  border-color: var(--blue-elec);
+  background: rgba(37,99,235,0.05);
+}
+
+.il-input::placeholder { color: var(--text-dim); font-size: 13px; }
+
+.il-btn {
+  display: block;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  background: var(--blue-elec);
+  color: var(--white);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 17px 24px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 14px;
+  box-shadow: 0 8px 32px rgba(37,99,235,0.3), 0 0 0 1px rgba(37,99,235,0.2);
+  transition: all 0.2s;
+}
+
+.il-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.il-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 40px rgba(37,99,235,0.45), 0 0 0 1px rgba(37,99,235,0.3);
+}
+
+.form-security {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  font-size: 11px;
+  color: var(--text-dim);
+}
+
+.form-security svg { flex-shrink: 0; }
+
+/* Trust row */
+.hero-trust {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin-top: 60px;
+  position: relative;
+  z-index: 2;
+}
+
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 28px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--text-dim);
+}
+
+.trust-item:not(:last-child) {
+  border-right: 1px solid var(--border-subtle);
+}
+
+.trust-dot {
+  width: 4px; height: 4px;
+  background: var(--blue-elec);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ─── SECTION SHARED ────────────────────────── */
+.s-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.section-eyebrow {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--blue-elec);
+  margin-bottom: 16px;
+}
+
+.section-h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: clamp(24px, 3.5vw, 42px);
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+  color: var(--white);
+  margin-bottom: 12px;
+}
+
+.section-h2 em { color: var(--gold); font-style: normal; }
+.section-h2 b { color: var(--blue-elec); font-weight: 900; }
+
+.section-lead {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.8;
+  max-width: 540px;
+}
+
+/* ─── S2 — PROBLÈME ─────────────────────────── */
+.s-problem {
+  background: var(--navy-2);
+  padding: 110px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.s-problem::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-blue), transparent);
+}
+
+.problem-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+  margin-top: 60px;
+}
+
+.pain-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.pain-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.pain-item:last-child { border-bottom: none; }
+
+.pain-num {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: 1px;
+  padding-top: 2px;
+  flex-shrink: 0;
+  width: 24px;
+}
+
+.pain-item-content h4 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--white);
+  margin-bottom: 6px;
+  letter-spacing: 0.2px;
+}
+
+.pain-item-content p {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+/* Pivot card */
+.pivot-glass {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 40px 36px;
+  backdrop-filter: blur(8px);
+  position: relative;
+  overflow: hidden;
+  height: fit-content;
+  margin-top: 10px;
+}
+
+.pivot-glass::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(37,99,235,0.4), transparent);
+}
+
+.pivot-glass::after {
+  content: '';
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(37,99,235,0.08) 0%, transparent 70%);
+}
+
+.pivot-tag {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--blue-elec);
+  margin-bottom: 20px;
+  display: block;
+}
+
+.pivot-quote-text {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(18px, 2vw, 26px);
+  font-weight: 400;
+  color: var(--white);
+  line-height: 1.55;
+  margin-bottom: 28px;
+}
+
+.pivot-quote-text em {
+  color: var(--blue-elec);
+  font-style: italic;
+}
+
+.pivot-divider {
+  height: 1px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+  margin-bottom: 24px;
+  opacity: 0.4;
+}
+
+.pivot-author {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+
+/* ─── S3 — BÉNÉFICES ────────────────────────── */
+.s-benefits {
+  background: var(--navy-3);
+  padding: 110px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.benefits-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: end;
+  margin-bottom: 60px;
+}
+
+.benefits-cta-mini {
+  text-align: right;
+}
+
+.benefits-cta-mini p {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+
+.il-btn-ghost {
+  display: inline-block;
+  border: 1px solid var(--blue-elec);
+  color: var(--blue-light);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 12px 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: transparent;
+}
+
+.il-btn-ghost:hover {
+  background: var(--blue-elec);
+  color: white;
+}
+
+/* Benefits grid */
+.benefits-grid-premium {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+
+.benefit-cell {
+  background: var(--navy-3);
+  padding: 32px 26px;
+  position: relative;
+  transition: background 0.2s;
+}
+
+.benefit-cell:hover {
+  background: rgba(37,99,235,0.05);
+}
+
+.benefit-cell-icon {
+  margin-bottom: 20px;
+  color: var(--blue-elec);
+}
+
+.benefit-cell h4 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--white);
+  margin-bottom: 8px;
+  letter-spacing: 0.2px;
+  line-height: 1.3;
+}
+
+.benefit-cell p {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+/* Checklist premium */
+.check-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 48px;
+}
+
+.check-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--border-subtle);
+  font-size: 13px;
+  color: rgba(200,208,220,0.75);
+  line-height: 1.5;
+}
+
+.check-item:last-child { border-bottom: none; }
+
+.check-icon {
+  width: 18px; height: 18px;
+  border: 1px solid var(--blue-elec);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.check-icon svg { color: var(--blue-elec); }
+
+/* ─── S4 — LOUIS + AMF ──────────────────────── */
+.s-credibility {
+  background: var(--navy-2);
+  padding: 110px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.cred-layout {
+  display: grid;
+  grid-template-columns: 480px 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+/* Photo zone */
+.photo-zone {
+  position: relative;
+}
+
+.photo-frame {
+  background: linear-gradient(145deg, rgba(30,58,138,0.2), rgba(5,8,15,0.6));
+  border: 1px solid var(--border-blue);
+  border-radius: 12px;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.photo-frame::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(37,99,235,0.1) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 80%, rgba(30,58,138,0.08) 0%, transparent 60%);
+}
+
+.photo-placeholder-icon {
+  font-size: 64px;
+  opacity: 0.15;
+}
+
+.photo-placeholder-text {
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  font-weight: 500;
+}
+
+.photo-placeholder-sub {
+  font-size: 10px;
+  color: var(--text-dim);
+  opacity: 0.6;
+}
+
+/* AMF floating card */
+.amf-float-card {
+  position: absolute;
+  bottom: 28px; left: 50%;
+  transform: translateX(-50%);
+  background: rgba(5,8,15,0.85);
+  border: 1px solid var(--gold-border);
+  border-radius: 8px;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 30px rgba(212,175,55,0.06);
+  white-space: nowrap;
+  z-index: 2;
+}
+
+.amf-icon-shield {
+  width: 38px; height: 38px;
+  background: linear-gradient(135deg, rgba(212,175,55,0.2), rgba(212,175,55,0.05));
+  border: 1px solid var(--gold-border);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--gold);
+  flex-shrink: 0;
+}
+
+.amf-card-text strong {
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 13px;
+  color: var(--gold);
+  letter-spacing: 1px;
+  margin-bottom: 2px;
+}
+
+.amf-card-text span {
+  font-size: 11px;
+  color: rgba(212,175,55,0.55);
+  letter-spacing: 0.5px;
+}
+
+/* Cred text */
+.cred-text .section-eyebrow { margin-bottom: 12px; }
+
+.cred-text p {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.9;
+  margin-top: 20px;
+}
+
+.cred-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 36px;
+}
+
+.cred-stat {
+  background: rgba(255,255,255,0.02);
+  padding: 22px 20px;
+  text-align: center;
+}
+
+.cred-stat-num {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 28px;
+  color: var(--blue-elec);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.cred-stat-lbl {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+/* ─── S5 — TÉMOIGNAGES ──────────────────────── */
+.s-proof {
+  background: var(--navy-3);
+  padding: 110px 0;
+}
+
+.proof-marquee-hint {
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: 1px;
+  margin-top: 8px;
+  font-style: italic;
+}
+
+.proof-grid-premium {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 50px;
+}
+
+.testi-premium {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.testi-premium:hover {
+  border-color: rgba(37,99,235,0.2);
+}
+
+.testi-premium::before {
+  content: '"';
+  position: absolute;
+  top: 16px; right: 24px;
+  font-family: 'Playfair Display', serif;
+  font-size: 80px;
+  color: rgba(37,99,235,0.06);
+  line-height: 1;
+  pointer-events: none;
+}
+
+.testi-stars {
+  display: flex;
+  gap: 3px;
+  margin-bottom: 18px;
+}
+
+.star {
+  width: 12px; height: 12px;
+  background: var(--gold);
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+.testi-body {
+  font-size: 14px;
+  color: rgba(200,208,220,0.8);
+  line-height: 1.75;
+  margin-bottom: 24px;
+  font-style: italic;
+}
+
+.testi-footer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.testi-avatar {
+  width: 38px; height: 38px;
+  background: linear-gradient(135deg, var(--blue-royal), var(--blue-elec));
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 13px;
+  color: white;
+  flex-shrink: 0;
+}
+
+.testi-name {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  color: var(--white);
+  margin-bottom: 2px;
+}
+
+.testi-role {
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: 0.3px;
+}
+
+/* Featured testimonial */
+.testi-featured {
+  grid-column: 1 / -1;
+  background: linear-gradient(135deg, rgba(30,58,138,0.1), rgba(37,99,235,0.04));
+  border-color: rgba(37,99,235,0.15);
+}
+
+/* Screenshot placeholder */
+.screenshot-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+  overflow: hidden;
+}
+
+.screenshot-ph {
+  flex: 1;
+  background: rgba(255,255,255,0.02);
+  border: 1px dashed rgba(37,99,235,0.2);
+  border-radius: 8px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: var(--text-dim);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* ─── S6 — RARETÉ ───────────────────────────── */
+.s-scarcity {
+  background: var(--navy-2);
+  padding: 80px 0;
+  position: relative;
+}
+
+.scarcity-center {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.scarcity-card-premium {
+  background: rgba(212,175,55,0.03);
+  border: 1px solid var(--gold-border);
+  border-radius: 12px;
+  padding: 60px 56px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.scarcity-card-premium::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0.4;
+}
+
+.scarcity-bg-num {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 240px;
+  color: rgba(212,175,55,0.025);
+  pointer-events: none;
+  line-height: 1;
+  letter-spacing: -8px;
+}
+
+.scarcity-tag {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+  display: block;
+}
+
+.scarcity-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: clamp(28px, 4vw, 52px);
+  color: var(--white);
+  line-height: 1.1;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.scarcity-title em { color: var(--gold); font-style: normal; }
+
+.scarcity-body {
+  font-size: 15px;
+  color: var(--text-muted);
+  max-width: 480px;
+  margin: 0 auto;
+  line-height: 1.8;
+  position: relative;
+}
+
+/* ─── S7 — CTA FINAL ────────────────────────── */
+.s-cta-final {
+  background: var(--navy-1);
+  padding: 120px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.s-cta-final::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px; height: 500px;
+  background: radial-gradient(ellipse,
+    rgba(37,99,235,0.08) 0%,
+    transparent 70%);
+  pointer-events: none;
+}
+
+.cta-final-inner {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 40px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.cta-final-eyebrow {
+  font-family: 'Playfair Display', serif;
+  font-size: 14px;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--text-dim);
+  margin-bottom: 24px;
+  letter-spacing: 0.3px;
+}
+
+.cta-final-h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: clamp(28px, 4vw, 48px);
+  color: var(--white);
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+  margin-bottom: 16px;
+}
+
+.cta-final-h2 span { color: var(--blue-elec); }
+
+.cta-final-sub {
+  font-size: 15px;
+  color: var(--text-muted);
+  max-width: 440px;
+  margin: 0 auto 48px;
+  line-height: 1.8;
+}
+
+.cta-form-final {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* ─── FOOTER ────────────────────────────────── */
+.il-footer {
+  background: var(--navy-0);
+  border-top: 1px solid var(--border-subtle);
+  padding: 40px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-brand {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.4);
+}
+
+.footer-brand span { color: var(--blue-elec); }
+
+.footer-links {
+  display: flex;
+  gap: 24px;
+}
+
+.footer-link {
+  font-size: 11px;
+  color: var(--text-dim);
+  text-decoration: none;
+  letter-spacing: 0.3px;
+  transition: color 0.2s;
+}
+
+.footer-link:hover { color: var(--blue-light); }
+
+.footer-amf {
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: 0.5px;
+}
+</style>
+</head>
+<body>
+
+<!-- ════ NAV ════ -->
+<nav class="il-nav">
+  <div class="nav-logo">INVEST<span>LOUIS</span></div>
+  <div class="nav-amf">
+    <div class="nav-amf-dot"></div>
+    Certifié AMF
+  </div>
+  <button class="nav-cta">Recevoir le Guide</button>
+</nav>
+
+
+<!-- ════ S1 — HERO ════ -->
+<section class="s-hero">
+
+  <!-- Background candlestick chart -->
+  <div class="hero-chart-bg">
+    <svg viewBox="0 0 800 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Candles -->
+      <g stroke="#3B82F6" stroke-width="1.5">
+        <!-- Wick -->
+        <line x1="60" y1="40" x2="60" y2="220"/>
+        <line x1="120" y1="60" x2="120" y2="200"/>
+        <line x1="180" y1="30" x2="180" y2="190"/>
+        <line x1="240" y1="80" x2="240" y2="240"/>
+        <line x1="300" y1="50" x2="300" y2="180"/>
+        <line x1="360" y1="20" x2="360" y2="160"/>
+        <line x1="420" y1="40" x2="420" y2="200"/>
+        <line x1="480" y1="10" x2="480" y2="150"/>
+        <line x1="540" y1="30" x2="540" y2="140"/>
+        <line x1="600" y1="20" x2="600" y2="120"/>
+        <line x1="660" y1="10" x2="660" y2="100"/>
+        <line x1="720" y1="5" x2="720" y2="90"/>
+      </g>
+      <!-- Bodies bull -->
+      <g fill="#3B82F6" fill-opacity="0.6">
+        <rect x="50" y="100" width="20" height="80"/>
+        <rect x="170" y="80" width="20" height="80"/>
+        <rect x="290" y="80" width="20" height="70"/>
+        <rect x="350" y="50" width="20" height="80"/>
+        <rect x="470" y="40" width="20" height="70"/>
+        <rect x="530" y="50" width="20" height="60"/>
+        <rect x="590" y="40" width="20" height="50"/>
+        <rect x="650" y="30" width="20" height="45"/>
+        <rect x="710" y="20" width="20" height="40"/>
+      </g>
+      <!-- Bodies bear -->
+      <g fill="#1E3A8A" fill-opacity="0.6">
+        <rect x="110" y="100" width="20" height="60"/>
+        <rect x="230" y="120" width="20" height="70"/>
+        <rect x="410" y="100" width="20" height="70"/>
+      </g>
+      <!-- Trend line -->
+      <polyline
+        points="60,180 120,150 180,140 240,190 300,130 360,100 420,150 480,80 540,80 600,70 660,55 720,40"
+        stroke="#D4AF37" stroke-width="1" fill="none" stroke-dasharray="4 4" opacity="0.5"/>
+    </svg>
+  </div>
+
+  <div class="hero-ray"></div>
+
+  <div class="hero-content">
+
+    <div class="hero-badge-row">
+      <span class="badge-amf">
+        <svg width="10" height="12" viewBox="0 0 10 12" fill="currentColor"><path d="M5 0L0 2v4c0 2.76 2.13 5.34 5 6 2.87-.66 5-3.24 5-6V2L5 0z"/></svg>
+        Certifié AMF
+      </span>
+      <span class="badge-free">
+        ⚡ Accès 100% Gratuit
+      </span>
+    </div>
+
+    <p class="hero-eyebrow">Louis Ronchet · Mentorat Trading Privé · Toulouse</p>
+
+    <h1 class="hero-h1">
+      [TITRE DU PDF]<br>
+      <span class="word-blue">en [X] étapes</span>
+    </h1>
+
+    <div class="gold-rule">
+      <div class="gold-rule-line"></div>
+      <div class="gold-rule-diamond"></div>
+      <div class="gold-rule-line right"></div>
+    </div>
+
+    <p class="hero-sub">
+      [Promesse claire de transformation. Ce que le trader va comprendre ou éviter après lecture.]
+    </p>
+
+    <div class="hero-split">
+
+      <!-- PDF Mockup -->
+      <div class="pdf-3d">
+        <div class="pdf-free-sticker">Gratuit</div>
+        <div class="pdf-card-premium">
+          <div class="pdf-logo-text">INVEST<span>LOUIS</span></div>
+          <div class="pdf-sub-text">Louis Ronchet · Certifié AMF</div>
+          <div class="pdf-hr"></div>
+
+          <!-- Mini chart SVG -->
+          <div class="pdf-mini-chart">
+            <svg viewBox="0 0 180 60" fill="none" xmlns="http://www.w3.org/2000/svg" width="100%">
+              <polyline points="0,50 30,40 50,45 70,30 90,35 110,20 130,25 150,10 180,5"
+                stroke="#3B82F6" stroke-width="1.5" fill="none"/>
+              <polygon points="0,50 30,40 50,45 70,30 90,35 110,20 130,25 150,10 180,5 180,60 0,60"
+                fill="url(#chartGrad)" opacity="0.3"/>
+              <defs>
+                <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#2563EB"/>
+                  <stop offset="100%" stop-color="transparent"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+
+          <div class="pdf-title-text">[Titre du PDF<br>sur 2 lignes max]</div>
+          <div class="pdf-tag-row">
+            <span class="pdf-tag pdf-tag-gold">AMF</span>
+            <span class="pdf-tag pdf-tag-blue">Gratuit</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <div class="hero-form-col">
+        <span class="form-label">Accès immédiat — entrer tes informations</span>
+
+        <div class="form-field-wrap">
+          <span class="form-field-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </span>
+          <input class="il-input" type="text" placeholder="Ton prénom" disabled />
+        </div>
+
+        <div class="form-field-wrap">
+          <span class="form-field-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          </span>
+          <input class="il-input" type="email" placeholder="Ton adresse email" disabled />
+        </div>
+
+        <button class="il-btn">Recevoir Mon Guide Gratuit →</button>
+
+        <div class="form-security">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Données sécurisées · Aucun spam · Désabonnement en 1 clic
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="hero-trust">
+    <div class="trust-item"><div class="trust-dot"></div> Certifié AMF</div>
+    <div class="trust-item"><div class="trust-dot"></div> 8 traders max / cohorte</div>
+    <div class="trust-item"><div class="trust-dot"></div> 90 jours d'accompagnement</div>
+    <div class="trust-item"><div class="trust-dot"></div> Mentorat privé</div>
+  </div>
+
+</section>
+
+
+<!-- ════ S2 — PROBLÈME ════ -->
+<section class="s-problem">
+  <div class="s-inner">
+
+    <div style="max-width:560px;">
+      <p class="section-eyebrow">Le vrai problème</p>
+      <h2 class="section-h2">Tu trades depuis des mois,<br>mais rien ne <em>structure</em> vraiment<br>ton approche.</h2>
+      <div class="gold-rule" style="justify-content:flex-start; margin:20px 0;">
+        <div class="gold-rule-line" style="width:40px;"></div>
+        <div class="gold-rule-diamond"></div>
+      </div>
+      <p class="section-lead">Le marché ne récompense pas ceux qui improvisent. Il récompense ceux qui ont une méthode, et qui s'y tiennent.</p>
+    </div>
+
+    <div class="problem-layout">
+
+      <div class="pain-list">
+        <div class="pain-item">
+          <span class="pain-num">01</span>
+          <div class="pain-item-content">
+            <h4>Tu changes de stratégie trop souvent</h4>
+            <p>Tu passes d'un setup à l'autre sans jamais en maîtriser un vraiment. Chaque nouvelle stratégie semble meilleure que la précédente.</p>
+          </div>
+        </div>
+        <div class="pain-item">
+          <span class="pain-num">02</span>
+          <div class="pain-item-content">
+            <h4>Tu entres en position sans plan clair</h4>
+            <p>Les émotions prennent le dessus sur l'analyse au moment de l'exécution. Le FOMO dicte tes décisions.</p>
+          </div>
+        </div>
+        <div class="pain-item">
+          <span class="pain-num">03</span>
+          <div class="pain-item-content">
+            <h4>Tu n'analyses pas vraiment tes erreurs</h4>
+            <p>Tu perds, tu passes à autre chose. Mais sans comprendre précisément pourquoi, tu répètes les mêmes erreurs.</p>
+          </div>
+        </div>
+        <div class="pain-item">
+          <span class="pain-num">04</span>
+          <div class="pain-item-content">
+            <h4>Tu n'as pas de cadre de suivi structuré</h4>
+            <p>Sans journal de trading ni métriques claires, impossible de savoir ce qui fonctionne vraiment pour toi.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="pivot-glass">
+        <span class="pivot-tag">Nouvelle perspective</span>
+        <p class="pivot-quote-text">
+          "Tu n'as pas besoin de<br>
+          <em>plus d'informations.</em><br>
+          Tu as besoin d'un <em>cadre.</em>"
+        </p>
+        <div class="pivot-divider"></div>
+        <p style="font-size:13px; color:var(--text-muted); line-height:1.75; margin-bottom:20px;">
+          La majorité des traders intermédiaires ont accès aux mêmes informations. Ce qui les différencie, c'est la structure avec laquelle ils opèrent — pas la quantité de connaissances accumulées.
+        </p>
+        <span class="pivot-author">— Louis Ronchet, Certifié AMF</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════ S3 — BÉNÉFICES ════ -->
+<section class="s-benefits">
+  <div class="s-inner">
+
+    <div class="benefits-header">
+      <div>
+        <p class="section-eyebrow">Dans ce guide gratuit</p>
+        <h2 class="section-h2">Ce que tu vas<br><b>découvrir</b></h2>
+      </div>
+      <div class="benefits-cta-mini">
+        <p>[Phrase d'accroche sur la valeur contenue dans ce PDF. Ce qu'il va changer concrètement.]</p>
+        <button class="il-btn-ghost">Recevoir le guide →</button>
+      </div>
+    </div>
+
+    <div class="benefits-grid-premium">
+      <div class="benefit-cell">
+        <div class="benefit-cell-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <h4>[Bénéfice 1]</h4>
+        <p>[Description courte — ce que le trader peut faire après]</p>
+      </div>
+      <div class="benefit-cell">
+        <div class="benefit-cell-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <h4>[Bénéfice 2]</h4>
+        <p>[Description courte]</p>
+      </div>
+      <div class="benefit-cell">
+        <div class="benefit-cell-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <h4>[Bénéfice 3]</h4>
+        <p>[Description courte]</p>
+      </div>
+      <div class="benefit-cell">
+        <div class="benefit-cell-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h4>[Bénéfice 4]</h4>
+        <p>[Description courte]</p>
+      </div>
+    </div>
+
+    <div class="check-cols">
+      <div class="check-item"><div class="check-icon"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>[Point actionnable 1]</div>
+      <div class="check-item"><div class="check-icon"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>[Point actionnable 4]</div>
+      <div class="check-item"><div class="check-icon"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>[Point actionnable 2]</div>
+      <div class="check-item"><div class="check-icon"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>[Point actionnable 5]</div>
+      <div class="check-item"><div class="check-icon"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>[Point actionnable 3]</div>
+      <div class="check-item"><div class="check-icon"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>[Point actionnable 6]</div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════ S4 — LOUIS + AMF ════ -->
+<section class="s-credibility">
+  <div class="s-inner">
+    <div class="cred-layout">
+
+      <div class="photo-zone">
+        <div class="photo-frame">
+          <div class="photo-placeholder-icon">👤</div>
+          <div class="photo-placeholder-text">Photo pro de Louis</div>
+          <div class="photo-placeholder-sub">Portrait studio ou setup trading</div>
+          <div class="amf-float-card">
+            <div class="amf-icon-shield">
+              <svg width="18" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+            </div>
+            <div class="amf-card-text">
+              <strong>CERTIFIÉ AMF</strong>
+              <span>Autorité des Marchés Financiers</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cred-text">
+        <p class="section-eyebrow">Qui suis-je ?</p>
+        <h2 class="section-h2">Louis Ronchet<br><b>Formateur Trading Privé</b></h2>
+        <div class="gold-rule" style="justify-content:flex-start; margin: 20px 0;">
+          <div class="gold-rule-line" style="width:40px;"></div>
+          <div class="gold-rule-diamond"></div>
+        </div>
+        <p>[Bio authentique de Louis en 3-4 lignes. Parcours, transformation personnelle, pourquoi il a décidé de former des traders. Ton sincère, première personne, sans exagération.]</p>
+        <p style="margin-top: 16px; font-size:13px; color:rgba(212,175,55,0.65); line-height:1.8;">
+          La certification AMF est la référence réglementaire française en matière de marchés financiers. Elle distingue les professionnels encadrés par l'État des formateurs sans certification — et c'est une barrière réelle dans la niche trading.
+        </p>
+
+        <div class="cred-stats">
+          <div class="cred-stat">
+            <span class="cred-stat-num">90J</span>
+            <span class="cred-stat-lbl">Programme</span>
+          </div>
+          <div class="cred-stat">
+            <span class="cred-stat-num">8</span>
+            <span class="cred-stat-lbl">Traders max</span>
+          </div>
+          <div class="cred-stat">
+            <span class="cred-stat-num">AMF</span>
+            <span class="cred-stat-lbl">Certifié</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════ S5 — TÉMOIGNAGES ════ -->
+<section class="s-proof">
+  <div class="s-inner">
+
+    <div>
+      <p class="section-eyebrow">Ils ont structuré leur trading</p>
+      <h2 class="section-h2">Ce qu'ils en <em>disent</em></h2>
+      <p class="proof-marquee-hint">Screenshots DM / avis clients à intégrer dès disponibles</p>
+    </div>
+
+    <div class="proof-grid-premium">
+
+      <div class="testi-premium testi-featured">
+        <div class="testi-stars">
+          <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+        </div>
+        <p class="testi-body">"[Témoignage fort — résultat le plus concret, chiffre si possible, transformation before/after. C'est le témoignage en vedette donc il doit être le plus impactant.]"</p>
+        <div class="testi-footer">
+          <div class="testi-avatar">A</div>
+          <div>
+            <div class="testi-name">[Prénom Nom]</div>
+            <div class="testi-role">[Profil · Ville · Marché tradé]</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-premium">
+        <div class="testi-stars">
+          <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+        </div>
+        <p class="testi-body">"[Témoignage 2 — focus sur la discipline, le changement de mindset ou la régularité obtenue]"</p>
+        <div class="testi-footer">
+          <div class="testi-avatar">B</div>
+          <div>
+            <div class="testi-name">[Prénom]</div>
+            <div class="testi-role">[Profil · Ville]</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-premium">
+        <div class="testi-stars">
+          <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+        </div>
+        <p class="testi-body">"[Témoignage 3 — focus sur la clarté de méthode, la confiance retrouvée dans le trading]"</p>
+        <div class="testi-footer">
+          <div class="testi-avatar">C</div>
+          <div>
+            <div class="testi-name">[Prénom]</div>
+            <div class="testi-role">[Profil · Ville]</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Screenshots placeholders -->
+    <div class="screenshot-row">
+      <div class="screenshot-ph">Screenshot DM 1</div>
+      <div class="screenshot-ph">Screenshot DM 2</div>
+      <div class="screenshot-ph">Screenshot DM 3</div>
+      <div class="screenshot-ph">Screenshot DM 4</div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════ S6 — RARETÉ ════ -->
+<section class="s-scarcity">
+  <div class="scarcity-center">
+    <div class="scarcity-card-premium">
+      <div class="scarcity-bg-num">8</div>
+      <span class="scarcity-tag">Accès limité</span>
+      <h2 class="scarcity-title">
+        Maximum <em>8 traders</em><br>par cohorte.
+      </h2>
+      <div class="gold-rule" style="margin: 24px auto;">
+        <div class="gold-rule-line"></div>
+        <div class="gold-rule-diamond"></div>
+        <div class="gold-rule-line right"></div>
+      </div>
+      <p class="scarcity-body">
+        Pas pour créer une fausse urgence. Mais parce qu'un accompagnement réellement personnalisé exige du temps — et le temps est une ressource limitée. Au-delà de 8 traders, la qualité du suivi diminue. Ce n'est pas négociable.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════ S7 — CTA FINAL ════ -->
+<section class="s-cta-final">
+  <div class="cta-final-inner">
+
+    <p class="cta-final-eyebrow">Tu es encore là — le sujet te concerne.</p>
+
+    <h2 class="cta-final-h2">
+      Reçois le guide<br>
+      <span>[Titre PDF]</span><br>
+      maintenant.
+    </h2>
+
+    <div class="gold-rule" style="margin: 24px auto;">
+      <div class="gold-rule-line"></div>
+      <div class="gold-rule-diamond"></div>
+      <div class="gold-rule-line right"></div>
+    </div>
+
+    <p class="cta-final-sub">
+      Un premier pas concret. Pas un engagement. Juste une méthode que tu peux appliquer dès cette semaine.
+    </p>
+
+    <div class="cta-form-final">
+      <div class="form-field-wrap">
+        <span class="form-field-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </span>
+        <input class="il-input" type="text" placeholder="Ton prénom" disabled />
+      </div>
+      <div class="form-field-wrap">
+        <span class="form-field-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        </span>
+        <input class="il-input" type="email" placeholder="Ton adresse email" disabled />
+      </div>
+      <button class="il-btn">Je Veux Mon Guide Gratuit →</button>
+      <div class="form-security" style="justify-content:center; margin-top:14px;">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Données sécurisées · Aucun spam · Désabonnement en 1 clic
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════ FOOTER ════ -->
+<footer class="il-footer">
+  <div class="footer-brand">INVEST<span>LOUIS</span> · Louis Ronchet</div>
+  <div class="footer-links">
+    <a class="footer-link" href="#">Mentions légales</a>
+    <a class="footer-link" href="#">Confidentialité</a>
+    <a class="footer-link" href="#">Contact</a>
+  </div>
+  <div class="footer-amf">Certifié AMF · Toulouse · © 2026</div>
+</footer>
+
+</body>
+</html>
