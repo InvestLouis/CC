@@ -607,6 +607,7 @@
 
   <!-- HERO -->
   <section id="il-hero">
+    <canvas id="il-chart-bg" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0.38;"></canvas>
     <div class="il-glow-tr"></div>
     <div class="inner">
 
@@ -1188,5 +1189,191 @@
       if(err) err.classList.remove('show');
     });
   });
+})();
+
+/* ── CHART BACKGROUND ANIMATION ── */
+(function() {
+  var canvas = document.getElementById('il-chart-bg');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+
+  var W, H;
+  function resize() {
+    W = canvas.offsetWidth;
+    H = canvas.offsetHeight;
+    canvas.width  = W * devicePixelRatio;
+    canvas.height = H * devicePixelRatio;
+    ctx.scale(devicePixelRatio, devicePixelRatio);
+  }
+  resize();
+  window.addEventListener('resize', function() { resize(); });
+
+  // --- candle data ---
+  var TOTAL = 60;
+  var candles = [];
+  var seed = 42;
+  function rng() { seed = (seed * 1664525 + 1013904223) & 0xffffffff; return (seed >>> 0) / 0xffffffff; }
+
+  var price = 100;
+  for (var i = 0; i < TOTAL; i++) {
+    var open  = price;
+    var move  = (rng() - 0.46) * 3.5;
+    var close = open + move;
+    var hi    = Math.max(open, close) + rng() * 2;
+    var lo    = Math.min(open, close) - rng() * 2;
+    candles.push({ o: open, c: close, h: hi, l: lo });
+    price = close;
+  }
+
+  // trend line from candle 5 to last
+  var trendStart = { i: 5, p: candles[5].l };
+  var trendEnd   = { i: TOTAL - 3, p: candles[TOTAL - 3].h };
+
+  // animation state
+  var offset = 0; // slow scroll offset (fractional candle)
+  var revealed = 0; // how many candles fully drawn (for entry animation)
+  var startTime = null;
+
+  function priceRange(from, to) {
+    var min = Infinity, max = -Infinity;
+    for (var k = from; k < to; k++) {
+      min = Math.min(min, candles[k].l);
+      max = Math.max(max, candles[k].h);
+    }
+    return { min: min, max: max };
+  }
+
+  function py(price, min, max, padT, padB) {
+    return padT + (1 - (price - min) / (max - min)) * (H - padT - padB);
+  }
+
+  function draw(ts) {
+    if (!startTime) startTime = ts;
+    var elapsed = ts - startTime;
+
+    // slow drift: 1 candle per 4s
+    offset = (elapsed / 4000) % TOTAL;
+
+    // entry reveal: first 2s
+    revealed = Math.min(TOTAL, elapsed / 33);
+
+    ctx.clearRect(0, 0, W, H);
+
+    var padL = 20, padR = 30, padT = 40, padB = 50;
+    var visible = Math.min(28, Math.floor(W / 28));
+    var startIdx = Math.floor(offset) % TOTAL;
+    var frac = offset - Math.floor(offset);
+
+    // build visible slice (looped)
+    var slice = [];
+    for (var k = 0; k < visible + 2; k++) {
+      slice.push(candles[(startIdx + k) % TOTAL]);
+    }
+
+    var range = priceRange(0, TOTAL);
+    var minP = range.min - 2, maxP = range.max + 2;
+
+    var cw  = (W - padL - padR) / visible;
+    var bw  = cw * 0.52;
+
+    /* ── GRID LINES ── */
+    ctx.strokeStyle = 'rgba(148,163,184,0.06)';
+    ctx.lineWidth   = 1;
+    var gridCount = 5;
+    for (var g = 0; g <= gridCount; g++) {
+      var gy = padT + (g / gridCount) * (H - padT - padB);
+      ctx.beginPath();
+      ctx.moveTo(padL, gy);
+      ctx.lineTo(W - padR, gy);
+      ctx.stroke();
+    }
+
+    /* ── AREA FILL under close line ── */
+    ctx.beginPath();
+    for (var j = 0; j < slice.length; j++) {
+      var xc = padL + (j - frac) * cw + cw / 2;
+      var yc = py(slice[j].c, minP, maxP, padT, padB);
+      if (j === 0) ctx.moveTo(xc, yc); else ctx.lineTo(xc, yc);
+    }
+    var lastX = padL + (slice.length - 1 - frac) * cw + cw / 2;
+    ctx.lineTo(lastX, H - padB);
+    ctx.lineTo(padL + (0 - frac) * cw + cw / 2, H - padB);
+    ctx.closePath();
+    var grad = ctx.createLinearGradient(0, padT, 0, H - padB);
+    grad.addColorStop(0, 'rgba(59,130,246,0.10)');
+    grad.addColorStop(1, 'rgba(59,130,246,0.00)');
+    ctx.fillStyle = grad;
+    ctx.fill();
+
+    /* ── CANDLES ── */
+    var drawCount = Math.min(slice.length, Math.ceil(revealed - startIdx < 0 ? revealed : slice.length));
+    for (var j = 0; j < slice.length; j++) {
+      var c = slice[j];
+      var xc  = padL + (j - frac) * cw + cw / 2;
+      if (xc < padL - cw || xc > W - padR + cw) continue;
+
+      var yO  = py(c.o, minP, maxP, padT, padB);
+      var yCl = py(c.c, minP, maxP, padT, padB);
+      var yH  = py(c.h, minP, maxP, padT, padB);
+      var yL  = py(c.l, minP, maxP, padT, padB);
+      var bull = c.c >= c.o;
+
+      var alpha = Math.min(1, (j + 1 - frac) * 0.18 + 0.5);
+
+      // wick
+      ctx.strokeStyle = bull
+        ? 'rgba(99,202,183,' + alpha + ')'
+        : 'rgba(239,83,80,' + alpha + ')';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(xc, yH);
+      ctx.lineTo(xc, yL);
+      ctx.stroke();
+
+      // glow
+      if (bull) {
+        ctx.shadowColor  = 'rgba(59,130,246,0.5)';
+        ctx.shadowBlur   = 8;
+      } else {
+        ctx.shadowColor  = 'rgba(239,83,80,0.3)';
+        ctx.shadowBlur   = 4;
+      }
+
+      // body
+      var bodyTop = Math.min(yO, yCl);
+      var bodyH   = Math.max(1.5, Math.abs(yO - yCl));
+      ctx.fillStyle = bull
+        ? 'rgba(99,202,183,' + (alpha * 0.9) + ')'
+        : 'rgba(239,83,80,' + (alpha * 0.9) + ')';
+      ctx.beginPath();
+      ctx.roundRect
+        ? ctx.roundRect(xc - bw / 2, bodyTop, bw, bodyH, 1.5)
+        : ctx.rect(xc - bw / 2, bodyTop, bw, bodyH);
+      ctx.fill();
+      ctx.shadowBlur = 0;
+    }
+
+    /* ── TREND LINE ── */
+    var tx1 = padL + ((trendStart.i - startIdx - frac) * cw) + cw / 2;
+    var tx2 = padL + ((trendEnd.i   - startIdx - frac) * cw) + cw / 2;
+    var ty1 = py(trendStart.p, minP, maxP, padT, padB);
+    var ty2 = py(trendEnd.p,   minP, maxP, padT, padB);
+
+    ctx.beginPath();
+    ctx.setLineDash([6, 4]);
+    ctx.strokeStyle = 'rgba(59,130,246,0.35)';
+    ctx.lineWidth   = 1.5;
+    ctx.shadowColor = 'rgba(59,130,246,0.5)';
+    ctx.shadowBlur  = 10;
+    ctx.moveTo(tx1, ty1);
+    ctx.lineTo(tx2, ty2);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.shadowBlur = 0;
+
+    requestAnimationFrame(draw);
+  }
+
+  requestAnimationFrame(draw);
 })();
 </script>
