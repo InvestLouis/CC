@@ -1,0 +1,1606 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>InvestLouis — [Titre du PDF]</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800;900&family=Playfair+Display:ital@1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ══════════════════════════════════════════════
+   TOKEN SYSTEM
+══════════════════════════════════════════════ */
+:root {
+  --ink:        #05080D;
+  --surface:    #0B1120;
+  --panel:      #101828;
+  --panel-2:    #141f34;
+  --border:     rgba(255,255,255,0.06);
+  --border-md:  rgba(255,255,255,0.1);
+
+  --blue:       #1D4ED8;
+  --blue-hi:    #3B82F6;
+  --blue-dim:   rgba(29,78,216,0.1);
+
+  --gold:       #B8963E;
+  --gold-hi:    #D4AF37;
+  --gold-dim:   rgba(184,150,62,0.1);
+  --gold-brd:   rgba(184,150,62,0.22);
+
+  --white:      #ffffff;
+  --text-hi:    #E2E8F0;
+  --text:       #94A3B8;
+  --text-lo:    #475569;
+
+  --r4: 4px;
+  --r8: 8px;
+  --r12: 12px;
+  --max: 1060px;
+}
+
+/* ══════════════════════════════════════════════
+   RESET
+══════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-weight: 300;
+  background: var(--ink);
+  color: var(--text);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+a { text-decoration: none; }
+svg { display: block; }
+
+/* ══════════════════════════════════════════════
+   LAYOUT HELPERS
+══════════════════════════════════════════════ */
+.w {
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-inline: 48px;
+}
+
+/* ══════════════════════════════════════════════
+   TYPOGRAPHY SCALE
+══════════════════════════════════════════════ */
+.t-eye {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--blue-hi);
+}
+
+.t-d1 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: clamp(42px, 6vw, 76px);
+  line-height: 0.95;
+  letter-spacing: -3px;
+  color: var(--white);
+}
+
+.t-d2 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: clamp(26px, 3.5vw, 44px);
+  line-height: 1.1;
+  letter-spacing: -1.5px;
+  color: var(--white);
+}
+
+.t-body {
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--text);
+  font-weight: 300;
+}
+
+.t-caption {
+  font-size: 11px;
+  letter-spacing: 0.3px;
+  color: var(--text-lo);
+}
+
+/* ══════════════════════════════════════════════
+   NAV
+══════════════════════════════════════════════ */
+.nav {
+  position: fixed;
+  inset: 0 0 auto;
+  height: 60px;
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  padding-inline: 48px;
+  background: rgba(5,8,13,0.80);
+  backdrop-filter: blur(24px) saturate(160%);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-inner {
+  width: 100%;
+  max-width: var(--max);
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-logo {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 14px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--white);
+}
+
+.nav-logo b { color: var(--blue-hi); font-weight: 900; }
+
+.nav-amf {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.nav-amf-pip { width: 4px; height: 4px; border-radius: 50%; background: var(--gold); opacity: 0.7; }
+
+.nav-cta {
+  height: 34px;
+  padding: 0 16px;
+  background: var(--blue);
+  color: var(--white);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-radius: var(--r4);
+  transition: opacity 0.15s;
+}
+.nav-cta:hover { opacity: 0.85; }
+
+/* ══════════════════════════════════════════════
+   HERO
+══════════════════════════════════════════════ */
+.hero {
+  min-height: 100svh;
+  padding-top: 60px;
+  display: grid;
+  align-items: center;
+  background: var(--surface);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Single light source — top right, disciplined */
+.hero::after {
+  content: '';
+  position: absolute;
+  top: -160px;
+  right: -160px;
+  width: 640px;
+  height: 640px;
+  background: radial-gradient(circle, rgba(29,78,216,0.07) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 72px;
+  align-items: center;
+  padding-block: 80px;
+  position: relative;
+  z-index: 2;
+}
+
+/* ─── AMF SEAL — signature element ─── */
+/* A typographic circular stamp, not a shield icon */
+.amf-seal {
+  display: block;
+  width: 200px;
+  height: 200px;
+  margin-bottom: 40px;
+  flex-shrink: 0;
+  opacity: 0.92;
+}
+
+.hero-eyebrow {
+  margin-bottom: 18px;
+}
+
+.hero-h1 {
+  margin-bottom: 8px;
+}
+
+.hero-h1-line2 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: clamp(42px, 6vw, 76px);
+  line-height: 0.95;
+  letter-spacing: -3px;
+  color: var(--blue-hi);
+  display: block;
+}
+
+.hero-sep {
+  width: 40px;
+  height: 1px;
+  background: var(--gold);
+  margin: 28px 0;
+  opacity: 0.5;
+}
+
+.hero-sub {
+  max-width: 420px;
+  margin-bottom: 40px;
+}
+
+/* Inline trust row */
+.hero-trust {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+}
+
+.trust-i {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-lo);
+}
+
+.trust-i svg { color: var(--blue-hi); flex-shrink: 0; }
+
+/* ─── FORM CARD ─── */
+.form-card {
+  background: var(--panel);
+  border: 1px solid var(--border-md);
+  border-radius: var(--r12);
+  overflow: hidden;
+  position: relative;
+}
+
+.form-card-top {
+  height: 3px;
+  background: linear-gradient(90deg, var(--blue), var(--blue-hi));
+}
+
+.form-card-body { padding: 28px; }
+
+/* PDF preview — minimal, inside card */
+.pdf-strip {
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: var(--r8);
+  padding: 18px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+}
+
+.pdf-strip-chart {
+  flex-shrink: 0;
+  width: 64px;
+  height: 40px;
+}
+
+.pdf-strip-chart svg { width: 100%; height: 100%; }
+
+.pdf-strip-info {}
+
+.pdf-strip-brand {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 3px;
+}
+
+.pdf-strip-brand b { color: var(--blue-hi); }
+
+.pdf-strip-title {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text);
+  line-height: 1.4;
+}
+
+.pdf-free {
+  position: absolute;
+  top: 12px; right: 14px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 8px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: var(--gold-dim);
+  border: 1px solid var(--gold-brd);
+  border-radius: 2px;
+  padding: 3px 8px;
+}
+
+.form-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  color: var(--white);
+  letter-spacing: -0.3px;
+  margin-bottom: 4px;
+}
+
+.form-subtitle { font-size: 12px; color: var(--text-lo); margin-bottom: 20px; }
+
+/* Fields */
+.field { position: relative; margin-bottom: 8px; }
+
+.field-ico {
+  position: absolute;
+  left: 13px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-lo);
+  pointer-events: none;
+}
+
+.f-input {
+  width: 100%;
+  height: 46px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--r8);
+  padding: 0 13px 0 40px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--white);
+  outline: none;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.f-input::placeholder { color: var(--text-lo); }
+.f-input:focus { border-color: var(--blue); background: rgba(29,78,216,0.04); }
+
+.f-submit {
+  width: 100%;
+  height: 50px;
+  margin-top: 12px;
+  background: var(--blue);
+  color: var(--white);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border-radius: var(--r8);
+  position: relative;
+  overflow: hidden;
+  transition: opacity 0.15s, transform 0.15s;
+  box-shadow: 0 4px 20px rgba(29,78,216,0.25);
+}
+
+.f-submit::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255,255,255,0.07) 0%, transparent 55%);
+}
+
+.f-submit:hover { opacity: 0.9; transform: translateY(-1px); }
+
+.f-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 12px;
+  font-size: 11px;
+  color: var(--text-lo);
+}
+
+/* ══════════════════════════════════════════════
+   TICKER STRIP
+   One animated moment — anchored in trading world
+══════════════════════════════════════════════ */
+.ticker {
+  background: var(--panel);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  height: 44px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.ticker-track {
+  display: flex;
+  gap: 0;
+  white-space: nowrap;
+  animation: ticker-scroll 32s linear infinite;
+  will-change: transform;
+}
+
+@keyframes ticker-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 36px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-lo);
+  border-right: 1px solid var(--border);
+}
+
+.ticker-item.accent { color: var(--gold); }
+
+.ticker-pip {
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--blue);
+  flex-shrink: 0;
+}
+
+/* ══════════════════════════════════════════════
+   SECTION: PROBLÈME
+══════════════════════════════════════════════ */
+.problem {
+  background: var(--ink);
+  padding-block: 120px;
+  border-bottom: 1px solid var(--border);
+}
+
+.problem-header {
+  margin-bottom: 72px;
+  max-width: 680px;
+}
+
+.problem-header .t-eye { margin-bottom: 16px; }
+
+/* Pull-quote in Playfair — the ONE serif moment */
+.problem-pull {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: clamp(18px, 2.2vw, 26px);
+  color: var(--text-hi);
+  line-height: 1.55;
+  margin-top: 28px;
+  padding-left: 20px;
+  border-left: 2px solid var(--blue);
+}
+
+.problem-pull cite {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-lo);
+  margin-top: 14px;
+}
+
+/* Pain table — structural, not decorated */
+.pain-table {
+  border-top: 1px solid var(--border);
+}
+
+.pain-row {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+  padding-block: 24px;
+  transition: background 0.15s;
+}
+
+.pain-row:hover { background: rgba(255,255,255,0.015); }
+
+.pain-idx {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--text-lo);
+  padding-top: 3px;
+  padding-right: 24px;
+  text-align: right;
+}
+
+.pain-body h4 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--text-hi);
+  margin-bottom: 6px;
+  letter-spacing: -0.1px;
+}
+
+.pain-body p {
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+/* ══════════════════════════════════════════════
+   SECTION: BÉNÉFICES
+══════════════════════════════════════════════ */
+.benefits {
+  background: var(--surface);
+  padding-block: 120px;
+  border-bottom: 1px solid var(--border);
+}
+
+.benefits-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+  margin-bottom: 56px;
+}
+
+.benefits-head-right {
+  flex-shrink: 0;
+  text-align: right;
+  max-width: 260px;
+}
+
+.benefits-head-right p {
+  font-size: 13px;
+  color: var(--text);
+  margin-bottom: 14px;
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+/* Feature grid: 2×2 with border system */
+.feat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid var(--border);
+  border-radius: var(--r12);
+  overflow: hidden;
+  margin-bottom: 1px;
+}
+
+.feat-cell {
+  padding: 32px;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  transition: background 0.18s;
+}
+
+.feat-cell:nth-child(2n) { border-right: none; }
+.feat-cell:nth-last-child(-n+2) { border-bottom: none; }
+.feat-cell:hover { background: rgba(29,78,216,0.03); }
+
+.feat-num {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--text-lo);
+  margin-bottom: 16px;
+}
+
+.feat-cell h4 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--white);
+  margin-bottom: 8px;
+  letter-spacing: -0.1px;
+}
+
+.feat-cell p {
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.65;
+  font-weight: 300;
+}
+
+/* Check list: plain, structural */
+.check-list {
+  border-top: 1px solid var(--border);
+  margin-top: 0;
+}
+
+.check-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+  color: var(--text);
+  font-weight: 300;
+  line-height: 1.5;
+}
+
+.check-row:last-child { border-bottom: none; }
+
+.check-ico {
+  width: 16px; height: 16px;
+  border: 1px solid rgba(29,78,216,0.4);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  color: var(--blue-hi);
+  margin-top: 1px;
+}
+
+/* ══════════════════════════════════════════════
+   SECTION: ABOUT LOUIS
+══════════════════════════════════════════════ */
+.about {
+  background: var(--ink);
+  padding-block: 120px;
+  border-bottom: 1px solid var(--border);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 460px;
+  gap: 80px;
+  align-items: center;
+}
+
+.about-left .t-eye { margin-bottom: 14px; }
+.about-left .t-d2 { margin-bottom: 4px; }
+
+.about-sub-name {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-lo);
+  margin-bottom: 32px;
+}
+
+.about-bio {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.85;
+  font-weight: 300;
+  margin-bottom: 12px;
+}
+
+/* AMF callout — structured like a credential */
+.amf-credential {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 18px;
+  background: var(--gold-dim);
+  border: 1px solid var(--gold-brd);
+  border-radius: var(--r8);
+  margin: 28px 0 32px;
+}
+
+.amf-cred-icon {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--gold);
+}
+
+.amf-cred-label {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 4px;
+}
+
+.amf-cred-body {
+  font-size: 12px;
+  color: rgba(184,150,62,0.6);
+  line-height: 1.65;
+  font-weight: 300;
+}
+
+/* Stats — horizontal, inside text flow */
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--r8);
+  overflow: hidden;
+}
+
+.stat-c {
+  background: var(--panel);
+  padding: 18px 16px;
+  text-align: center;
+}
+
+.stat-v {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 26px;
+  color: var(--white);
+  letter-spacing: -1px;
+  display: block;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.stat-l {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-lo);
+  display: block;
+}
+
+/* Photo area */
+.photo-wrap {
+  background: var(--panel);
+  border: 1px solid var(--border-md);
+  border-radius: var(--r12);
+  height: 520px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.photo-bg-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 30% 30%, rgba(29,78,216,0.06) 0%, transparent 60%);
+}
+
+.photo-ico { font-size: 48px; opacity: 0.08; }
+
+.photo-lbl {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-lo);
+}
+
+/* AMF badge at bottom of photo */
+.amf-badge-dock {
+  position: absolute;
+  inset: auto 20px 20px;
+  background: rgba(5,8,13,0.88);
+  border: 1px solid var(--gold-brd);
+  border-radius: var(--r8);
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  backdrop-filter: blur(16px);
+}
+
+.amf-dock-ico {
+  color: var(--gold);
+  flex-shrink: 0;
+}
+
+.amf-dock-name {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 2px;
+}
+
+.amf-dock-sub {
+  font-size: 10px;
+  color: rgba(184,150,62,0.5);
+}
+
+/* ══════════════════════════════════════════════
+   SECTION: TESTIMONIALS
+══════════════════════════════════════════════ */
+.testi {
+  background: var(--surface);
+  padding-block: 120px;
+  border-bottom: 1px solid var(--border);
+}
+
+.testi-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+  margin-bottom: 48px;
+}
+
+.testi-head-note {
+  font-size: 12px;
+  color: var(--text-lo);
+  font-style: italic;
+  max-width: 180px;
+  text-align: right;
+  line-height: 1.6;
+}
+
+/* Layout: featured full-width + 2 below */
+.testi-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid var(--border);
+  border-radius: var(--r12);
+  overflow: hidden;
+  gap: 1px;
+  background: var(--border);
+  margin-bottom: 12px;
+}
+
+.t-card {
+  background: var(--surface);
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.18s;
+}
+
+.t-card:hover { background: var(--panel); }
+
+.t-card.t-featured {
+  grid-column: 1 / -1;
+  background: var(--panel);
+}
+
+.t-q {
+  position: absolute;
+  top: 16px; right: 24px;
+  font-family: 'Playfair Display', serif;
+  font-size: 72px;
+  line-height: 1;
+  color: rgba(29,78,216,0.07);
+  pointer-events: none;
+  user-select: none;
+}
+
+.t-stars {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 16px;
+}
+
+.t-star {
+  width: 10px; height: 10px;
+  background: var(--gold);
+  clip-path: polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
+}
+
+.t-body {
+  font-size: 14px;
+  font-style: italic;
+  color: var(--text);
+  line-height: 1.75;
+  margin-bottom: 24px;
+  font-weight: 300;
+}
+
+.t-featured .t-body { font-size: 16px; color: var(--text-hi); }
+
+.t-foot {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+}
+
+.t-av {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1e3a8a, var(--blue-hi));
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 11px;
+  color: white;
+  flex-shrink: 0;
+}
+
+.t-name {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  color: var(--text-hi);
+  margin-bottom: 1px;
+}
+
+.t-role { font-size: 11px; color: var(--text-lo); }
+
+/* Screenshot placeholders */
+.screens {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.screen-ph {
+  background: var(--panel);
+  border: 1px dashed rgba(29,78,216,0.15);
+  border-radius: var(--r8);
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-lo);
+}
+
+/* ══════════════════════════════════════════════
+   SECTION: SCARCITY
+   The number 8 IS the design.
+══════════════════════════════════════════════ */
+.scarcity {
+  background: var(--ink);
+  padding-block: 100px;
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.scarcity-grid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 72px;
+  align-items: center;
+}
+
+.scarcity-number {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: clamp(120px, 16vw, 200px);
+  line-height: 0.9;
+  letter-spacing: -10px;
+  color: var(--white);
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.scarcity-right {}
+
+.scarcity-tag {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 14px;
+}
+
+.scarcity-right h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: clamp(18px, 2.2vw, 28px);
+  color: var(--white);
+  line-height: 1.25;
+  letter-spacing: -0.5px;
+  margin-bottom: 14px;
+}
+
+.scarcity-right p {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.8;
+  margin-bottom: 28px;
+  max-width: 440px;
+  font-weight: 300;
+}
+
+/* ══════════════════════════════════════════════
+   CTA FINAL
+══════════════════════════════════════════════ */
+.cta-section {
+  background: var(--surface);
+  padding-block: 140px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px; height: 320px;
+  background: radial-gradient(ellipse, rgba(29,78,216,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.cta-inner {
+  max-width: 560px;
+  margin-inline: auto;
+  position: relative;
+  z-index: 2;
+}
+
+.cta-eyebrow {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 14px;
+  color: var(--text-lo);
+  margin-bottom: 20px;
+}
+
+.cta-h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: clamp(30px, 4.5vw, 54px);
+  line-height: 1.0;
+  letter-spacing: -2px;
+  color: var(--white);
+  margin-bottom: 14px;
+}
+
+.cta-h2 span { color: var(--blue-hi); }
+
+.cta-sub {
+  font-size: 15px;
+  color: var(--text);
+  max-width: 360px;
+  margin-inline: auto;
+  line-height: 1.75;
+  margin-bottom: 44px;
+  font-weight: 300;
+}
+
+.cta-form {
+  max-width: 360px;
+  margin-inline: auto;
+}
+
+/* ══════════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════════ */
+.footer {
+  background: var(--ink);
+  border-top: 1px solid var(--border);
+  padding: 28px 48px;
+}
+
+.footer-inner {
+  max-width: var(--max);
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.foot-brand {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-lo);
+}
+
+.foot-brand b { color: #2d4a7a; }
+
+.foot-links { display: flex; gap: 20px; }
+.foot-links a { font-size: 11px; color: var(--text-lo); transition: color 0.15s; }
+.foot-links a:hover { color: var(--text); }
+
+.foot-right { font-size: 11px; color: var(--text-lo); }
+
+/* ══════════════════════════════════════════════
+   SHARED BUTTON
+══════════════════════════════════════════════ */
+.btn-blue {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  padding: 0 24px;
+  background: var(--blue);
+  color: var(--white);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border-radius: var(--r4);
+  transition: opacity 0.15s, transform 0.15s;
+  box-shadow: 0 4px 16px rgba(29,78,216,0.2);
+  cursor: pointer;
+  border: none;
+}
+
+.btn-blue:hover { opacity: 0.9; transform: translateY(-1px); }
+.btn-blue.full { width: 100%; height: 50px; border-radius: var(--r8); font-size: 12px; }
+
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-logo">INVEST<b>LOUIS</b></div>
+    <div class="nav-amf">
+      <div class="nav-amf-pip"></div>
+      Certifié AMF
+      <div class="nav-amf-pip"></div>
+    </div>
+    <button class="nav-cta">Recevoir le guide</button>
+  </div>
+</nav>
+
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="w hero-grid">
+
+    <!-- LEFT -->
+    <div>
+
+      <!-- SIGNATURE ELEMENT: AMF Typographic Seal -->
+      <svg class="amf-seal" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Outer ring -->
+        <circle cx="100" cy="100" r="96" stroke="#B8963E" stroke-width="1" stroke-opacity="0.4"/>
+        <!-- Inner ring -->
+        <circle cx="100" cy="100" r="82" stroke="#B8963E" stroke-width="0.5" stroke-opacity="0.25"/>
+        <!-- Dashed detail ring -->
+        <circle cx="100" cy="100" r="88" stroke="#B8963E" stroke-width="0.5" stroke-dasharray="3 4" stroke-opacity="0.2"/>
+        <!-- Circular text path: AUTORITÉ DES MARCHÉS FINANCIERS -->
+        <defs>
+          <path id="topArc" d="M 100,100 m -80,0 a 80,80 0 0,1 160,0"/>
+          <path id="botArc" d="M 100,100 m -72,0 a 72,72 0 0,0 144,0"/>
+        </defs>
+        <text font-family="Montserrat, sans-serif" font-weight="700" font-size="10" letter-spacing="3.5" fill="#B8963E" fill-opacity="0.7" text-anchor="middle">
+          <textPath href="#topArc" startOffset="50%">AUTORITÉ DES MARCHÉS FINANCIERS</textPath>
+        </text>
+        <text font-family="Montserrat, sans-serif" font-weight="700" font-size="9" letter-spacing="3" fill="#B8963E" fill-opacity="0.45" text-anchor="middle">
+          <textPath href="#botArc" startOffset="50%">CERTIFICATION OFFICIELLE · FRANCE</textPath>
+        </text>
+        <!-- Center: AMF monogram -->
+        <text x="100" y="88" font-family="Montserrat, sans-serif" font-weight="900" font-size="28" letter-spacing="-1" fill="#B8963E" fill-opacity="0.9" text-anchor="middle">AMF</text>
+        <!-- Separator line -->
+        <line x1="70" y1="96" x2="130" y2="96" stroke="#B8963E" stroke-width="0.75" stroke-opacity="0.4"/>
+        <!-- Bottom text inside seal -->
+        <text x="100" y="110" font-family="Montserrat, sans-serif" font-weight="700" font-size="7.5" letter-spacing="2.5" fill="#B8963E" fill-opacity="0.6" text-anchor="middle">LOUIS RONCHET</text>
+        <!-- Small stars / diamonds -->
+        <polygon points="100,52 102,58 108,58 103,62 105,68 100,64 95,68 97,62 92,58 98,58" fill="#B8963E" fill-opacity="0.3"/>
+        <polygon points="44,100 46,104 50,104 47,107 48,111 44,108 40,111 41,107 38,104 42,104" fill="#B8963E" fill-opacity="0.2"/>
+        <polygon points="156,100 158,104 162,104 159,107 160,111 156,108 152,111 153,107 150,104 154,104" fill="#B8963E" fill-opacity="0.2"/>
+      </svg>
+
+      <p class="t-eye hero-eyebrow">Louis Ronchet · Mentorat Trading Privé</p>
+
+      <h1 class="t-d1 hero-h1">[TITRE DU PDF]</h1>
+      <span class="hero-h1-line2">[en X étapes]</span>
+
+      <div class="hero-sep"></div>
+
+      <p class="t-body hero-sub">
+        [Promesse de transformation en une phrase. Ce que le trader comprend ou évite après lecture de ce guide.]
+      </p>
+
+      <div class="hero-trust">
+        <div class="trust-i">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Certification AMF
+        </div>
+        <div class="trust-i">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          8 traders max / cohorte
+        </div>
+        <div class="trust-i">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Programme 90 jours
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Form card -->
+    <div>
+      <div class="form-card">
+        <div class="form-card-top"></div>
+        <div class="form-card-body">
+
+          <div class="pdf-strip">
+            <div class="pdf-strip-chart">
+              <svg viewBox="0 0 64 40" fill="none" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="cg" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#1D4ED8" stop-opacity="0.3"/>
+                    <stop offset="100%" stop-color="#1D4ED8" stop-opacity="0"/>
+                  </linearGradient>
+                </defs>
+                <polygon points="0,36 16,28 32,30 48,16 64,8 64,40 0,40" fill="url(#cg)"/>
+                <polyline points="0,36 16,28 32,30 48,16 64,8" stroke="#3B82F6" stroke-width="1.5" fill="none"/>
+              </svg>
+            </div>
+            <div class="pdf-strip-info">
+              <div class="pdf-strip-brand">INVEST<b>LOUIS</b></div>
+              <div class="pdf-strip-title">[Titre du PDF — à définir]</div>
+            </div>
+            <div class="pdf-free">Gratuit</div>
+          </div>
+
+          <div class="form-title">Reçois le guide maintenant</div>
+          <div class="form-subtitle">Accès immédiat · Aucun paiement requis</div>
+
+          <div class="field">
+            <span class="field-ico">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </span>
+            <input class="f-input" type="text" placeholder="Ton prénom" disabled/>
+          </div>
+
+          <div class="field">
+            <span class="field-ico">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            </span>
+            <input class="f-input" type="email" placeholder="Ton adresse email" disabled/>
+          </div>
+
+          <button class="f-submit">Recevoir Mon Guide Gratuit →</button>
+
+          <div class="f-note">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            Aucun spam · Désabonnement en 1 clic
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══ TICKER ══ -->
+<div class="ticker">
+  <div class="ticker-track">
+    <!-- duplicated for seamless loop -->
+    <span class="ticker-item"><span class="ticker-pip"></span>Certification AMF</span>
+    <span class="ticker-item accent"><span class="ticker-pip" style="background:var(--gold)"></span>8 traders max / cohorte</span>
+    <span class="ticker-item"><span class="ticker-pip"></span>Programme 90 jours</span>
+    <span class="ticker-item"><span class="ticker-pip"></span>Mentorat privé · Toulouse</span>
+    <span class="ticker-item accent"><span class="ticker-pip" style="background:var(--gold)"></span>Méthode · Discipline · Performance</span>
+    <span class="ticker-item"><span class="ticker-pip"></span>Accompagnement personnalisé</span>
+    <span class="ticker-item"><span class="ticker-pip"></span>Traders intermédiaires</span>
+    <span class="ticker-item accent"><span class="ticker-pip" style="background:var(--gold)"></span>Moins de bruit. Plus de discipline.</span>
+
+    <span class="ticker-item"><span class="ticker-pip"></span>Certification AMF</span>
+    <span class="ticker-item accent"><span class="ticker-pip" style="background:var(--gold)"></span>8 traders max / cohorte</span>
+    <span class="ticker-item"><span class="ticker-pip"></span>Programme 90 jours</span>
+    <span class="ticker-item"><span class="ticker-pip"></span>Mentorat privé · Toulouse</span>
+    <span class="ticker-item accent"><span class="ticker-pip" style="background:var(--gold)"></span>Méthode · Discipline · Performance</span>
+    <span class="ticker-item"><span class="ticker-pip"></span>Accompagnement personnalisé</span>
+    <span class="ticker-item"><span class="ticker-pip"></span>Traders intermédiaires</span>
+    <span class="ticker-item accent"><span class="ticker-pip" style="background:var(--gold)"></span>Moins de bruit. Plus de discipline.</span>
+  </div>
+</div>
+
+
+<!-- ══ PROBLÈME ══ -->
+<section class="problem">
+  <div class="w">
+
+    <div class="problem-header">
+      <p class="t-eye" style="margin-bottom:16px;">Le vrai problème</p>
+      <h2 class="t-d2">Tu trades depuis des mois.<br>Mais rien ne structure<br>vraiment ton approche.</h2>
+      <div class="problem-pull">
+        "Tu n'as pas besoin de plus d'informations.<br>Tu as besoin d'un cadre."
+        <cite>— Louis Ronchet, Certifié AMF</cite>
+      </div>
+    </div>
+
+    <div class="pain-table">
+      <div class="pain-row">
+        <span class="pain-idx">01</span>
+        <div class="pain-body">
+          <h4>Tu changes de stratégie trop souvent</h4>
+          <p>Tu passes d'un setup à l'autre sans jamais en maîtriser un vraiment. Chaque nouvelle approche semble plus prometteuse que la précédente — jusqu'à la suivante.</p>
+        </div>
+      </div>
+      <div class="pain-row">
+        <span class="pain-idx">02</span>
+        <div class="pain-body">
+          <h4>Tu entres en position sans plan clair</h4>
+          <p>Les émotions prennent le dessus au moment de l'exécution. Le FOMO dicte tes décisions là où l'analyse devrait le faire.</p>
+        </div>
+      </div>
+      <div class="pain-row">
+        <span class="pain-idx">03</span>
+        <div class="pain-body">
+          <h4>Tu n'analyses pas tes erreurs</h4>
+          <p>Tu perds, tu passes à autre chose. Sans comprendre précisément pourquoi, tu répètes les mêmes patterns indéfiniment.</p>
+        </div>
+      </div>
+      <div class="pain-row">
+        <span class="pain-idx">04</span>
+        <div class="pain-body">
+          <h4>Tu confonds activité et progression</h4>
+          <p>Beaucoup de trades, peu d'évolution réelle. L'agitation donne l'illusion d'avancer — le carnet d'ordres, lui, ne ment pas.</p>
+        </div>
+      </div>
+      <div class="pain-row">
+        <span class="pain-idx">05</span>
+        <div class="pain-body">
+          <h4>Tu n'as pas de suivi structuré</h4>
+          <p>Sans journal ni métriques claires, impossible d'identifier ce qui fonctionne. Tu travailles à l'aveugle.</p>
+        </div>
+      </div>
+      <div class="pain-row">
+        <span class="pain-idx">06</span>
+        <div class="pain-body">
+          <h4>Tu manques de discipline sous pression</h4>
+          <p>Tu connais les règles. Mais les appliquer lorsque le marché bouge vite est une autre compétence — et elle s'entraîne.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══ BÉNÉFICES ══ -->
+<section class="benefits">
+  <div class="w">
+
+    <div class="benefits-head">
+      <div>
+        <p class="t-eye" style="margin-bottom:14px;">Dans ce guide gratuit</p>
+        <h2 class="t-d2">Ce que tu vas<br>découvrir</h2>
+      </div>
+      <div class="benefits-head-right">
+        <p>[Phrase sur ce que ce PDF change concrètement pour le trader qui le lit.]</p>
+        <button class="btn-blue">Recevoir le guide →</button>
+      </div>
+    </div>
+
+    <div class="feat-grid">
+      <div class="feat-cell">
+        <div class="feat-num">01</div>
+        <h4>[Bénéfice 1 — titre court]</h4>
+        <p>[Ce que le trader peut faire, comprendre ou éviter après avoir lu cette partie du PDF.]</p>
+      </div>
+      <div class="feat-cell">
+        <div class="feat-num">02</div>
+        <h4>[Bénéfice 2]</h4>
+        <p>[Description courte]</p>
+      </div>
+      <div class="feat-cell">
+        <div class="feat-num">03</div>
+        <h4>[Bénéfice 3]</h4>
+        <p>[Description courte]</p>
+      </div>
+      <div class="feat-cell">
+        <div class="feat-num">04</div>
+        <h4>[Bénéfice 4]</h4>
+        <p>[Description courte]</p>
+      </div>
+    </div>
+
+    <div class="check-list">
+      <div class="check-row"><div class="check-ico"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>[Point concret 1 — ce que le trader maîtrise après lecture]</div>
+      <div class="check-row"><div class="check-ico"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>[Point concret 2]</div>
+      <div class="check-row"><div class="check-ico"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>[Point concret 3]</div>
+      <div class="check-row"><div class="check-ico"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>[Point concret 4]</div>
+      <div class="check-row"><div class="check-ico"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>[Point concret 5]</div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══ ABOUT ══ -->
+<section class="about">
+  <div class="w">
+    <div class="about-grid">
+
+      <div class="about-left">
+        <p class="t-eye" style="margin-bottom:14px;">Qui suis-je ?</p>
+        <h2 class="t-d2" style="margin-bottom:6px;">Louis Ronchet</h2>
+        <p class="about-sub-name">Formateur Trading Privé</p>
+
+        <p class="about-bio">[Bio de Louis — 3 lignes. Parcours, moment de bascule. Ton direct, première personne. Sans superlatif, sans résultats inventés.]</p>
+        <p class="about-bio" style="margin-bottom:0;">[Pourquoi il forme des traders. Ce qu'il veut vraiment transmettre. Ce qu'il refuse de faire comme les autres.]</p>
+
+        <div class="amf-credential">
+          <svg class="amf-cred-icon" width="16" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+          <div>
+            <div class="amf-cred-label">Certifié AMF</div>
+            <p class="amf-cred-body">La certification AMF est la référence réglementaire française en matière de marchés financiers. Elle distingue les professionnels encadrés des formateurs non certifiés — une différence réelle dans une niche à haute méfiance.</p>
+          </div>
+        </div>
+
+        <div class="stat-row">
+          <div class="stat-c"><span class="stat-v">90J</span><span class="stat-l">Programme</span></div>
+          <div class="stat-c"><span class="stat-v">8</span><span class="stat-l">Traders max</span></div>
+          <div class="stat-c"><span class="stat-v">AMF</span><span class="stat-l">Certifié</span></div>
+        </div>
+      </div>
+
+      <div class="photo-wrap">
+        <div class="photo-bg-glow"></div>
+        <div class="photo-ico">👤</div>
+        <div class="photo-lbl">Photo de Louis</div>
+        <div class="amf-badge-dock">
+          <svg class="amf-dock-ico" width="16" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+          <div>
+            <span class="amf-dock-name">Certifié AMF</span>
+            <span class="amf-dock-sub">Autorité des Marchés Financiers</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ TÉMOIGNAGES ══ -->
+<section class="testi">
+  <div class="w">
+
+    <div class="testi-head">
+      <div>
+        <p class="t-eye" style="margin-bottom:14px;">Résultats</p>
+        <h2 class="t-d2">Ce qu'ils en disent</h2>
+      </div>
+      <p class="testi-head-note">Screenshots DM et avis clients à intégrer dès disponibles</p>
+    </div>
+
+    <div class="testi-grid">
+      <div class="t-card t-featured">
+        <div class="t-q">"</div>
+        <div class="t-stars"><div class="t-star"></div><div class="t-star"></div><div class="t-star"></div><div class="t-star"></div><div class="t-star"></div></div>
+        <p class="t-body">"[Témoignage principal — le plus fort. Transformation before/after concrète, chiffre si possible. Ce témoignage est lu en premier, il décide de tout.]"</p>
+        <div class="t-foot">
+          <div class="t-av">A</div>
+          <div>
+            <div class="t-name">[Prénom Nom]</div>
+            <div class="t-role">[Profil trader · Marché · Ville]</div>
+          </div>
+        </div>
+      </div>
+      <div class="t-card">
+        <div class="t-q">"</div>
+        <div class="t-stars"><div class="t-star"></div><div class="t-star"></div><div class="t-star"></div><div class="t-star"></div><div class="t-star"></div></div>
+        <p class="t-body">"[Témoignage 2 — discipline, structure retrouvée, changement de mindset.]"</p>
+        <div class="t-foot">
+          <div class="t-av">B</div>
+          <div><div class="t-name">[Prénom]</div><div class="t-role">[Profil · Ville]</div></div>
+        </div>
+      </div>
+      <div class="t-card">
+        <div class="t-q">"</div>
+        <div class="t-stars"><div class="t-star"></div><div class="t-star"></div><div class="t-star"></div><div class="t-star"></div><div class="t-star"></div></div>
+        <p class="t-body">"[Témoignage 3 — confiance retrouvée, clarté de méthode, progression mesurable.]"</p>
+        <div class="t-foot">
+          <div class="t-av">C</div>
+          <div><div class="t-name">[Prénom]</div><div class="t-role">[Profil · Ville]</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="screens">
+      <div class="screen-ph">DM 1</div>
+      <div class="screen-ph">DM 2</div>
+      <div class="screen-ph">DM 3</div>
+      <div class="screen-ph">DM 4</div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══ RARETÉ ══ -->
+<section class="scarcity">
+  <div class="w">
+    <div class="scarcity-grid">
+      <div class="scarcity-number">8</div>
+      <div class="scarcity-right">
+        <span class="scarcity-tag">Accès limité — pas une formule de vente</span>
+        <h3>Pas pour créer une fausse urgence.<br>Pour que l'accompagnement vaille quelque chose.</h3>
+        <p>Un suivi réellement personnalisé exige du temps. Au-delà de 8 traders simultanés, la qualité diminue. Ce plafond n'est pas négociable — c'est ce qui définit le mentorat.</p>
+        <button class="btn-blue">Recevoir le guide gratuit →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ CTA FINAL ══ -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <p class="cta-eyebrow">Tu es encore là — c'est que le sujet te concerne.</p>
+    <h2 class="cta-h2">Reçois le guide<br><span>[Titre PDF]</span><br>maintenant.</h2>
+    <p class="cta-sub">Un premier pas concret. Pas un engagement. Juste une méthode que tu peux appliquer dès cette semaine.</p>
+    <div class="cta-form">
+      <div class="field">
+        <span class="field-ico"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+        <input class="f-input" type="text" placeholder="Ton prénom" disabled/>
+      </div>
+      <div class="field">
+        <span class="field-ico"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span>
+        <input class="f-input" type="email" placeholder="Ton adresse email" disabled/>
+      </div>
+      <button class="btn-blue full" style="margin-top:12px;">Je Veux Mon Guide Gratuit →</button>
+      <div class="f-note" style="justify-content:center; margin-top:12px;">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Données sécurisées · Aucun spam · Désabonnement en 1 clic
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ FOOTER ══ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="foot-brand">INVEST<b>LOUIS</b> · Louis Ronchet</div>
+    <div class="foot-links">
+      <a href="#">Mentions légales</a>
+      <a href="#">Confidentialité</a>
+      <a href="#">Contact</a>
+    </div>
+    <div class="foot-right">Certifié AMF · Toulouse · © 2026</div>
+  </div>
+</footer>
+
+</body>
+</html>
