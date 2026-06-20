@@ -1,0 +1,1778 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>InvestLouis — [Titre du PDF]</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,500;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ─────────────────────────────────────────────
+   RESET & BASE
+───────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --c-bg:       #06080f;
+  --c-surface:  #090d17;
+  --c-surface2: #0c1120;
+  --c-border:   rgba(255,255,255,0.06);
+  --c-border-md:rgba(255,255,255,0.1);
+  --c-blue:     #2563EB;
+  --c-blue-dim: rgba(37,99,235,0.12);
+  --c-blue-glow:rgba(37,99,235,0.06);
+  --c-gold:     #C9A84C;
+  --c-gold-dim: rgba(201,168,76,0.1);
+  --c-gold-border:rgba(201,168,76,0.2);
+  --c-white:    #ffffff;
+  --c-text:     #8892a4;
+  --c-text-md:  #b0bac8;
+  --c-text-bright: #dce3ed;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  --max-w: 1080px;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--c-bg);
+  color: var(--c-text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+img { display: block; max-width: 100%; }
+
+button { font-family: inherit; cursor: pointer; border: none; }
+
+/* ─────────────────────────────────────────────
+   UTILITIES
+───────────────────────────────────────────── */
+.wrap {
+  max-width: var(--max-w);
+  margin-inline: auto;
+  padding-inline: 48px;
+}
+
+.eyebrow {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--c-blue);
+}
+
+.h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: clamp(40px, 5.5vw, 72px);
+  line-height: 1.02;
+  letter-spacing: -2px;
+  color: var(--c-white);
+}
+
+.h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: clamp(28px, 3.5vw, 46px);
+  line-height: 1.08;
+  letter-spacing: -1px;
+  color: var(--c-white);
+}
+
+.h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--c-text-bright);
+  letter-spacing: -0.2px;
+}
+
+.body-lg {
+  font-size: 17px;
+  line-height: 1.75;
+  color: var(--c-text-md);
+  font-weight: 300;
+}
+
+.body-sm {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--c-text);
+}
+
+.gold { color: var(--c-gold); }
+.blue { color: var(--c-blue); }
+.white { color: var(--c-white); }
+
+.serif {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+}
+
+/* ─────────────────────────────────────────────
+   NAV
+───────────────────────────────────────────── */
+.nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 64px;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  padding-inline: 48px;
+  background: rgba(6,8,15,0.82);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--c-border);
+}
+
+.nav-inner {
+  width: 100%;
+  max-width: var(--max-w);
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-logo {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 15px;
+  letter-spacing: 1.5px;
+  color: var(--c-white);
+  text-transform: uppercase;
+}
+
+.nav-logo span { color: var(--c-blue); }
+
+.nav-center {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: var(--c-gold);
+}
+
+.nav-center-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--c-gold);
+  opacity: 0.6;
+}
+
+.nav-btn {
+  height: 36px;
+  padding: 0 18px;
+  background: var(--c-blue);
+  color: var(--c-white);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-radius: var(--radius-sm);
+  transition: opacity 0.15s;
+}
+
+.nav-btn:hover { opacity: 0.85; }
+
+/* ─────────────────────────────────────────────
+   HERO
+───────────────────────────────────────────── */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  align-items: center;
+  gap: 80px;
+  padding-block: 140px 80px;
+  overflow: hidden;
+}
+
+/* Single blue glow — one light source, top-left */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -200px;
+  left: -100px;
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(ellipse, rgba(37,99,235,0.09) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+/* Horizontal rule that bleeds edge-to-edge */
+.hero-rule {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: var(--c-border);
+}
+
+/* Column — left */
+.hero-left {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 26px;
+  padding: 0 12px;
+  border-radius: 100px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.pill-gold {
+  background: var(--c-gold-dim);
+  border: 1px solid var(--c-gold-border);
+  color: var(--c-gold);
+}
+
+.pill-blue {
+  background: var(--c-blue-dim);
+  border: 1px solid rgba(37,99,235,0.25);
+  color: #60a5fa;
+}
+
+.pill svg { flex-shrink: 0; }
+
+.hero-h1 { margin-bottom: 6px; }
+
+.hero-h1-accent {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: clamp(40px, 5.5vw, 72px);
+  line-height: 1.02;
+  letter-spacing: -2px;
+  color: var(--c-blue);
+  display: block;
+}
+
+.hero-sub {
+  margin-top: 24px;
+  margin-bottom: 48px;
+  max-width: 480px;
+}
+
+/* Inline trust */
+.hero-trust {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 1px solid var(--c-border);
+}
+
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--c-text);
+  letter-spacing: 0.3px;
+}
+
+.trust-icon {
+  width: 14px; height: 14px;
+  color: var(--c-blue);
+  flex-shrink: 0;
+}
+
+/* Column — right: form card */
+.hero-right {
+  position: relative;
+  z-index: 2;
+}
+
+.form-card {
+  background: var(--c-surface);
+  border: 1px solid var(--c-border-md);
+  border-radius: var(--radius-lg);
+  padding: 36px 32px 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle top line accent */
+.form-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--c-blue), transparent);
+  opacity: 0.5;
+}
+
+.form-card-header {
+  margin-bottom: 28px;
+}
+
+.form-card-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 17px;
+  color: var(--c-white);
+  margin-bottom: 6px;
+  letter-spacing: -0.3px;
+}
+
+.form-card-sub {
+  font-size: 13px;
+  color: var(--c-text);
+}
+
+/* PDF preview inside card */
+.form-pdf-preview {
+  background: linear-gradient(160deg, #121d3a 0%, #0a0f1c 100%);
+  border: 1px solid rgba(37,99,235,0.2);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  margin-bottom: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.form-pdf-preview::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 40px;
+  background: linear-gradient(transparent, rgba(10,15,28,0.8));
+}
+
+.pdf-brand {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--c-white);
+  margin-bottom: 4px;
+}
+
+.pdf-brand span { color: var(--c-blue); }
+
+.pdf-sub {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--c-gold);
+  margin-bottom: 14px;
+}
+
+.pdf-line {
+  height: 1px;
+  background: linear-gradient(90deg, var(--c-gold), transparent);
+  opacity: 0.3;
+  margin-bottom: 14px;
+}
+
+/* Mini area chart */
+.pdf-chart {
+  position: relative;
+  height: 48px;
+  margin-bottom: 14px;
+}
+
+.pdf-chart svg {
+  width: 100%;
+  height: 100%;
+}
+
+.pdf-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  color: var(--c-white);
+  line-height: 1.4;
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.pdf-chips {
+  display: flex;
+  gap: 6px;
+  position: relative;
+  z-index: 1;
+}
+
+.pdf-chip {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 2px;
+}
+
+.chip-gold {
+  background: var(--c-gold-dim);
+  border: 1px solid var(--c-gold-border);
+  color: var(--c-gold);
+}
+
+.chip-blue {
+  background: var(--c-blue-dim);
+  border: 1px solid rgba(37,99,235,0.3);
+  color: #93c5fd;
+}
+
+/* Gratuit ribbon */
+.pdf-ribbon {
+  position: absolute;
+  top: 16px; right: -4px;
+  background: var(--c-gold);
+  color: #06080f;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 4px 14px 4px 10px;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 8px 50%);
+}
+
+/* Form fields */
+.field {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.field-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #3d4a5c;
+  pointer-events: none;
+}
+
+.field input {
+  width: 100%;
+  height: 48px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  padding: 0 14px 0 42px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: var(--c-white);
+  outline: none;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.field input::placeholder {
+  color: #3d4a5c;
+}
+
+.field input:focus {
+  border-color: var(--c-blue);
+  background: rgba(37,99,235,0.04);
+}
+
+.cta-btn {
+  display: block;
+  width: 100%;
+  height: 52px;
+  background: var(--c-blue);
+  color: var(--c-white);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border-radius: var(--radius-md);
+  margin-top: 14px;
+  position: relative;
+  overflow: hidden;
+  transition: opacity 0.15s, transform 0.15s;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.4), 0 8px 24px rgba(37,99,235,0.2);
+}
+
+.cta-btn:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+.cta-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, transparent 60%);
+}
+
+.form-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 14px;
+  font-size: 11px;
+  color: #3d4a5c;
+  font-weight: 400;
+}
+
+/* ─────────────────────────────────────────────
+   PROBLEM
+───────────────────────────────────────────── */
+.problem {
+  padding-block: 120px;
+  background: var(--c-surface);
+  position: relative;
+}
+
+.problem-grid {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 96px;
+  align-items: start;
+}
+
+.problem-sticky {
+  position: sticky;
+  top: 96px;
+}
+
+.problem-number {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 120px;
+  line-height: 0.9;
+  letter-spacing: -8px;
+  color: rgba(255,255,255,0.025);
+  margin-bottom: -20px;
+  margin-left: -6px;
+  user-select: none;
+}
+
+.problem-label {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: clamp(22px, 2.8vw, 34px);
+  color: var(--c-white);
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+  margin-bottom: 20px;
+}
+
+.problem-label em {
+  color: var(--c-gold);
+  font-style: normal;
+}
+
+.problem-body {
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--c-text);
+  margin-bottom: 28px;
+}
+
+.pivot-text {
+  padding: 20px 0 20px 20px;
+  border-left: 2px solid var(--c-blue);
+}
+
+.pivot-text p {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 16px;
+  color: var(--c-text-bright);
+  line-height: 1.65;
+}
+
+.pivot-text cite {
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--c-text);
+  margin-top: 12px;
+}
+
+/* Pain items */
+.pain-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.pain-row {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 0;
+  padding-block: 28px;
+  border-bottom: 1px solid var(--c-border);
+}
+
+.pain-row:first-child { border-top: 1px solid var(--c-border); }
+
+.pain-index {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: #2a3447;
+  padding-top: 3px;
+  letter-spacing: 0.5px;
+}
+
+.pain-content h4 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--c-text-bright);
+  margin-bottom: 8px;
+  letter-spacing: -0.1px;
+}
+
+.pain-content p {
+  font-size: 13px;
+  color: var(--c-text);
+  line-height: 1.7;
+}
+
+/* ─────────────────────────────────────────────
+   BENEFITS
+───────────────────────────────────────────── */
+.benefits {
+  padding-block: 120px;
+  background: var(--c-bg);
+}
+
+.benefits-top {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 64px;
+  gap: 40px;
+}
+
+.benefits-top-left { max-width: 480px; }
+
+.benefits-top-right {
+  flex-shrink: 0;
+}
+
+.benefits-top-right p {
+  font-size: 13px;
+  color: var(--c-text);
+  max-width: 220px;
+  text-align: right;
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+/* 4-column features */
+.features-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: 1px;
+}
+
+.feature-col {
+  padding: 32px 26px;
+  border-right: 1px solid var(--c-border);
+  position: relative;
+  transition: background 0.2s;
+}
+
+.feature-col:last-child { border-right: none; }
+
+.feature-col:hover {
+  background: rgba(37,99,235,0.03);
+}
+
+.feature-icon {
+  width: 36px; height: 36px;
+  margin-bottom: 20px;
+  color: var(--c-blue);
+}
+
+.feature-col h4 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--c-white);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.feature-col p {
+  font-size: 12px;
+  color: var(--c-text);
+  line-height: 1.65;
+}
+
+/* Checklist 2-col */
+.checklist-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.check-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px 24px;
+  border-right: 1px solid var(--c-border);
+  border-bottom: 1px solid var(--c-border);
+}
+
+.check-item:nth-child(even) { border-right: none; }
+.check-item:nth-last-child(-n+2) { border-bottom: none; }
+
+.check-mark {
+  width: 18px; height: 18px;
+  border: 1px solid rgba(37,99,235,0.4);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+  color: var(--c-blue);
+}
+
+.check-text {
+  font-size: 13px;
+  color: var(--c-text-md);
+  line-height: 1.5;
+}
+
+/* ─────────────────────────────────────────────
+   ABOUT — LOUIS + AMF
+───────────────────────────────────────────── */
+.about {
+  padding-block: 120px;
+  background: var(--c-surface);
+  border-top: 1px solid var(--c-border);
+  border-bottom: 1px solid var(--c-border);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 480px;
+  gap: 80px;
+  align-items: center;
+}
+
+.about-left {}
+
+.about-left .eyebrow { margin-bottom: 14px; }
+
+.about-left .h2 { margin-bottom: 6px; }
+
+.about-name-sub {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--c-text);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 32px;
+}
+
+.about-bio {
+  font-size: 15px;
+  color: var(--c-text-md);
+  line-height: 1.85;
+  margin-bottom: 16px;
+}
+
+.about-bio + .about-bio { margin-bottom: 36px; }
+
+.about-amf-callout {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px;
+  background: var(--c-gold-dim);
+  border: 1px solid var(--c-gold-border);
+  border-radius: var(--radius-md);
+  margin-bottom: 36px;
+}
+
+.amf-shield {
+  width: 36px; height: 36px;
+  background: rgba(201,168,76,0.15);
+  border: 1px solid var(--c-gold-border);
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--c-gold);
+  flex-shrink: 0;
+}
+
+.amf-callout-text strong {
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: var(--c-gold);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.amf-callout-text p {
+  font-size: 12px;
+  color: rgba(201,168,76,0.65);
+  line-height: 1.65;
+}
+
+/* Stats row */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--c-border);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.stat-cell {
+  background: var(--c-surface);
+  padding: 20px;
+  text-align: center;
+}
+
+.stat-val {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 28px;
+  color: var(--c-white);
+  letter-spacing: -1px;
+  display: block;
+}
+
+.stat-lbl {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--c-text);
+  display: block;
+  margin-top: 4px;
+}
+
+/* Photo column */
+.about-photo {
+  position: relative;
+}
+
+.photo-area {
+  background: linear-gradient(160deg, #0d1e42 0%, #060a14 100%);
+  border: 1px solid var(--c-border-md);
+  border-radius: var(--radius-lg);
+  height: 560px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.photo-area-glow {
+  position: absolute;
+  top: -100px; left: -100px;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(37,99,235,0.07) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.photo-placeholder-ico {
+  font-size: 56px;
+  opacity: 0.1;
+}
+
+.photo-placeholder-txt {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #2a3447;
+}
+
+/* AMF badge floating */
+.amf-badge-float {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  right: 24px;
+  background: rgba(6,8,15,0.9);
+  border: 1px solid var(--c-gold-border);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.amf-badge-icon {
+  width: 34px; height: 34px;
+  background: var(--c-gold-dim);
+  border: 1px solid var(--c-gold-border);
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--c-gold);
+  flex-shrink: 0;
+}
+
+.amf-badge-label strong {
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--c-gold);
+  margin-bottom: 2px;
+}
+
+.amf-badge-label span {
+  font-size: 11px;
+  color: rgba(201,168,76,0.5);
+}
+
+/* ─────────────────────────────────────────────
+   TESTIMONIALS
+───────────────────────────────────────────── */
+.testimonials {
+  padding-block: 120px;
+  background: var(--c-bg);
+}
+
+.testimonials-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 56px;
+  gap: 32px;
+}
+
+.testi-hint {
+  font-size: 12px;
+  color: var(--c-text);
+  font-style: italic;
+  max-width: 200px;
+  text-align: right;
+  line-height: 1.5;
+}
+
+/* Layout: 1 featured + 2 regular */
+.testi-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 1px;
+  background: var(--c-border);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.testi-card {
+  background: var(--c-surface);
+  padding: 36px;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.2s;
+}
+
+.testi-card:hover { background: #0c1120; }
+
+.testi-card.featured {
+  grid-column: 1 / -1;
+  background: var(--c-surface2);
+}
+
+.testi-card.featured .testi-body {
+  font-size: 16px;
+}
+
+.testi-quote-mark {
+  font-family: 'Playfair Display', serif;
+  font-size: 64px;
+  line-height: 1;
+  color: rgba(37,99,235,0.08);
+  position: absolute;
+  top: 20px; right: 28px;
+  pointer-events: none;
+  user-select: none;
+}
+
+.testi-stars {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 16px;
+}
+
+.star {
+  width: 11px; height: 11px;
+  background: var(--c-gold);
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+.testi-body {
+  font-size: 14px;
+  font-style: italic;
+  color: var(--c-text-md);
+  line-height: 1.75;
+  margin-bottom: 24px;
+}
+
+.testi-footer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 20px;
+  border-top: 1px solid var(--c-border);
+}
+
+.testi-av {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1e3a8a, var(--c-blue));
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 12px;
+  color: white;
+  flex-shrink: 0;
+}
+
+.testi-meta-name {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  color: var(--c-white);
+  margin-bottom: 2px;
+}
+
+.testi-meta-role {
+  font-size: 11px;
+  color: var(--c-text);
+}
+
+/* Screenshot placeholders */
+.screenshot-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.screenshot-ph {
+  background: var(--c-surface);
+  border: 1px dashed rgba(37,99,235,0.15);
+  border-radius: var(--radius-md);
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #2a3447;
+}
+
+/* ─────────────────────────────────────────────
+   SCARCITY
+───────────────────────────────────────────── */
+.scarcity {
+  padding-block: 100px;
+  background: var(--c-surface);
+  border-top: 1px solid var(--c-border);
+  overflow: hidden;
+}
+
+.scarcity-inner {
+  display: grid;
+  grid-template-columns: 1fr 480px;
+  gap: 80px;
+  align-items: center;
+}
+
+.scarcity-num-display {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: clamp(100px, 14vw, 180px);
+  line-height: 0.9;
+  letter-spacing: -10px;
+  color: var(--c-white);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.scarcity-num-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--c-gold);
+  padding-left: 4px;
+}
+
+.scarcity-right h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: clamp(18px, 2.2vw, 26px);
+  color: var(--c-white);
+  line-height: 1.3;
+  letter-spacing: -0.5px;
+  margin-bottom: 16px;
+}
+
+.scarcity-right p {
+  font-size: 14px;
+  color: var(--c-text);
+  line-height: 1.8;
+  margin-bottom: 28px;
+}
+
+/* ─────────────────────────────────────────────
+   CTA FINAL
+───────────────────────────────────────────── */
+.cta-final {
+  padding-block: 140px;
+  background: var(--c-bg);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-final::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px; height: 400px;
+  background: radial-gradient(ellipse, rgba(37,99,235,0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.cta-final-inner {
+  max-width: 600px;
+  margin-inline: auto;
+  position: relative;
+  z-index: 2;
+}
+
+.cta-final-eyebrow {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 15px;
+  color: var(--c-text);
+  margin-bottom: 20px;
+}
+
+.cta-final-h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: clamp(30px, 4.5vw, 56px);
+  letter-spacing: -1.5px;
+  line-height: 1.05;
+  color: var(--c-white);
+  margin-bottom: 16px;
+}
+
+.cta-final-h2 span { color: var(--c-blue); }
+
+.cta-final-sub {
+  font-size: 15px;
+  color: var(--c-text);
+  max-width: 380px;
+  margin-inline: auto;
+  line-height: 1.75;
+  margin-bottom: 48px;
+  font-weight: 300;
+}
+
+.cta-form-final {
+  max-width: 380px;
+  margin-inline: auto;
+}
+
+/* ─────────────────────────────────────────────
+   FOOTER
+───────────────────────────────────────────── */
+.footer {
+  background: var(--c-bg);
+  border-top: 1px solid var(--c-border);
+  padding: 32px 48px;
+}
+
+.footer-inner {
+  max-width: var(--max-w);
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.footer-logo {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #2a3447;
+}
+
+.footer-logo span { color: #3d5a8a; }
+
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.footer-links a {
+  font-size: 11px;
+  color: #2a3447;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.footer-links a:hover { color: var(--c-text); }
+
+.footer-right {
+  font-size: 11px;
+  color: #2a3447;
+}
+
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══════════════════════════════════ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-logo">INVEST<span>LOUIS</span></div>
+    <div class="nav-center">
+      <div class="nav-center-dot"></div>
+      Certifié AMF
+      <div class="nav-center-dot"></div>
+    </div>
+    <button class="nav-btn">Recevoir le guide</button>
+  </div>
+</nav>
+
+
+<!-- ══ HERO ══════════════════════════════════ -->
+<section class="hero wrap">
+
+  <div class="hero-left">
+
+    <div class="hero-meta">
+      <span class="pill pill-gold">
+        <svg width="10" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+        Certifié AMF
+      </span>
+      <span class="pill pill-blue">Accès gratuit</span>
+    </div>
+
+    <p class="eyebrow" style="margin-bottom:16px;">Louis Ronchet · Mentorat Trading Privé</p>
+
+    <h1 class="h1 hero-h1">[TITRE DU PDF]</h1>
+    <span class="hero-h1-accent">[en X étapes]</span>
+
+    <p class="body-lg hero-sub">
+      [Promesse de transformation en une phrase. Ce que le trader comprend ou évite après lecture de ce guide.]
+    </p>
+
+    <div class="hero-trust">
+      <div class="trust-item">
+        <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Certification AMF
+      </div>
+      <div class="trust-item">
+        <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        8 traders max
+      </div>
+      <div class="trust-item">
+        <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Programme 90 jours
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Right: Form card -->
+  <div class="hero-right">
+    <div class="form-card">
+
+      <!-- PDF Preview -->
+      <div class="form-pdf-preview">
+        <div class="pdf-ribbon">Gratuit</div>
+        <div class="pdf-brand">INVEST<span>LOUIS</span></div>
+        <div class="pdf-sub">Louis Ronchet · Certifié AMF</div>
+        <div class="pdf-line"></div>
+        <div class="pdf-chart">
+          <svg viewBox="0 0 320 50" preserveAspectRatio="none" fill="none">
+            <defs>
+              <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#2563EB" stop-opacity="0.25"/>
+                <stop offset="100%" stop-color="#2563EB" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <polygon
+              points="0,45 40,38 80,42 120,28 160,32 200,18 240,22 280,10 320,5 320,50 0,50"
+              fill="url(#g1)"/>
+            <polyline
+              points="0,45 40,38 80,42 120,28 160,32 200,18 240,22 280,10 320,5"
+              stroke="#2563EB" stroke-width="1.5" fill="none"/>
+            <!-- Candle wicks -->
+            <g stroke="#3B82F6" stroke-width="1" opacity="0.5">
+              <line x1="40" y1="34" x2="40" y2="44"/>
+              <line x1="120" y1="22" x2="120" y2="34"/>
+              <line x1="200" y1="12" x2="200" y2="24"/>
+              <line x1="280" y1="4" x2="280" y2="16"/>
+            </g>
+            <g fill="#2563EB" opacity="0.6">
+              <rect x="36" y="34" width="8" height="6"/>
+              <rect x="116" y="22" width="8" height="8"/>
+              <rect x="196" y="12" width="8" height="7"/>
+              <rect x="276" y="4" width="8" height="8"/>
+            </g>
+          </svg>
+        </div>
+        <div class="pdf-title">[Titre du PDF<br>sur 2 lignes max]</div>
+        <div class="pdf-chips">
+          <span class="pdf-chip chip-gold">AMF</span>
+          <span class="pdf-chip chip-blue">Guide</span>
+          <span class="pdf-chip chip-blue">Gratuit</span>
+        </div>
+      </div>
+
+      <div class="form-card-header">
+        <div class="form-card-title">Reçois le guide maintenant</div>
+        <div class="form-card-sub">Accès immédiat · Aucun paiement requis</div>
+      </div>
+
+      <div class="field">
+        <span class="field-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </span>
+        <input type="text" placeholder="Ton prénom" disabled/>
+      </div>
+
+      <div class="field">
+        <span class="field-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        </span>
+        <input type="email" placeholder="Ton adresse email" disabled/>
+      </div>
+
+      <button class="cta-btn">Recevoir Mon Guide Gratuit →</button>
+
+      <div class="form-note">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Aucun spam · Désabonnement en 1 clic
+      </div>
+
+    </div>
+  </div>
+
+  <div class="hero-rule"></div>
+</section>
+
+
+<!-- ══ PROBLEM ═══════════════════════════════ -->
+<section class="problem">
+  <div class="wrap">
+    <div class="problem-grid">
+
+      <div class="problem-sticky">
+        <div class="problem-number">06</div>
+        <h2 class="problem-label">
+          Tu trades depuis<br>des mois, mais rien<br>ne <em>structure</em><br>ton approche.
+        </h2>
+        <p class="problem-body">
+          Le marché ne récompense pas ceux qui improvisent. Il récompense ceux qui ont une méthode — et qui s'y tiennent sous pression.
+        </p>
+        <div class="pivot-text">
+          <p>"Tu n'as pas besoin de plus d'informations. Tu as besoin d'un cadre."</p>
+          <cite>— Louis Ronchet, Certifié AMF</cite>
+        </div>
+      </div>
+
+      <div class="pain-stack">
+        <div class="pain-row">
+          <span class="pain-index">01</span>
+          <div class="pain-content">
+            <h4>Tu changes de stratégie trop souvent</h4>
+            <p>Tu passes d'un setup à l'autre sans jamais en maîtriser un vraiment. Chaque nouvelle approche semble plus prometteuse que la précédente.</p>
+          </div>
+        </div>
+        <div class="pain-row">
+          <span class="pain-index">02</span>
+          <div class="pain-content">
+            <h4>Tu entres en position sans plan clair</h4>
+            <p>Les émotions prennent le dessus au moment de l'exécution. Le FOMO dicte tes décisions là où l'analyse devrait le faire.</p>
+          </div>
+        </div>
+        <div class="pain-row">
+          <span class="pain-index">03</span>
+          <div class="pain-content">
+            <h4>Tu n'analyses pas tes erreurs</h4>
+            <p>Tu perds, tu passes à autre chose. Mais sans comprendre précisément pourquoi, tu répètes exactement les mêmes patterns.</p>
+          </div>
+        </div>
+        <div class="pain-row">
+          <span class="pain-index">04</span>
+          <div class="pain-content">
+            <h4>Tu confonds activité et progression</h4>
+            <p>Beaucoup de trades, peu d'évolution réelle. L'agitation donne l'illusion d'avancer.</p>
+          </div>
+        </div>
+        <div class="pain-row">
+          <span class="pain-index">05</span>
+          <div class="pain-content">
+            <h4>Tu n'as pas de suivi structuré</h4>
+            <p>Sans journal ni métriques claires, impossible d'identifier ce qui fonctionne vraiment dans ton trading.</p>
+          </div>
+        </div>
+        <div class="pain-row">
+          <span class="pain-index">06</span>
+          <div class="pain-content">
+            <h4>Tu manques de discipline sous pression</h4>
+            <p>Tu connais les règles. Mais les appliquer lorsque le marché bouge vite est une autre compétence — qui s'entraîne.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ BENEFITS ══════════════════════════════ -->
+<section class="benefits">
+  <div class="wrap">
+
+    <div class="benefits-top">
+      <div class="benefits-top-left">
+        <p class="eyebrow" style="margin-bottom:14px;">Dans ce guide gratuit</p>
+        <h2 class="h2">Ce que tu vas<br>découvrir</h2>
+      </div>
+      <div class="benefits-top-right">
+        <p>[Phrase sur ce que ce PDF va changer concrètement pour le trader.]</p>
+        <button class="cta-btn" style="width:auto; padding:0 24px; font-size:10px; height:40px; border-radius:4px;">
+          Recevoir le guide →
+        </button>
+      </div>
+    </div>
+
+    <div class="features-row" style="margin-bottom:1px;">
+      <div class="feature-col">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        <h4>[Bénéfice 1]</h4>
+        <p>[Description courte — ce que le trader peut faire après]</p>
+      </div>
+      <div class="feature-col">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        <h4>[Bénéfice 2]</h4>
+        <p>[Description courte]</p>
+      </div>
+      <div class="feature-col">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 20h.01M7 20v-4"/><path d="M12 20V10"/><path d="M17 20V4"/><path d="M22 20h.01"/></svg>
+        <h4>[Bénéfice 3]</h4>
+        <p>[Description courte]</p>
+      </div>
+      <div class="feature-col">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <h4>[Bénéfice 4]</h4>
+        <p>[Description courte]</p>
+      </div>
+    </div>
+
+    <div class="checklist-grid">
+      <div class="check-item">
+        <div class="check-mark"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <span class="check-text">[Point actionnable 1]</span>
+      </div>
+      <div class="check-item">
+        <div class="check-mark"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <span class="check-text">[Point actionnable 4]</span>
+      </div>
+      <div class="check-item">
+        <div class="check-mark"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <span class="check-text">[Point actionnable 2]</span>
+      </div>
+      <div class="check-item">
+        <div class="check-mark"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <span class="check-text">[Point actionnable 5]</span>
+      </div>
+      <div class="check-item">
+        <div class="check-mark"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <span class="check-text">[Point actionnable 3]</span>
+      </div>
+      <div class="check-item">
+        <div class="check-mark"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <span class="check-text">[Point actionnable 6]</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══ ABOUT ══════════════════════════════════ -->
+<section class="about">
+  <div class="wrap">
+    <div class="about-grid">
+
+      <div class="about-left">
+        <p class="eyebrow" style="margin-bottom:14px;">Qui suis-je ?</p>
+        <h2 class="h2" style="margin-bottom:6px;">Louis Ronchet</h2>
+        <p class="about-name-sub">Formateur Trading Privé</p>
+
+        <p class="about-bio">
+          [Bio authentique de Louis — 3 à 4 lignes. Parcours, transformation personnelle, moment de bascule. Ton direct, première personne. Sans superlatif.]
+        </p>
+        <p class="about-bio">
+          [Pourquoi il a décidé de former des traders. Ce qu'il veut transmettre. Ce qu'il refuse de faire comme les autres formateurs.]
+        </p>
+
+        <div class="about-amf-callout">
+          <div class="amf-shield">
+            <svg width="16" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+          </div>
+          <div class="amf-callout-text">
+            <strong>Certifié AMF</strong>
+            <p>La certification AMF est la référence réglementaire française en trading. Elle distingue les professionnels encadrés par l'État des formateurs non certifiés — et c'est une différence qui compte dans une niche à haute méfiance.</p>
+          </div>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat-cell">
+            <span class="stat-val">90J</span>
+            <span class="stat-lbl">Programme</span>
+          </div>
+          <div class="stat-cell">
+            <span class="stat-val">8</span>
+            <span class="stat-lbl">Traders max</span>
+          </div>
+          <div class="stat-cell">
+            <span class="stat-val">AMF</span>
+            <span class="stat-lbl">Certifié</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-photo">
+        <div class="photo-area">
+          <div class="photo-area-glow"></div>
+          <div class="photo-placeholder-ico">👤</div>
+          <div class="photo-placeholder-txt">Photo de Louis</div>
+          <div class="amf-badge-float">
+            <div class="amf-badge-icon">
+              <svg width="16" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+            </div>
+            <div class="amf-badge-label">
+              <strong>Certifié AMF</strong>
+              <span>Autorité des Marchés Financiers</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ TESTIMONIALS ═══════════════════════════ -->
+<section class="testimonials">
+  <div class="wrap">
+
+    <div class="testimonials-header">
+      <div>
+        <p class="eyebrow" style="margin-bottom:14px;">Résultats</p>
+        <h2 class="h2">Ce qu'ils en disent</h2>
+      </div>
+      <p class="testi-hint">Screenshots DM et avis clients à intégrer dès disponibles</p>
+    </div>
+
+    <div class="testi-layout">
+      <div class="testi-card featured">
+        <div class="testi-quote-mark">"</div>
+        <div class="testi-stars">
+          <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+        </div>
+        <p class="testi-body">"[Témoignage principal — le plus fort, le plus concret. Transformation avant/après, chiffre si possible. C'est celui qui sera lu en premier et qui décidera si le visiteur lit les suivants.]"</p>
+        <div class="testi-footer">
+          <div class="testi-av">A</div>
+          <div>
+            <div class="testi-meta-name">[Prénom Nom]</div>
+            <div class="testi-meta-role">[Profil trader · Marché · Ville]</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-quote-mark">"</div>
+        <div class="testi-stars">
+          <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+        </div>
+        <p class="testi-body">"[Témoignage 2 — focus sur la discipline, la structure retrouvée, le changement de mindset.]"</p>
+        <div class="testi-footer">
+          <div class="testi-av">B</div>
+          <div>
+            <div class="testi-meta-name">[Prénom]</div>
+            <div class="testi-meta-role">[Profil · Ville]</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-quote-mark">"</div>
+        <div class="testi-stars">
+          <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+        </div>
+        <p class="testi-body">"[Témoignage 3 — focus sur la confiance retrouvée dans son trading, la clarté de méthode.]"</p>
+        <div class="testi-footer">
+          <div class="testi-av">C</div>
+          <div>
+            <div class="testi-meta-name">[Prénom]</div>
+            <div class="testi-meta-role">[Profil · Ville]</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="screenshot-row" style="margin-top:12px;">
+      <div class="screenshot-ph">DM 1</div>
+      <div class="screenshot-ph">DM 2</div>
+      <div class="screenshot-ph">DM 3</div>
+      <div class="screenshot-ph">DM 4</div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══ SCARCITY ═══════════════════════════════ -->
+<section class="scarcity">
+  <div class="wrap">
+    <div class="scarcity-inner">
+      <div>
+        <span class="scarcity-num-display">8</span>
+        <span class="scarcity-num-label">Traders maximum par cohorte</span>
+      </div>
+      <div class="scarcity-right">
+        <h3>Pas pour créer une fausse urgence. Pour garantir un suivi qui vaut vraiment quelque chose.</h3>
+        <p>Un accompagnement réellement personnalisé exige du temps. Et le temps est une ressource limitée. Au-delà de 8 traders, la qualité du suivi diminue. Ce n'est pas négociable.</p>
+        <button class="cta-btn" style="width:auto; padding:0 28px; font-size:11px; height:44px; border-radius:4px;">
+          Recevoir le guide gratuit →
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ CTA FINAL ══════════════════════════════ -->
+<section class="cta-final">
+  <div class="cta-final-inner">
+
+    <p class="cta-final-eyebrow">Tu es encore là — c'est que le sujet te concerne.</p>
+
+    <h2 class="cta-final-h2">
+      Reçois le guide<br><span>[Titre PDF]</span><br>maintenant.
+    </h2>
+
+    <p class="cta-final-sub">
+      Un premier pas concret. Pas un engagement. Juste une méthode que tu peux appliquer dès cette semaine.
+    </p>
+
+    <div class="cta-form-final">
+      <div class="field">
+        <span class="field-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </span>
+        <input type="text" placeholder="Ton prénom" disabled/>
+      </div>
+      <div class="field">
+        <span class="field-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        </span>
+        <input type="email" placeholder="Ton adresse email" disabled/>
+      </div>
+      <button class="cta-btn">Je Veux Mon Guide Gratuit →</button>
+      <div class="form-note" style="justify-content:center; margin-top:14px;">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Données sécurisées · Aucun spam · Désabonnement en 1 clic
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══ FOOTER ═════════════════════════════════ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-logo">INVEST<span>LOUIS</span> · Louis Ronchet</div>
+    <div class="footer-links">
+      <a href="#">Mentions légales</a>
+      <a href="#">Confidentialité</a>
+      <a href="#">Contact</a>
+    </div>
+    <div class="footer-right">Certifié AMF · Toulouse · © 2026</div>
+  </div>
+</footer>
+
+</body>
+</html>
