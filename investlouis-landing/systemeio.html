@@ -373,47 +373,90 @@
 .il-tp-count { font-size: 13px; color: var(--muted); }
 .il-tp-count a { color: #00B67A; text-decoration: underline; text-underline-offset: 2px; }
 
-/* ── TESTIMONIALS ── */
-.il-testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+/* ── TESTIMONIALS CAROUSEL 3D ── */
+.il-carousel-wrap {
+  position: relative;
+  perspective: 1200px;
+  height: 420px;
+  overflow: visible;
+}
+.il-carousel-stage {
+  position: relative; width: 100%; height: 100%;
+  transform-style: preserve-3d;
+}
 .il-testi-card {
-  background: var(--ink); border: 1px solid rgba(255,255,255,0.07); border-radius: 16px;
-  padding: 24px; display: flex; flex-direction: column; gap: 16px;
-  transition: border-color 0.4s var(--ease);
+  position: absolute;
+  width: 360px; left: 50%; top: 0;
+  margin-left: -180px;
+  background: var(--surface);
+  border: 1px solid rgba(255,255,255,0.07); border-radius: 20px;
+  padding: 28px; display: flex; flex-direction: column;
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+  transition: transform 0.6s cubic-bezier(0.32,0.72,0,1),
+              opacity  0.6s cubic-bezier(0.32,0.72,0,1),
+              box-shadow 0.6s cubic-bezier(0.32,0.72,0,1);
+  cursor: pointer;
+  user-select: none;
 }
-.il-testi-card:hover { border-color: rgba(255,255,255,0.12); }
-/* voir plus */
-.il-testi-body { position: relative; }
-.il-testi-body.collapsed { max-height: 96px; overflow: hidden; }
-.il-testi-body.collapsed::after {
-  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 40px;
-  background: linear-gradient(transparent, var(--ink));
+/* position states — set by JS */
+.il-testi-card[data-pos="0"] {
+  transform: translateX(0) translateZ(0) rotateY(0deg) scale(1);
+  opacity: 1; z-index: 5;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.1), 0 40px 80px rgba(0,0,0,0.6), 0 8px 24px rgba(29,78,216,0.2);
+  border-color: rgba(255,255,255,0.14);
 }
-.il-voir-plus {
-  background: none; border: none; color: #00B67A; font-family: inherit;
-  font-size: 12px; font-weight: 700; cursor: pointer; padding: 4px 0 0;
-  display: block; letter-spacing: 0.3px;
+.il-testi-card[data-pos="-1"],
+.il-testi-card[data-pos="1"] {
+  transform: translateX(var(--tx,0)) translateZ(-180px) rotateY(var(--ry,0)) scale(0.82);
+  opacity: 0.55; z-index: 3;
+  box-shadow: none;
 }
-.il-voir-plus:hover { text-decoration: underline; }
+.il-testi-card[data-pos="-1"] { --tx: -310px; --ry: 28deg; }
+.il-testi-card[data-pos="1"]  { --tx:  310px; --ry: -28deg; }
+.il-testi-card[data-pos="-2"],
+.il-testi-card[data-pos="2"] {
+  transform: translateX(var(--tx2,0)) translateZ(-350px) rotateY(var(--ry2,0)) scale(0.65);
+  opacity: 0.22; z-index: 1;
+}
+.il-testi-card[data-pos="-2"] { --tx2: -480px; --ry2: 42deg; }
+.il-testi-card[data-pos="2"]  { --tx2:  480px; --ry2: -42deg; }
+.il-testi-card[data-pos="-3"],
+.il-testi-card[data-pos="3"],
+.il-testi-card[data-pos="-4"],
+.il-testi-card[data-pos="4"] {
+  opacity: 0; pointer-events: none;
+  transform: translateX(0) translateZ(-500px) scale(0.5);
+}
+
+/* card internals */
 .il-tp-badge {
   display: inline-flex; align-items: center; gap: 5px;
   background: #00B67A10; border: 1px solid #00B67A33; border-radius: 6px;
-  padding: 2px 8px; margin-bottom: 8px;
+  padding: 2px 8px; margin-bottom: 10px; width: fit-content;
 }
 .il-tp-badge svg { width: 12px; height: 12px; }
 .il-tp-badge span { font-size: 10px; font-weight: 700; color: #00B67A; letter-spacing: 0.5px; text-transform: uppercase; }
-.il-testi-title { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 14px; color: #fff; margin-bottom: 8px; }
-.il-testi-date { font-size: 11px; color: var(--dim); margin-top: 8px; }
 .il-stars { display: flex; gap: 2px; margin-bottom: 10px; }
 .il-stars svg { width: 13px; height: 13px; fill: #00B67A; }
-.il-testi-large { padding: 28px; justify-content: space-between; }
-.il-testi-text-lg {
-  font-family: 'Playfair Display', serif; font-style: italic;
-  color: #fff; font-size: 20px; line-height: 1.6;
+.il-testi-title { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 14px; color: #fff; margin-bottom: 8px; }
+.il-testi-date { font-size: 11px; color: var(--dim); }
+.il-testi-body { position: relative; flex: 1; }
+.il-testi-body.collapsed { max-height: 110px; overflow: hidden; }
+.il-testi-body.collapsed::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 44px;
+  background: linear-gradient(transparent, var(--surface));
 }
-.il-testi-text { color: var(--text); font-size: 14px; line-height: 1.6; }
+.il-voir-plus {
+  background: none; border: none; color: #00B67A; font-family: inherit;
+  font-size: 11px; font-weight: 700; cursor: pointer; padding: 6px 0 0;
+  display: block; letter-spacing: 0.3px;
+}
+.il-voir-plus:hover { text-decoration: underline; }
+.il-testi-text { color: var(--text); font-size: 13.5px; line-height: 1.65; }
 .il-testi-footer {
   display: flex; align-items: center; gap: 10px;
-  padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.05);
+  padding-top: 14px; margin-top: 14px; border-top: 1px solid rgba(255,255,255,0.05);
 }
 .il-avatar {
   width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0;
@@ -423,6 +466,27 @@
   font-size: 12px; color: var(--blue-hi);
 }
 .il-testi-name { font-family: 'Montserrat', sans-serif; font-weight: 700; color: #fff; font-size: 13px; }
+
+/* nav */
+.il-carousel-nav {
+  display: flex; align-items: center; justify-content: center;
+  gap: 16px; margin-top: 36px;
+}
+.il-nav-btn {
+  width: 40px; height: 40px; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.04); color: #94A3B8;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: all 0.2s; flex-shrink: 0;
+}
+.il-nav-btn:hover { background: rgba(255,255,255,0.1); color: #fff; border-color: rgba(255,255,255,0.2); }
+.il-nav-dots { display: flex; gap: 6px; align-items: center; }
+.il-nav-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: rgba(255,255,255,0.15); cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.32,0.72,0,1);
+}
+.il-nav-dot.active { width: 20px; border-radius: 3px; background: #00B67A; }
 .il-testi-role { font-size: 11px; color: var(--muted); margin-top: 1px; }
 .il-social-proof {
   display: flex; align-items: center; justify-content: center; gap: 12px;
@@ -503,9 +567,14 @@
   #il-hero .inner { grid-template-columns: 1fr; }
   .il-benefits-grid { grid-template-columns: 1fr; }
   .il-about-grid { grid-template-columns: 1fr; }
-  .il-testi-grid { grid-template-columns: 1fr; }
   .il-tp-score-num { font-size: 28px; }
   .il-tp-stars-lg svg { width: 24px; height: 24px; }
+  .il-testi-card { width: 300px; margin-left: -150px; }
+  .il-testi-card[data-pos="-1"] { --tx: -240px; }
+  .il-testi-card[data-pos="1"]  { --tx:  240px; }
+  .il-testi-card[data-pos="-2"] { --tx2: -360px; }
+  .il-testi-card[data-pos="2"]  { --tx2:  360px; }
+  .il-carousel-wrap { height: 480px; }
   .il-table-head, .il-table-row { grid-template-columns: 1fr; }
   .il-table-head div:not(:first-child), .il-table-cell:not(:first-child) { border-left: none; border-top: 1px solid rgba(255,255,255,0.04); }
 }
@@ -777,254 +846,114 @@
         </div>
       </div>
 
-      <!-- Grid 3 colonnes -->
-      <div class="il-testi-grid">
+      <!-- Carrousel 3D -->
+      <div class="il-carousel-wrap il-reveal" id="il-carousel">
+        <div class="il-carousel-stage" id="il-stage">
 
-        <!-- 1 · Vk -->
-        <div class="il-testi-card il-reveal">
-          <div class="il-tp-badge">
-            <svg viewBox="0 0 24 24" fill="#00B67A"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <span>Trustpilot</span>
+          <!-- 0 · Vk -->
+          <div class="il-testi-card" data-idx="0">
+            <div class="il-tp-badge"><svg viewBox="0 0 24 24" fill="#00B67A"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>Trustpilot</span></div>
+            <div class="il-stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+            <div class="il-testi-title">Une formation d'exception</div>
+            <div class="il-testi-body collapsed" id="tc0"><p class="il-testi-text">J'ai rejoint le groupe en octobre, j'ai connu Louis sur d'autres groupes Telegram. Il a su répondre à mes questions de manière précise et simple. Par la suite j'ai décidé de rejoindre son groupe pour structurer mon trading. J'étais perdu entre les différentes stratégies et je n'avais aucune connaissance fondamentale. Dès mon arrivée Louis ainsi que les autres élèves m'ont beaucoup aidé, j'ai pu créer ma stratégie avec laquelle je suis à l'aise. Le groupe m'a permis de comprendre la fondamentale grâce aux lives de Louis.</p></div>
+            <button class="il-voir-plus" onclick="ilToggle('tc0',this)">Voir plus ▾</button>
+            <div class="il-testi-footer"><div class="il-avatar">V</div><div><div class="il-testi-name">Vk</div><div class="il-testi-date">3 juin 2024 · Avis spontané</div></div></div>
           </div>
-          <div class="il-stars">
-            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+
+          <!-- 1 · James -->
+          <div class="il-testi-card" data-idx="1">
+            <div class="il-tp-badge"><svg viewBox="0 0 24 24" fill="#00B67A"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>Trustpilot</span></div>
+            <div class="il-stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+            <div class="il-testi-title">Bonjour à tous.</div>
+            <div class="il-testi-body collapsed" id="tc1"><p class="il-testi-text">Il y a un an, j'ai intégré le groupe de Louis. Avant, mon trading était désorganisé, sans structure ni compréhension des marchés. Rejoindre ce groupe a été un tournant. La découverte de l'analyse fondamentale a été marquante. J'ai appris à décrypter les indicateurs économiques et à intégrer cette analyse dans ma stratégie. L'esprit de cohésion et d'entraide du groupe est à souligner. Je témoigne pour encourager ceux qui hésitent à se lancer — cela a transformé mon trading et m'a offert une communauté de soutien.</p></div>
+            <button class="il-voir-plus" onclick="ilToggle('tc1',this)">Voir plus ▾</button>
+            <div class="il-testi-footer"><div class="il-avatar">J</div><div><div class="il-testi-name">James</div><div class="il-testi-date">2 juin 2024 · Avis spontané</div></div></div>
           </div>
-          <div class="il-testi-title">Une formation d'exception</div>
-          <div class="il-testi-body collapsed" id="tb1">
-            <p class="il-testi-text">J'ai rejoint le groupe en octobre, j'ai connu louis sur d'autres groupes telegram qu'il a su répondre à mes questions de manière précise et simple. Par la suite j'ai décidé de rejoindre son groupe pour structurer mon trading. J'étais perdu entre les différentes stratégies et je n'avais aucune connaissance fondamentale. Dès mon arrivée Louis ainsi que les autres élèves m'ont beaucoup aidé, j'ai pu créer ma stratégie avec laquelle je suis à l'aise et avec laquelle je n'ai plus aucun doute psychologiquement. Le groupe m'a permis de comprendre la fondamentale grâce aux lives de Louis.</p>
+
+          <!-- 2 · Carole -->
+          <div class="il-testi-card" data-idx="2">
+            <div class="il-tp-badge"><svg viewBox="0 0 24 24" fill="#00B67A"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>Trustpilot</span></div>
+            <div class="il-stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+            <div class="il-testi-title">Sincérité, Professionnalisme et Passion !</div>
+            <div class="il-testi-body collapsed" id="tc2"><p class="il-testi-text">Louis est un trader professionnel passionné par le trading et l'investissement financier. Au delà de la stratégie technique, c'est un plaisir d'apprendre l'importance du fondamental et de l'économie en trading. Il est très ouvert à tous les styles de trading : une seule règle ici, la passion ! Il accompagne également le trader sur d'autres aspects : psychologie, nutrition, sport, diversification, fiscalité. Débutant comme avancé, chacun peut y trouver une vraie plus-value. Ce groupe est un vrai lieu de partage au sein d'une communauté bienveillante.</p></div>
+            <button class="il-voir-plus" onclick="ilToggle('tc2',this)">Voir plus ▾</button>
+            <div class="il-testi-footer"><div class="il-avatar">C</div><div><div class="il-testi-name">Carole Rosazza</div><div class="il-testi-date">27 mai 2024 · Avis spontané</div></div></div>
           </div>
-          <button class="il-voir-plus" onclick="ilToggle('tb1',this)">Voir plus ▾</button>
-          <div class="il-testi-footer" style="margin-top:14px">
-            <div class="il-avatar">V</div>
-            <div>
-              <div class="il-testi-name">Vk</div>
-              <div class="il-testi-date">3 juin 2024 · Avis spontané</div>
-            </div>
+
+          <!-- 3 · Jess -->
+          <div class="il-testi-card" data-idx="3">
+            <div class="il-tp-badge"><svg viewBox="0 0 24 24" fill="#00B67A"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>Trustpilot</span></div>
+            <div class="il-stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+            <div class="il-testi-title">Simple et efficace, il vend pas du rêve...</div>
+            <div class="il-testi-body"><p class="il-testi-text">Simple et efficace. Il vend pas du rêve mais de très belles connaissances. Je recommande.</p></div>
+            <div class="il-testi-footer"><div class="il-avatar">J</div><div><div class="il-testi-name">Jess Jess</div><div class="il-testi-date">27 mai 2024 · Avis spontané</div></div></div>
           </div>
+
+          <!-- 4 · Lucas -->
+          <div class="il-testi-card" data-idx="4">
+            <div class="il-tp-badge"><svg viewBox="0 0 24 24" fill="#00B67A"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>Trustpilot</span></div>
+            <div class="il-stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+            <div class="il-testi-title">Je recommande les yeux fermés</div>
+            <div class="il-testi-body collapsed" id="tc4"><p class="il-testi-text">J'ai rejoint la formation et le groupe de trading et je suis extrêmement satisfait. Le programme est bien structuré pour répondre aux besoins des traders de tous niveaux. Un des points forts : l'accent mis sur la gestion des risques, un aspect crucial souvent négligé. J'ai pu appliquer directement ce que j'avais appris et constater les résultats. La formation offre également un accès à des outils et ressources de trading de pointe. En résumé, cette formation a largement dépassé mes attentes. Je la recommande vivement.</p></div>
+            <button class="il-voir-plus" onclick="ilToggle('tc4',this)">Voir plus ▾</button>
+            <div class="il-testi-footer"><div class="il-avatar">L</div><div><div class="il-testi-name">Lucas Birot</div><div class="il-testi-date">26 mai 2024 · Avis spontané</div></div></div>
+          </div>
+
+          <!-- 5 · Thomas Z -->
+          <div class="il-testi-card" data-idx="5">
+            <div class="il-tp-badge"><svg viewBox="0 0 24 24" fill="#00B67A"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>Trustpilot</span></div>
+            <div class="il-stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+            <div class="il-testi-title">Du trading en famille</div>
+            <div class="il-testi-body collapsed" id="tc5"><p class="il-testi-text">J'ai rejoint cette grande famille depuis 5 mois ! Depuis que je suis dedans j'ai énormément appris niveau fondamental, j'ai aussi évolué dans mes analyses techniques. Ce n'est pas seulement un groupe qui envoie des signaux, c'est une communauté bienveillante qui s'aide mutuellement à évoluer ! Tous les matins notre mentor est en live pour l'ouverture de la bourse de Londres. Louis est une personne très professionnelle et extrêmement réactive. TOI, qui lis ce message, N'HÉSITE PLUS.</p></div>
+            <button class="il-voir-plus" onclick="ilToggle('tc5',this)">Voir plus ▾</button>
+            <div class="il-testi-footer"><div class="il-avatar">T</div><div><div class="il-testi-name">Thomas Zamuner</div><div class="il-testi-date">27 mai 2024 · Avis spontané</div></div></div>
+          </div>
+
+          <!-- 6 · Elyes -->
+          <div class="il-testi-card" data-idx="6">
+            <div class="il-tp-badge"><svg viewBox="0 0 24 24" fill="#00B67A"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>Trustpilot</span></div>
+            <div class="il-stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+            <div class="il-testi-title">Merci Louis</div>
+            <div class="il-testi-body collapsed" id="tc6"><p class="il-testi-text">Avec Louis, cela fait plus d'un an que je me forme à tes côtés. Je pense que ça a été pour moi la meilleure des choses pour apprendre le trading. Cela fait 2 ans que je suis dans ce monde. Au début j'ai commencé par le copy trading — j'ai tout perdu ou presque. Depuis que j'ai rejoint le groupe, j'ai su ce qu'est vraiment le trading. On partage tous les jours nos analyses et on les corrige ensemble. Grâce à toi, aujourd'hui je suis rentable. Je te remercie et je lâche rien.</p></div>
+            <button class="il-voir-plus" onclick="ilToggle('tc6',this)">Voir plus ▾</button>
+            <div class="il-testi-footer"><div class="il-avatar">E</div><div><div class="il-testi-name">Elyes Krichene</div><div class="il-testi-date">27 mai 2024 · Avis spontané</div></div></div>
+          </div>
+
+          <!-- 7 · David -->
+          <div class="il-testi-card" data-idx="7">
+            <div class="il-tp-badge"><svg viewBox="0 0 24 24" fill="#00B67A"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>Trustpilot</span></div>
+            <div class="il-stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+            <div class="il-testi-title">Trading</div>
+            <div class="il-testi-body"><p class="il-testi-text">Je conseille à 100% cette société, car vous serez accompagné de A à Z. Si vous souhaitez apprendre le métier de Trader, c'est avec Louis. Pour ma part je suis passé de 10 euros de gain à 200 euros et une équipe qui soutient les uns les autres — on apprend bien plus.</p></div>
+            <div class="il-testi-footer"><div class="il-avatar">D</div><div><div class="il-testi-name">David</div><div class="il-testi-date">26 mai 2024 · Avis spontané</div></div></div>
+          </div>
+
+          <!-- 8 · Jeremie -->
+          <div class="il-testi-card" data-idx="8">
+            <div class="il-tp-badge"><svg viewBox="0 0 24 24" fill="#00B67A"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>Trustpilot</span></div>
+            <div class="il-stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+            <div class="il-testi-title">Efficience 🔥</div>
+            <div class="il-testi-body collapsed" id="tc8"><p class="il-testi-text">Il y a maintenant plus d'un an que j'ai intégré ton groupe, aucun regret je recommande même à mes amis. Nous nous entraînons mutuellement en partageant nos points de vue ainsi que des contenus intéressants. Ce que j'apprécie c'est la clarté dans tes explications lors de tes lives réguliers. Mon évolution grâce à toi : la compréhension de l'analyse fondamentale, ce qui m'a donné un boost à mon trading. Le soutien et l'encouragement que tu nous apportes est incroyablement positif psychologiquement.</p></div>
+            <button class="il-voir-plus" onclick="ilToggle('tc8',this)">Voir plus ▾</button>
+            <div class="il-testi-footer"><div class="il-avatar">J</div><div><div class="il-testi-name">Jeremie Leblan</div><div class="il-testi-date">26 mai 2024 · Avis spontané</div></div></div>
+          </div>
+
         </div>
-
-        <!-- 2 · James -->
-        <div class="il-testi-card il-reveal d1">
-          <div class="il-tp-badge">
-            <svg viewBox="0 0 24 24" fill="#00B67A"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <span>Trustpilot</span>
-          </div>
-          <div class="il-stars">
-            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          </div>
-          <div class="il-testi-title">Bonjour à tous.</div>
-          <div class="il-testi-body collapsed" id="tb2">
-            <p class="il-testi-text">Il y a un an, j'ai intégré le groupe de Louis. Avant, mon trading était désorganisé, sans structure ni compréhension des marchés. Rejoindre ce groupe a été un tournant. La découverte de l'analyse fondamentale a été marquante. Avec les membres, j'ai appris à décrypter les indicateurs économiques et à intégrer cette analyse dans ma stratégie. Cette approche m'a aidé à améliorer mes résultats et à gagner en confiance. L'esprit de cohésion et d'entraide du groupe est à souligner. Chaque membre partage ses connaissances et offre son soutien. Je témoigne pour encourager ceux qui hésitent à se lancer — cela a transformé mon trading.</p>
-          </div>
-          <button class="il-voir-plus" onclick="ilToggle('tb2',this)">Voir plus ▾</button>
-          <div class="il-testi-footer" style="margin-top:14px">
-            <div class="il-avatar">J</div>
-            <div>
-              <div class="il-testi-name">James</div>
-              <div class="il-testi-date">2 juin 2024 · Avis spontané</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 3 · Carole -->
-        <div class="il-testi-card il-reveal d2">
-          <div class="il-tp-badge">
-            <svg viewBox="0 0 24 24" fill="#00B67A"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <span>Trustpilot</span>
-          </div>
-          <div class="il-stars">
-            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          </div>
-          <div class="il-testi-title">Sincérité, Professionnalisme et Passion !</div>
-          <div class="il-testi-body collapsed" id="tb3">
-            <p class="il-testi-text">Louis est un trader professionnel passionné par le trading et l'investissement financier en général. Au delà de la stratégie technique, c'est un plaisir d'apprendre l'importance du fondamental et de l'économie en trading. Il est très ouvert à tous les styles de trading : une seule règle ici, la passion ! Il accompagne également le trader sur bien d'autres aspects tels que la gestion de la psychologie, la nutrition, le sport, la diversification, la fiscalité, etc. Débutant comme plus avancé, chacun peut y trouver une vraie plus-value avec un accompagnement personnalisé. Ce groupe est un vrai lieu de partage au sein d'une communauté bienveillante dans laquelle on peut se sentir à l'aise. On vous attend !</p>
-          </div>
-          <button class="il-voir-plus" onclick="ilToggle('tb3',this)">Voir plus ▾</button>
-          <div class="il-testi-footer" style="margin-top:14px">
-            <div class="il-avatar">C</div>
-            <div>
-              <div class="il-testi-name">Carole Rosazza</div>
-              <div class="il-testi-date">27 mai 2024 · Avis spontané</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 4 · Jess Jess -->
-        <div class="il-testi-card il-reveal">
-          <div class="il-tp-badge">
-            <svg viewBox="0 0 24 24" fill="#00B67A"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <span>Trustpilot</span>
-          </div>
-          <div class="il-stars">
-            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          </div>
-          <div class="il-testi-title">Simple et efficace, il vend pas du rêve...</div>
-          <div class="il-testi-body">
-            <p class="il-testi-text">Simple et efficace. Il vend pas du rêve mais de très belle connaissance. Je recommande.</p>
-          </div>
-          <div class="il-testi-footer" style="margin-top:14px">
-            <div class="il-avatar">J</div>
-            <div>
-              <div class="il-testi-name">Jess Jess</div>
-              <div class="il-testi-date">27 mai 2024 · Avis spontané</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 5 · Lucas Birot -->
-        <div class="il-testi-card il-reveal d1">
-          <div class="il-tp-badge">
-            <svg viewBox="0 0 24 24" fill="#00B67A"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <span>Trustpilot</span>
-          </div>
-          <div class="il-stars">
-            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          </div>
-          <div class="il-testi-title">Je recommande les yeux fermés</div>
-          <div class="il-testi-body collapsed" id="tb5">
-            <p class="il-testi-text">J'ai rejoint la formation et le groupe de trading et je suis extrêmement satisfait. Le programme étant bien structuré et conçu pour répondre aux besoins des traders de tous niveaux. Un des points forts de la formation a été l'accent mis sur la gestion des risques, un aspect crucial souvent négligé dans d'autres formations. J'ai pu appliquer directement ce que j'avais appris et constater les résultats de mes décisions de trading. La formation offre également un accès à des outils et ressources de trading de pointe qui m'a permis de me familiariser avec les plateformes de trading actuelles. En résumé, cette formation m'a largement dépassé mes attentes.</p>
-          </div>
-          <button class="il-voir-plus" onclick="ilToggle('tb5',this)">Voir plus ▾</button>
-          <div class="il-testi-footer" style="margin-top:14px">
-            <div class="il-avatar">L</div>
-            <div>
-              <div class="il-testi-name">Lucas Birot</div>
-              <div class="il-testi-date">26 mai 2024 · Avis spontané</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 6 · Thomas Zamuner -->
-        <div class="il-testi-card il-reveal d2">
-          <div class="il-tp-badge">
-            <svg viewBox="0 0 24 24" fill="#00B67A"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <span>Trustpilot</span>
-          </div>
-          <div class="il-stars">
-            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          </div>
-          <div class="il-testi-title">Du trading en famille</div>
-          <div class="il-testi-body collapsed" id="tb6">
-            <p class="il-testi-text">J'ai rejoint cette grande famille depuis 5 mois ! Depuis que je suis dedans j'ai énormément appris niveau fondamental, j'ai aussi évolué dans mes analyses techniques. Ce n'est pas seulement un groupe qui envoie des signaux, c'est une communauté bienveillante qui s'aide mutuellement à évoluer ! Tous les matins notre mentor est en live pour l'ouverture de la bourse de Londres et pour ma part il m'a appris à scalper. Louis est une personne très professionnelle et extrêmement réactive, il prend le temps nécessaire pour aider chacun. TOI, qui lis ce message, N'HÉSITE PLUS.</p>
-          </div>
-          <button class="il-voir-plus" onclick="ilToggle('tb6',this)">Voir plus ▾</button>
-          <div class="il-testi-footer" style="margin-top:14px">
-            <div class="il-avatar">T</div>
-            <div>
-              <div class="il-testi-name">Thomas Zamuner</div>
-              <div class="il-testi-date">27 mai 2024 · Avis spontané</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 7 · Elyes Krichene -->
-        <div class="il-testi-card il-reveal">
-          <div class="il-tp-badge">
-            <svg viewBox="0 0 24 24" fill="#00B67A"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <span>Trustpilot</span>
-          </div>
-          <div class="il-stars">
-            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          </div>
-          <div class="il-testi-title">Merci Louis</div>
-          <div class="il-testi-body collapsed" id="tb7">
-            <p class="il-testi-text">Avec Louis, cela fait plus d'un an que je me forme à tes côtés. Et je pense que ça a été pour moi la meilleure des choses qui me soit arrivée pour apprendre le trading. Cela fait 2 ans que je suis dans le monde du trading. Au début, j'ai commencé par tout ce qui est le copy trading. La plupart des gens auraient déjà abandonné le trading. Sauf que pour moi, avant tout, le trading c'est une passion. Je savais que le trading ne se limitait pas à des scammeurs à Dubai. Depuis que j'ai rejoint le groupe, j'ai su ce qu'est vraiment le trading. Le groupe m'a permis de me former dans l'analyse technique ainsi que l'analyse fondamentale. Un des points positifs : on partage tous les jours nos analyses et on les corrige, ce qui nous permet ainsi de progresser ensemble. Grâce à toi, aujourd'hui je suis rentable.</p>
-          </div>
-          <button class="il-voir-plus" onclick="ilToggle('tb7',this)">Voir plus ▾</button>
-          <div class="il-testi-footer" style="margin-top:14px">
-            <div class="il-avatar">E</div>
-            <div>
-              <div class="il-testi-name">Elyes Krichene</div>
-              <div class="il-testi-date">27 mai 2024 · Avis spontané</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 8 · David -->
-        <div class="il-testi-card il-reveal d1">
-          <div class="il-tp-badge">
-            <svg viewBox="0 0 24 24" fill="#00B67A"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <span>Trustpilot</span>
-          </div>
-          <div class="il-stars">
-            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          </div>
-          <div class="il-testi-title">Trading</div>
-          <div class="il-testi-body">
-            <p class="il-testi-text">Je conseille à 100% cette société, car vous serez accompagné de A à Z. Si vous souhaitez apprendre le métier de Trader, c'est avec Louis que vous allez tous apprendre les fondamentaux, les techniques, etc. Pour ma part je suis passé de 10 euros de gain à 200 euros et une équipe qui soutient les uns et les autres — on apprend bien plus.</p>
-          </div>
-          <div class="il-testi-footer" style="margin-top:14px">
-            <div class="il-avatar">D</div>
-            <div>
-              <div class="il-testi-name">David</div>
-              <div class="il-testi-date">26 mai 2024 · Avis spontané</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 9 · Jeremie Leblan -->
-        <div class="il-testi-card il-reveal d2">
-          <div class="il-tp-badge">
-            <svg viewBox="0 0 24 24" fill="#00B67A"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <span>Trustpilot</span>
-          </div>
-          <div class="il-stars">
-            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          </div>
-          <div class="il-testi-title">Efficience 🔥</div>
-          <div class="il-testi-body collapsed" id="tb9">
-            <p class="il-testi-text">Il y a maintenant plus d'un an que j'ai intégré ton groupe, aucun regret je recommande même à mes amis. Nous nous entraînons mutuellement en partageant nos points de vue ainsi que des contenus intéressants liés au domaine. Ce que j'apprécie c'est la clarté dans tes explications lors de tes lives réguliers. Mon évolution grâce à toi, c'est la compréhension de l'analyse fondamentale, ce qui m'a donné un boost à mon trading. Pour finir, le soutien et l'encouragement que tu nous apportes est incroyablement positif psychologiquement, donc change pas et nous atteignons toute et tous nos objectifs.</p>
-          </div>
-          <button class="il-voir-plus" onclick="ilToggle('tb9',this)">Voir plus ▾</button>
-          <div class="il-testi-footer" style="margin-top:14px">
-            <div class="il-avatar">J</div>
-            <div>
-              <div class="il-testi-name">Jeremie Leblan</div>
-              <div class="il-testi-date">26 mai 2024 · Avis spontané</div>
-            </div>
-          </div>
-        </div>
-
       </div>
 
-      <!-- Lien voir tous -->
-      <div style="text-align:center;margin-top:36px" class="il-reveal">
+      <!-- Nav -->
+      <div class="il-carousel-nav">
+        <button class="il-nav-btn" onclick="ilCarousel(-1)" aria-label="Précédent">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <div class="il-nav-dots" id="il-dots"></div>
+        <button class="il-nav-btn" onclick="ilCarousel(1)" aria-label="Suivant">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+
+      <!-- Lien Trustpilot -->
+      <div style="text-align:center;margin-top:28px">
         <a href="https://fr.trustpilot.com/review/investlouis.com" target="_blank" rel="noopener"
            style="display:inline-flex;align-items:center;gap:8px;border:1px solid #00B67A33;border-radius:10px;padding:10px 20px;font-size:13px;font-weight:700;color:#00B67A;transition:background 0.2s;"
            onmouseover="this.style.background='#00B67A15'" onmouseout="this.style.background='transparent'">
@@ -1141,6 +1070,72 @@
     var collapsed = el.classList.toggle('collapsed');
     btn.textContent = collapsed ? 'Voir plus ▾' : 'Voir moins ▴';
   }
+
+  /* ── CARROUSEL 3D ── */
+  (function() {
+    var cards = Array.from(document.querySelectorAll('#il-stage .il-testi-card'));
+    var N = cards.length;
+    var cur = 0;
+    var dotsEl = document.getElementById('il-dots');
+
+    // build dots
+    cards.forEach(function(_, i) {
+      var d = document.createElement('div');
+      d.className = 'il-nav-dot' + (i === 0 ? ' active' : '');
+      d.onclick = function() { ilGoto(i); };
+      dotsEl.appendChild(d);
+    });
+
+    function render() {
+      var dots = dotsEl.querySelectorAll('.il-nav-dot');
+      dots.forEach(function(d, i) { d.classList.toggle('active', i === cur); });
+      cards.forEach(function(card, i) {
+        var rel = ((i - cur) % N + N) % N;
+        if (rel > N / 2) rel -= N;
+        var clamped = Math.max(-4, Math.min(4, rel));
+        card.setAttribute('data-pos', clamped);
+        card.style.pointerEvents = (rel === 0) ? 'auto' : 'none';
+      });
+    }
+
+    window.ilCarousel = function(dir) {
+      cur = (cur + dir + N) % N;
+      render();
+    };
+    window.ilGoto = function(i) {
+      cur = i;
+      render();
+    };
+
+    // click side cards to advance
+    cards.forEach(function(card, i) {
+      card.addEventListener('click', function() {
+        var pos = parseInt(card.getAttribute('data-pos') || '0');
+        if (pos !== 0) ilCarousel(pos > 0 ? 1 : -1);
+      });
+    });
+
+    // swipe / drag
+    var startX = 0;
+    var wrap = document.getElementById('il-carousel');
+    wrap.addEventListener('pointerdown', function(e) { startX = e.clientX; });
+    wrap.addEventListener('pointerup', function(e) {
+      var dx = e.clientX - startX;
+      if (Math.abs(dx) > 40) ilCarousel(dx < 0 ? 1 : -1);
+    });
+
+    // keyboard
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowLeft')  ilCarousel(-1);
+      if (e.key === 'ArrowRight') ilCarousel(1);
+    });
+
+    // auto-advance
+    var timer = setInterval(function() { ilCarousel(1); }, 5000);
+    wrap.addEventListener('pointerdown', function() { clearInterval(timer); });
+
+    render();
+  })();
 
   /* ── SCROLL REVEAL ── */
   var obs = new IntersectionObserver(function(entries){
