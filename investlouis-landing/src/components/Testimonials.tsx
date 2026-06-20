@@ -1,20 +1,20 @@
 const testimonials = [
   {
-    name: 'Marie T.',
-    role: 'Infirmière · Lyon',
-    text: 'J\'ai ouvert mon PEA dans la semaine qui a suivi. Simple, clair, sans bullshit. Exactement ce dont j\'avais besoin.',
+    name: 'Thomas M.',
+    role: 'Trader indépendant · Lyon',
+    text: 'Le Volume Profile et le VWAP ont complètement changé ma lecture du marché. Je comprends enfin pourquoi le prix réagit à certains niveaux.',
     stars: 5,
   },
   {
-    name: 'Antoine B.',
-    role: 'Ingénieur · Paris',
-    text: 'Enfin un contenu qui va droit au but. En 3 semaines j\'avais mon premier portefeuille ETF opérationnel.',
+    name: 'Julien K.',
+    role: 'Ingénieur reconverti · Paris',
+    text: 'J\'avais regardé des dizaines de vidéos sur les SMC sans vraiment comprendre. Louis a mis les choses dans l\'ordre en 30 pages chrono.',
     stars: 5,
   },
   {
-    name: 'Camille R.',
-    role: 'Enseignante · Bordeaux',
-    text: 'Louis explique les choses comme un ami compétent, pas comme un banquier qui veut te vendre quelque chose.',
+    name: 'Sarah D.',
+    role: 'Trader forex · Bordeaux',
+    text: 'Le COT Report, j\'entendais ce terme depuis des mois. Maintenant je le lis chaque vendredi. Ça a changé mes biais directionnels.',
     stars: 5,
   },
 ]
@@ -42,8 +42,8 @@ export default function Testimonials() {
             Ils ont franchi le pas
           </p>
           <h2 className="font-['Montserrat'] font-black text-white text-[36px] leading-[1.1] tracking-[-1px]">
-            4 800 lecteurs ne peuvent<br />
-            <span className="text-[#3B82F6]">pas avoir tort</span>
+            Ils ont changé leur façon<br />
+            <span className="text-[#3B82F6]">de lire les marchés</span>
           </h2>
         </div>
 

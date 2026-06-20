@@ -18,7 +18,7 @@ export default function Nav() {
         <button className="h-[34px] px-4 bg-[#1D4ED8] text-white font-['Montserrat'] font-bold
                            text-[10px] tracking-[1px] uppercase rounded-[4px]
                            hover:opacity-85 transition-opacity">
-          Recevoir le guide
+          Recevoir le PDF gratuit
         </button>
 
       </div>

@@ -1,23 +1,23 @@
 const chapters = [
   {
     num: '01',
-    title: 'Les fondamentaux',
-    desc: 'Comprendre comment l\'argent se multiplie : intérêts composés, allocation d\'actifs, horizon de placement.',
+    title: 'Order Flow & DOM',
+    desc: 'Lire le carnet d\'ordres comme un trader de salle de marché. Identifier les zones d\'absorption et les déséquilibres acheteurs/vendeurs avant que le prix réagisse.',
   },
   {
     num: '02',
-    title: 'Ton premier portefeuille',
-    desc: 'Construire un portefeuille diversifié avec moins de 500€ — ETF, PEA, assurance-vie.',
+    title: 'Volume Profile & VWAP',
+    desc: 'Les deux outils que tout institutionnel utilise pour trouver sa valeur juste. Comment les appliquer sur n\'importe quel marché pour optimiser tes entrées.',
   },
   {
     num: '03',
-    title: 'Éviter les pièges',
-    desc: 'Les 7 erreurs que font 80% des investisseurs débutants et comment les contourner.',
+    title: 'Smart Money Concepts',
+    desc: 'Comprendre comment les gros acteurs accumulent avant de bouger. Zones de liquidité, manipulation de marché, et comment en profiter plutôt qu\'en être victime.',
   },
   {
     num: '04',
-    title: 'Passer à l\'action',
-    desc: 'Un plan hebdomadaire concret : quoi acheter, quand rééquilibrer, comment suivre.',
+    title: 'COT Report & Macro',
+    desc: 'Le rapport que les hedge funds lisent chaque vendredi. Décoder le positionnement des institutionnels pour anticiper les grands mouvements directionnels.',
   },
 ]
 
@@ -31,16 +31,16 @@ export default function Benefits() {
           <div>
             <p className="font-['Montserrat'] font-bold text-[10px] tracking-[2px] uppercase
                           text-[#B8963E] mb-4">
-              Ce que tu vas apprendre
+              Ce que contient le guide
             </p>
             <h2 className="font-['Montserrat'] font-black text-white text-[36px] leading-[1.1]
                            tracking-[-1px] mb-6">
-              4 chapitres.<br />
-              <span className="text-[#3B82F6]">0 remplissage.</span>
+              4 outils pro.<br />
+              <span className="text-[#3B82F6]">Applicables demain.</span>
             </h2>
             <p className="text-[#475569] text-[15px] leading-relaxed">
-              Chaque page est conçue pour t'apporter une action concrète.
-              Pas de théorie creuse, pas de jargon inutile.
+              Chaque outil est expliqué avec des cas concrets sur des marchés réels.
+              Pas de théorie abstraite — comment le configurer, comment le lire, quand agir.
             </p>
           </div>
 

@@ -17,12 +17,12 @@ export default function CtaFinal() {
           </p>
           <h2 className="font-['Montserrat'] font-black text-white text-[36px] lg:text-[44px]
                          leading-[1.1] tracking-[-1px] mb-4">
-            Ton argent attend.<br />
-            <span className="text-[#3B82F6]">Toi aussi ?</span>
+            Les institutions tradent.<br />
+            <span className="text-[#3B82F6]">Et toi ?</span>
           </h2>
           <p className="text-[#475569] text-[16px] leading-relaxed">
-            Rejoins 4 800 lecteurs qui ont choisi d'investir intelligemment.
-            Le guide arrive dans ta boîte mail en moins de 2 minutes.
+            Rejoins 4 800 traders qui ont arrêté de se battre contre le marché
+            et ont commencé à lire ce que les institutionnels font vraiment.
           </p>
         </div>
 

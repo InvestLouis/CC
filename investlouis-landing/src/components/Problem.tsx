@@ -1,23 +1,23 @@
 const rows = [
   {
-    pain: 'Ton argent dort à 3% sur un livret A',
-    cost: 'Tu perds du pouvoir d\'achat chaque année',
-    fix: 'Stratégie d\'allocation multi-supports',
+    pain: 'Tu trades sans lire le flux des ordres institutionnels',
+    cost: 'Tu te bats contre les pros — et tu perds',
+    fix: 'Order flow & DOM : lire les intentions du marché',
   },
   {
-    pain: 'Tu ne sais pas par où commencer',
-    cost: 'Paralysie — tu n\'investis jamais',
-    fix: 'Plan d\'action en 5 étapes claires',
+    pain: 'Tes indicateurs retardent sur le prix',
+    cost: 'Tu entres trop tard, tu sors trop tôt',
+    fix: 'Volume Profile & VWAP institutionnel',
   },
   {
-    pain: 'La bourse te fait peur',
-    cost: 'Tu rates des années de capitalisation',
-    fix: 'Approche progressive, risque maîtrisé',
+    pain: 'Tu ignores les zones de liquidité des gros acteurs',
+    cost: 'Tes stops sont chassés systématiquement',
+    fix: 'Smart Money Concepts & zones d\'accumulation',
   },
   {
-    pain: 'Trop d\'information contradictoire en ligne',
-    cost: 'Mauvaises décisions, pertes évitables',
-    fix: 'Méthode vérifiée, source certifiée AMF',
+    pain: 'Pas de contexte macro dans ton analyse',
+    cost: 'Tu trades contre la tendance de fond',
+    fix: 'COT Report & positionnement des institutionnels',
   },
 ]
 
@@ -33,8 +33,8 @@ export default function Problem() {
           </p>
           <h2 className="font-['Montserrat'] font-black text-white text-[36px] lg:text-[44px]
                          leading-[1.1] tracking-[-1px] max-w-[560px]">
-            Pourquoi ton argent<br />
-            <span className="text-[#3B82F6]">ne travaille pas</span> pour toi
+            Pourquoi 90% des traders retail<br />
+            <span className="text-[#3B82F6]">perdent face aux institutions</span>
           </h2>
         </div>
 
@@ -80,8 +80,8 @@ export default function Problem() {
         {/* Pullquote */}
         <div className="mt-12 pl-6 border-l-2 border-[#B8963E]/40">
           <p className="font-['Playfair_Display'] italic text-[#94A3B8] text-[18px] leading-relaxed">
-            "La différence entre ceux qui créent de la richesse et les autres n'est pas le salaire —
-            c'est la méthode."
+            "Les institutionnels ne sont pas plus intelligents que toi. Ils ont juste accès
+            à des outils que personne ne t'a montrés — jusqu'à maintenant."
           </p>
           <p className="mt-3 font-['Montserrat'] font-bold text-[10px] tracking-[1.5px] uppercase text-[#475569]">
             Louis Ronchet · InvestLouis

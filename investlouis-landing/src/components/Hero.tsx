@@ -30,15 +30,15 @@ export default function Hero() {
 
             <h1 className="font-['Montserrat'] font-black text-white leading-[1.08]
                            text-[42px] lg:text-[54px] tracking-[-1.5px]">
-              Investis Comme<br />
-              <span className="text-[#3B82F6]">les Pros</span> Dès<br />
-              le Premier Mois
+              Les Outils des<br />
+              <span className="text-[#3B82F6]">Traders Institutionnels</span><br />
+              — Enfin Accessibles
             </h1>
 
             <p className="text-[#94A3B8] text-[17px] leading-[1.65] font-light max-w-[480px]">
-              Le guide que les conseillers bancaires ne veulent pas
-              que tu lises. Stratégies concrètes, zéro jargon,
-              résultats mesurables.
+              Les salles de marché utilisent des outils d'analyse que
+              90% des traders retail ignorent. Ce guide te révèle lesquels —
+              et comment les intégrer dans ta stratégie dès aujourd'hui.
             </p>
           </div>
 
@@ -80,17 +80,17 @@ export default function Hero() {
                   </svg>
                 </div>
                 <span className="text-[#475569] text-[11px] font-['Montserrat'] tracking-wide uppercase">
-                  Guide PDF · Couverture à venir
+                  La Clé de la Rentabilité · PDF Gratuit
                 </span>
               </div>
             </div>
 
             <div className="mb-5">
               <h2 className="font-['Montserrat'] font-black text-white text-[18px] leading-tight mb-1">
-                Accède au Guide Gratuitement
+                Reçois "La Clé de la Rentabilité"
               </h2>
               <p className="text-[#475569] text-[13px]">
-                Reçois-le instantanément dans ta boîte mail.
+                Gratuit · Dans ta boîte mail en moins de 2 minutes.
               </p>
             </div>
 
