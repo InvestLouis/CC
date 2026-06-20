@@ -1,0 +1,945 @@
+<!-- ============================================================
+     InvestLouis — La Clé de la Rentabilité
+     Page de capture · HTML pur pour Systeme.io
+     ============================================================ -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700;800;900&family=Playfair+Display:ital@1&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ── RESET ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── TOKENS ── */
+:root {
+  --ink:     #05080D;
+  --surface: #0B1120;
+  --panel:   #101828;
+  --blue:    #1D4ED8;
+  --blue-hi: #3B82F6;
+  --gold:    #B8963E;
+  --text:    #94A3B8;
+  --muted:   #475569;
+  --dim:     #334155;
+  --ease:    cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+/* ── BASE ── */
+#il-wrap {
+  background: var(--ink);
+  color: var(--text);
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+#il-wrap h1, #il-wrap h2, #il-wrap h3, #il-wrap h4 {
+  font-family: 'Montserrat', sans-serif;
+  text-wrap: balance;
+}
+#il-wrap p { text-wrap: pretty; }
+#il-wrap a { text-decoration: none; color: inherit; }
+
+/* Grain overlay */
+#il-grain {
+  position: fixed; inset: 0; z-index: 999; pointer-events: none; opacity: 0.028;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 128px 128px;
+}
+
+/* ── NAV ── */
+#il-nav {
+  position: fixed; inset-inline: 0; top: 0; z-index: 50;
+  height: 60px; display: flex; align-items: center;
+  padding: 0 32px;
+  background: rgba(5,8,13,0.88); backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+#il-nav .inner {
+  width: 100%; max-width: 1060px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.il-logo {
+  font-family: 'Montserrat', sans-serif; font-weight: 900;
+  font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; color: #fff;
+}
+.il-logo span { color: var(--blue-hi); }
+.il-amf-badge {
+  display: flex; align-items: center; gap: 6px;
+  font-family: 'Montserrat', sans-serif; font-weight: 700;
+  font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--gold);
+}
+.il-amf-badge i {
+  display: inline-block; width: 5px; height: 5px;
+  border-radius: 50%; background: var(--gold); opacity: 0.7;
+}
+.il-nav-cta {
+  height: 34px; padding: 0 16px; border-radius: 5px; border: none;
+  background: var(--blue); color: #fff; cursor: pointer;
+  font-family: 'Montserrat', sans-serif; font-weight: 700;
+  font-size: 10px; letter-spacing: 1px; text-transform: uppercase;
+  transition: all 0.3s var(--ease);
+}
+.il-nav-cta:hover { background: #2563EB; transform: translateY(-1px); }
+.il-nav-cta:active { transform: scale(0.97); }
+
+/* ── HERO ── */
+#il-hero {
+  position: relative; min-height: 100dvh;
+  display: flex; align-items: center; padding-top: 60px; overflow: hidden;
+}
+.il-glow-tr {
+  position: absolute; top: -100px; right: -100px;
+  width: 700px; height: 700px; border-radius: 50%;
+  background: var(--blue); opacity: 0.055; filter: blur(140px);
+  pointer-events: none;
+}
+#il-hero .inner {
+  position: relative; width: 100%; max-width: 1060px; margin: 0 auto;
+  padding: 80px 32px;
+  display: grid; grid-template-columns: 1fr 420px; gap: 56px; align-items: center;
+}
+.il-hero-left { display: flex; flex-direction: column; gap: 28px; }
+
+/* AMF SVG logo */
+.il-amf-logo svg { width: 80px; opacity: 0.85; }
+
+.il-eyebrow {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 6px 12px; border-radius: 20px;
+  border: 1px solid rgba(184,150,62,0.25); background: rgba(184,150,62,0.05);
+  font-family: 'Montserrat', sans-serif; font-weight: 700;
+  font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--gold); width: fit-content;
+}
+.il-eyebrow i {
+  display: inline-block; width: 5px; height: 5px;
+  border-radius: 50%; background: var(--gold);
+}
+
+#il-hero h1 {
+  font-size: clamp(36px, 4.5vw, 52px); font-weight: 900;
+  color: #fff; line-height: 1.07; letter-spacing: -1.5px;
+}
+#il-hero h1 span { color: var(--blue-hi); }
+
+.il-sub {
+  color: var(--dim); font-size: 17px; line-height: 1.7; font-weight: 300; max-width: 460px;
+}
+
+.il-trust { display: flex; align-items: center; gap: 20px; }
+.il-trust-item { display: flex; flex-direction: column; }
+.il-trust-item b {
+  font-family: 'Montserrat', sans-serif; font-weight: 900;
+  font-size: 21px; color: #fff; font-variant-numeric: tabular-nums;
+}
+.il-trust-item small { font-size: 11px; color: var(--muted); letter-spacing: 0.3px; }
+.il-trust-sep { width: 1px; height: 30px; background: rgba(255,255,255,0.07); }
+
+/* Hero card */
+.il-hero-card {
+  position: relative;
+  padding: 1.5px; border-radius: 18px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.03) 100%);
+  box-shadow: 0 32px 80px rgba(29,78,216,0.15), 0 4px 16px rgba(0,0,0,0.4);
+}
+.il-hero-card-inner {
+  background: var(--surface); border-radius: 16px; padding: 28px;
+  box-shadow: inset 0 1px 1px rgba(255,255,255,0.06);
+}
+.il-pdf-mock {
+  width: 100%; height: 140px; background: var(--ink);
+  border: 1px solid rgba(255,255,255,0.05); border-radius: 12px;
+  display: flex; align-items: center; justify-content: center; margin-bottom: 20px;
+}
+.il-pdf-mock .il-pdf-icon {
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+}
+.il-pdf-icon-circle {
+  width: 36px; height: 36px; border-radius: 8px;
+  background: rgba(29,78,216,0.15); border: 1px solid rgba(29,78,216,0.2);
+  display: flex; align-items: center; justify-content: center;
+}
+.il-pdf-icon-circle svg { width: 16px; height: 16px; stroke: var(--blue-hi); fill: none; stroke-width: 1.5; }
+.il-pdf-title { color: #fff; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 12px; text-align: center; }
+.il-pdf-sub { color: var(--dim); font-size: 10px; text-transform: uppercase; letter-spacing: 1px; text-align: center; margin-top: 2px; }
+
+.il-form-heading {
+  font-family: 'Montserrat', sans-serif; font-weight: 900;
+  color: #fff; font-size: 16px; margin-bottom: 4px;
+}
+.il-form-sub { color: var(--dim); font-size: 12px; margin-bottom: 16px; }
+
+/* ── FORM ── */
+.il-form { display: flex; flex-direction: column; gap: 10px; }
+.il-field { position: relative; }
+.il-field-icon {
+  position: absolute; left: 13px; top: 50%; transform: translateY(-50%);
+  color: var(--dim); pointer-events: none; display: flex;
+}
+.il-field-icon svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+.il-input {
+  width: 100%; height: 46px; background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07); border-radius: 8px;
+  padding: 0 12px 0 38px; color: #fff; font-size: 14px; font-weight: 300;
+  font-family: 'Plus Jakarta Sans', sans-serif; outline: none;
+  transition: all 0.3s var(--ease);
+}
+.il-input::placeholder { color: var(--dim); }
+.il-input:focus { border-color: var(--blue); background: rgba(29,78,216,0.05); }
+.il-input.error { border-color: rgba(239,68,68,0.5); }
+.il-error { font-size: 11px; color: #F87171; margin-top: 3px; display: none; }
+.il-error.show { display: block; }
+
+.il-btn {
+  margin-top: 4px; width: 100%; height: 50px; border-radius: 8px; border: none;
+  background: var(--blue); color: #fff; cursor: pointer;
+  font-family: 'Montserrat', sans-serif; font-weight: 800;
+  font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+  position: relative; overflow: hidden;
+  box-shadow: 0 4px 24px rgba(29,78,216,0.3), inset 0 1px 1px rgba(255,255,255,0.12);
+  transition: all 0.4s var(--ease);
+}
+.il-btn::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.08), transparent);
+  pointer-events: none;
+}
+.il-btn:hover { background: #2563EB; transform: translateY(-1px); }
+.il-btn:active { transform: scale(0.98); }
+
+.il-trust-note {
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  margin-top: 4px; font-size: 11px; color: var(--dim);
+}
+.il-trust-note svg { width: 11px; height: 11px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+/* ── TICKER ── */
+#il-ticker {
+  border-top: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  background: var(--surface); padding: 12px 0; overflow: hidden; position: relative;
+}
+#il-ticker::before, #il-ticker::after {
+  content: ''; position: absolute; inset-block: 0; z-index: 2; width: 60px; pointer-events: none;
+}
+#il-ticker::before { left: 0; background: linear-gradient(to right, var(--surface), transparent); }
+#il-ticker::after  { right: 0; background: linear-gradient(to left, var(--surface), transparent); }
+.il-ticker-track { display: flex; will-change: transform; animation: il-tick 36s linear infinite; }
+.il-ticker-item {
+  display: flex; align-items: center; gap: 8px; padding: 0 24px; white-space: nowrap;
+}
+.il-ticker-item .tk-label {
+  font-family: 'Montserrat', sans-serif; font-weight: 700;
+  font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--text);
+}
+.il-ticker-item .tk-val {
+  font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 11px;
+}
+.tk-up { color: #22C55E; }
+.tk-dn { color: #EF4444; }
+.tk-sep { color: rgba(255,255,255,0.1); font-size: 10px; }
+@keyframes il-tick { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* ── SECTION COMMON ── */
+.il-section { padding: 96px 32px; }
+.il-section.alt { background: var(--surface); }
+.il-container { max-width: 1060px; margin: 0 auto; }
+.il-eyebrow-sm {
+  font-family: 'Montserrat', sans-serif; font-weight: 700;
+  font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 14px;
+}
+.il-h2 {
+  font-size: clamp(28px, 3vw, 40px); font-weight: 900;
+  color: #fff; line-height: 1.1; letter-spacing: -1px; margin-bottom: 20px;
+}
+.il-h2 span { color: var(--blue-hi); }
+
+/* ── PROBLEM ── */
+.il-table {
+  border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; overflow: hidden;
+  margin-bottom: 40px;
+}
+.il-table-head {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  background: var(--surface); border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.il-table-head div {
+  padding: 10px 20px;
+  font-family: 'Montserrat', sans-serif; font-weight: 700;
+  font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--dim);
+}
+.il-table-head div:nth-child(3) { color: var(--gold); }
+.il-table-head div:not(:first-child) { border-left: 1px solid rgba(255,255,255,0.07); }
+.il-table-row {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  transition: background 0.25s;
+}
+.il-table-row:last-child { border-bottom: none; }
+.il-table-row:hover { background: rgba(255,255,255,0.018); }
+.il-table-cell { padding: 18px 20px; font-size: 14px; line-height: 1.45; }
+.il-table-cell:not(:first-child) { border-left: 1px solid rgba(255,255,255,0.04); }
+.il-table-cell.pain { color: var(--text); display: flex; align-items: flex-start; gap: 10px; }
+.il-table-cell.cost { color: var(--muted); font-style: italic; }
+.il-table-cell.fix  { color: #CBD5E1; display: flex; align-items: flex-start; gap: 10px; }
+.il-dot { width: 6px; height: 6px; border-radius: 50%; margin-top: 7px; flex-shrink: 0; }
+.il-dot.red  { background: rgba(239,68,68,0.5); }
+.il-dot.green { background: rgba(34,197,94,0.6); }
+.il-pullquote {
+  padding-left: 20px; border-left: 2px solid rgba(184,150,62,0.3); margin-top: 40px;
+}
+.il-pullquote p {
+  font-family: 'Playfair Display', serif; font-style: italic;
+  color: var(--muted); font-size: 18px; line-height: 1.65;
+}
+.il-pullquote cite {
+  display: block; margin-top: 12px;
+  font-family: 'Montserrat', sans-serif; font-weight: 700;
+  font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--dim); font-style: normal;
+}
+
+/* ── BENEFITS ── */
+.il-benefits-grid { display: grid; grid-template-columns: 300px 1fr; gap: 56px; align-items: start; }
+.il-chapter {
+  display: flex; gap: 22px; padding: 18px 20px; border-radius: 10px;
+  border: 1px solid transparent;
+  transition: all 0.4s var(--ease); cursor: default;
+}
+.il-chapter:hover { background: rgba(255,255,255,0.025); border-color: rgba(255,255,255,0.06); }
+.il-chapter-num {
+  font-family: 'Montserrat', sans-serif; font-weight: 900;
+  font-size: 26px; color: rgba(255,255,255,0.07); line-height: 1;
+  margin-top: 2px; flex-shrink: 0; font-variant-numeric: tabular-nums;
+  transition: color 0.4s;
+}
+.il-chapter:hover .il-chapter-num { color: rgba(29,78,216,0.28); }
+.il-chapter-title {
+  font-family: 'Montserrat', sans-serif; font-weight: 700;
+  color: #fff; font-size: 15px; margin-bottom: 2px;
+}
+.il-chapter-tool {
+  font-family: 'Montserrat', sans-serif; font-weight: 700;
+  font-size: 9px; letter-spacing: 1px; text-transform: uppercase;
+  color: var(--blue); margin-bottom: 8px;
+}
+.il-chapter-desc { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+/* ── ABOUT ── */
+.il-about-grid { display: grid; grid-template-columns: 1fr 360px; gap: 56px; align-items: center; }
+.il-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+.il-tag {
+  padding: 6px 12px; border: 1px solid rgba(255,255,255,0.07); border-radius: 20px;
+  font-family: 'Montserrat', sans-serif; font-weight: 700;
+  font-size: 10px; letter-spacing: 0.5px; text-transform: uppercase; color: var(--dim);
+  transition: all 0.25s;
+}
+.il-tag:hover { border-color: rgba(255,255,255,0.12); color: var(--muted); }
+.il-photo-card {
+  padding: 1px; border-radius: 18px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%);
+}
+.il-photo-inner {
+  aspect-ratio: 3/4; background: var(--surface); border-radius: 17px;
+  display: flex; align-items: center; justify-content: center;
+}
+.il-photo-placeholder {
+  display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; padding: 32px;
+}
+.il-photo-icon {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: rgba(29,78,216,0.15); border: 1px solid rgba(29,78,216,0.2);
+  display: flex; align-items: center; justify-content: center;
+}
+.il-photo-icon svg { width: 22px; height: 22px; stroke: var(--blue-hi); fill: none; stroke-width: 1.5; }
+.il-photo-label { font-size: 12px; color: var(--dim); }
+
+/* ── TESTIMONIALS ── */
+.il-testi-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 14px; }
+.il-testi-stack { display: flex; flex-direction: column; gap: 14px; }
+.il-testi-card {
+  background: var(--ink); border: 1px solid rgba(255,255,255,0.07); border-radius: 16px;
+  padding: 24px; display: flex; flex-direction: column; gap: 16px;
+  transition: border-color 0.4s var(--ease);
+}
+.il-testi-card:hover { border-color: rgba(255,255,255,0.12); }
+.il-stars { display: flex; gap: 2px; }
+.il-stars svg { width: 11px; height: 11px; fill: var(--gold); }
+.il-testi-large { padding: 28px; justify-content: space-between; }
+.il-testi-text-lg {
+  font-family: 'Playfair Display', serif; font-style: italic;
+  color: #fff; font-size: 20px; line-height: 1.6;
+}
+.il-testi-text { color: var(--text); font-size: 14px; line-height: 1.6; }
+.il-testi-footer {
+  display: flex; align-items: center; gap: 10px;
+  padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.05);
+}
+.il-avatar {
+  width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0;
+  background: rgba(29,78,216,0.2); border: 1px solid rgba(29,78,216,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Montserrat', sans-serif; font-weight: 700;
+  font-size: 12px; color: var(--blue-hi);
+}
+.il-testi-name { font-family: 'Montserrat', sans-serif; font-weight: 700; color: #fff; font-size: 13px; }
+.il-testi-role { font-size: 11px; color: var(--muted); margin-top: 1px; }
+.il-social-proof {
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+  border-top: 1px solid rgba(255,255,255,0.05); padding-top: 28px; margin-top: 24px;
+}
+.il-avatars { display: flex; }
+.il-avatars .il-avatar-sm {
+  width: 28px; height: 28px; border-radius: 50%; margin-left: -8px;
+  background: rgba(29,78,216,0.3); border: 2px solid var(--ink);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Montserrat', sans-serif; font-weight: 700;
+  font-size: 10px; color: var(--blue-hi);
+}
+.il-avatars .il-avatar-sm:first-child { margin-left: 0; }
+.il-social-text { font-size: 13px; color: var(--muted); }
+.il-social-text b { color: #fff; font-weight: 500; }
+
+/* ── SCARCITY ── */
+.il-scarcity-wrap { max-width: 680px; margin: 0 auto; }
+.il-scarcity-card {
+  position: relative; border: 1px solid rgba(184,150,62,0.15);
+  background: rgba(184,150,62,0.025); border-radius: 18px; padding: 40px;
+  text-align: center; box-shadow: inset 0 0 0 1px rgba(184,150,62,0.06);
+}
+.il-scarcity-badge {
+  position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%);
+  display: inline-block; background: var(--gold); color: var(--ink);
+  font-family: 'Montserrat', sans-serif; font-weight: 900;
+  font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+  padding: 5px 14px; border-radius: 20px;
+}
+.il-scarcity-text { color: var(--muted); font-size: 15px; line-height: 1.7; max-width: 440px; margin: 0 auto 16px; }
+.il-scarcity-note {
+  display: inline-flex; align-items: center; gap: 8px;
+  color: var(--gold); font-family: 'Montserrat', sans-serif;
+  font-weight: 700; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+}
+.il-scarcity-note svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+/* ── CTA FINAL ── */
+#il-cta-final { position: relative; padding: 120px 32px; overflow: hidden; }
+.il-cta-glow {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none;
+}
+.il-cta-glow-orb { width: 800px; height: 500px; border-radius: 50%; background: var(--blue); opacity: 0.05; filter: blur(130px); }
+.il-cta-inner { position: relative; max-width: 520px; margin: 0 auto; text-align: center; }
+.il-cta-inner .il-h2 { font-size: clamp(30px, 3.5vw, 44px); margin-bottom: 16px; }
+.il-cta-sub { color: var(--muted); font-size: 16px; line-height: 1.7; margin-bottom: 36px; }
+.il-cta-form-wrap { max-width: 400px; margin: 0 auto; }
+
+/* ── FOOTER ── */
+#il-footer {
+  border-top: 1px solid rgba(255,255,255,0.05);
+  padding: 40px 32px;
+}
+#il-footer .inner {
+  max-width: 1060px; margin: 0 auto;
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px;
+}
+.il-footer-brand { display: flex; align-items: center; gap: 16px; }
+.il-footer-disclaimer { font-size: 11px; color: #1E293B; text-align: center; max-width: 440px; line-height: 1.6; }
+.il-footer-links { display: flex; gap: 14px; }
+.il-footer-links a { font-size: 11px; color: #1E293B; text-transform: uppercase; letter-spacing: 0.5px; font-family: 'Montserrat', sans-serif; font-weight: 700; transition: color 0.2s; }
+.il-footer-links a:hover { color: var(--dim); }
+
+/* ── SCROLL REVEAL ── */
+.il-reveal {
+  opacity: 0; transform: translateY(22px);
+  transition: opacity 0.7s cubic-bezier(0.19,1,0.22,1), transform 0.7s cubic-bezier(0.19,1,0.22,1);
+}
+.il-reveal.d1 { transition-delay: 0.1s; }
+.il-reveal.d2 { transition-delay: 0.22s; }
+.il-reveal.d3 { transition-delay: 0.36s; }
+.il-reveal.vis { opacity: 1; transform: translateY(0); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  #il-hero .inner { grid-template-columns: 1fr; }
+  .il-benefits-grid { grid-template-columns: 1fr; }
+  .il-about-grid { grid-template-columns: 1fr; }
+  .il-testi-grid { grid-template-columns: 1fr; }
+  .il-table-head, .il-table-row { grid-template-columns: 1fr; }
+  .il-table-head div:not(:first-child), .il-table-cell:not(:first-child) { border-left: none; border-top: 1px solid rgba(255,255,255,0.04); }
+}
+@media (max-width: 600px) {
+  #il-nav { padding: 0 16px; }
+  .il-amf-badge { display: none; }
+  .il-section { padding: 64px 16px; }
+  #il-hero .inner { padding: 60px 16px; }
+}
+</style>
+
+<!-- ══════════════════════════════════════════════
+     MARKUP
+════════════════════════════════════════════════ -->
+<div id="il-wrap">
+  <div id="il-grain" aria-hidden="true"></div>
+
+  <!-- NAV -->
+  <nav id="il-nav">
+    <div class="inner">
+      <div class="il-logo">INVEST<span>LOUIS</span></div>
+      <div class="il-amf-badge">
+        <i></i> Certifié AMF <i></i>
+      </div>
+      <button class="il-nav-cta" onclick="document.getElementById('il-hero-form').scrollIntoView({behavior:'smooth'})">
+        Recevoir le PDF gratuit
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="il-hero">
+    <div class="il-glow-tr"></div>
+    <div class="inner">
+
+      <!-- LEFT -->
+      <div class="il-hero-left">
+        <div class="il-amf-logo il-reveal">
+          <svg viewBox="0 0 220 110" xmlns="http://www.w3.org/2000/svg">
+            <text x="110" y="74" font-family="Arial Black,sans-serif" font-weight="900" font-size="70" letter-spacing="-2" fill="#E2001A" text-anchor="middle">AMF</text>
+            <rect x="0" y="80" width="220" height="5" fill="#003189"/>
+            <text x="110" y="104" font-family="Arial,sans-serif" font-weight="400" font-size="11" letter-spacing="0.5" fill="#003189" text-anchor="middle">Autorité des marchés financiers</text>
+          </svg>
+        </div>
+
+        <div class="il-reveal d1">
+          <div class="il-eyebrow"><i></i> Guide Gratuit · Certifié AMF</div>
+          <h1 style="margin-top:16px">
+            Arrête de trader<br>
+            <span>contre les institutions.</span><br>
+            Trade avec elles.
+          </h1>
+          <p class="il-sub" style="margin-top:18px">
+            Order flow, Volume Profile, COT Report — les outils des salles de
+            marché, expliqués pour un trader retail. Gratuit, certifié AMF,
+            applicable cette semaine.
+          </p>
+        </div>
+
+        <div class="il-trust il-reveal d2">
+          <div class="il-trust-item">
+            <b>4 800+</b><small>lecteurs actifs</small>
+          </div>
+          <div class="il-trust-sep"></div>
+          <div class="il-trust-item">
+            <b>4.9 / 5</b><small>note moyenne</small>
+          </div>
+          <div class="il-trust-sep"></div>
+          <div class="il-trust-item">
+            <b>100%</b><small>gratuit</small>
+          </div>
+        </div>
+      </div>
+
+      <!-- FORM CARD -->
+      <div id="il-hero-form" class="il-hero-card il-reveal d1">
+        <div class="il-hero-card-inner">
+          <div class="il-pdf-mock">
+            <div class="il-pdf-icon">
+              <div class="il-pdf-icon-circle">
+                <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+              </div>
+              <div class="il-pdf-title">La Clé de la Rentabilité</div>
+              <div class="il-pdf-sub">Guide PDF · Couverture à venir</div>
+            </div>
+          </div>
+          <p class="il-form-heading">Accède au guide — gratuitement</p>
+          <p class="il-form-sub">Dans ta boîte mail en 2 minutes. Zéro spam.</p>
+          <form class="il-form" onsubmit="ilSubmit(event)">
+            <div class="il-field">
+              <div class="il-field-icon">
+                <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </div>
+              <input id="il-prenom" class="il-input" type="text" placeholder="Ton prénom" autocomplete="given-name">
+              <div class="il-error" id="il-prenom-err">Entre ton prénom</div>
+            </div>
+            <div class="il-field">
+              <div class="il-field-icon">
+                <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              </div>
+              <input id="il-email" class="il-input" type="email" placeholder="Ton adresse email" autocomplete="email">
+              <div class="il-error" id="il-email-err">Adresse email invalide</div>
+            </div>
+            <button type="submit" class="il-btn">Télécharger La Clé de la Rentabilité →</button>
+            <p class="il-trust-note">
+              <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              Aucun spam · Désabonnement en 1 clic
+            </p>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- TICKER -->
+  <div id="il-ticker" aria-hidden="true">
+    <div class="il-ticker-track" id="il-ticker-track"></div>
+  </div>
+
+  <!-- PROBLEM -->
+  <section class="il-section">
+    <div class="il-container">
+      <div class="il-reveal">
+        <p class="il-eyebrow-sm">Le diagnostic</p>
+        <h2 class="il-h2">Pourquoi 90% des traders retail<br><span>perdent face aux institutions</span></h2>
+      </div>
+      <div class="il-table il-reveal">
+        <div class="il-table-head">
+          <div>Problème actuel</div>
+          <div>Coût réel</div>
+          <div>Dans le guide</div>
+        </div>
+        <div class="il-table-row">
+          <div class="il-table-cell pain"><span class="il-dot red"></span>Tu trades sans lire le flux des ordres institutionnels</div>
+          <div class="il-table-cell cost">Tu te bats contre les pros — et tu perds</div>
+          <div class="il-table-cell fix"><span class="il-dot green"></span>Order flow & DOM : lire les intentions du marché</div>
+        </div>
+        <div class="il-table-row">
+          <div class="il-table-cell pain"><span class="il-dot red"></span>Tes indicateurs retardent sur le prix</div>
+          <div class="il-table-cell cost">Tu entres trop tard, tu sors trop tôt</div>
+          <div class="il-table-cell fix"><span class="il-dot green"></span>Volume Profile & VWAP institutionnel</div>
+        </div>
+        <div class="il-table-row">
+          <div class="il-table-cell pain"><span class="il-dot red"></span>Tu ignores les zones de liquidité des gros acteurs</div>
+          <div class="il-table-cell cost">Tes stops sont chassés systématiquement</div>
+          <div class="il-table-cell fix"><span class="il-dot green"></span>Smart Money Concepts & zones d'accumulation</div>
+        </div>
+        <div class="il-table-row">
+          <div class="il-table-cell pain"><span class="il-dot red"></span>Pas de contexte macro dans ton analyse</div>
+          <div class="il-table-cell cost">Tu trades contre la tendance de fond</div>
+          <div class="il-table-cell fix"><span class="il-dot green"></span>COT Report & positionnement des institutionnels</div>
+        </div>
+      </div>
+      <div class="il-pullquote il-reveal d2">
+        <p>"Ce n'est pas une question de talent. C'est une question d'information. Les institutions gagnent parce qu'elles voient ce que tu ne vois pas encore."</p>
+        <cite>Louis Ronchet · InvestLouis</cite>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFITS -->
+  <section class="il-section alt">
+    <div class="il-container">
+      <div class="il-benefits-grid">
+        <div class="il-reveal">
+          <p class="il-eyebrow-sm">Ce que contient le guide</p>
+          <h2 class="il-h2">4 outils pro.<br><span>Applicables demain.</span></h2>
+          <p style="color:var(--muted);font-size:15px;line-height:1.7">Chaque outil est expliqué avec des cas concrets sur des marchés réels. Comment le configurer, comment le lire, quand agir.</p>
+        </div>
+        <div>
+          <div class="il-chapter il-reveal">
+            <div class="il-chapter-num">01</div>
+            <div>
+              <div class="il-chapter-title">Lire les intentions du marché</div>
+              <div class="il-chapter-tool">Order Flow & DOM</div>
+              <div class="il-chapter-desc">Tu verras les zones où les gros acheteurs s'accumulent — avant que le prix réagisse. Finis les entrées en retard.</div>
+            </div>
+          </div>
+          <div class="il-chapter il-reveal d1">
+            <div class="il-chapter-num">02</div>
+            <div>
+              <div class="il-chapter-title">Entrer au bon prix, pas au mauvais moment</div>
+              <div class="il-chapter-tool">Volume Profile & VWAP</div>
+              <div class="il-chapter-desc">Les institutionnels ont une valeur juste en tête. Ce chapitre t'apprend à la calculer toi aussi.</div>
+            </div>
+          </div>
+          <div class="il-chapter il-reveal d2">
+            <div class="il-chapter-num">03</div>
+            <div>
+              <div class="il-chapter-title">Arrêter de te faire chasser</div>
+              <div class="il-chapter-tool">Smart Money Concepts</div>
+              <div class="il-chapter-desc">Tes stops se déclenchent juste avant que le prix parte dans ton sens ? Ce n'est pas de la malchance.</div>
+            </div>
+          </div>
+          <div class="il-chapter il-reveal d3">
+            <div class="il-chapter-num">04</div>
+            <div>
+              <div class="il-chapter-title">Savoir dans quel sens souffle le vent</div>
+              <div class="il-chapter-tool">COT Report & Macro</div>
+              <div class="il-chapter-desc">Les hedge funds publient leur positionnement chaque vendredi. Ce chapitre t'apprend à le lire en 10 minutes.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="il-section">
+    <div class="il-container">
+      <div class="il-about-grid">
+        <div class="il-reveal">
+          <p class="il-eyebrow-sm">Qui je suis</p>
+          <h2 class="il-h2">Louis Ronchet,<br><span>certifié AMF</span></h2>
+          <p style="color:var(--dim);font-size:16px;line-height:1.75;margin-bottom:16px">
+            Basé à Toulouse, j'ai commencé à investir avec un salaire ordinaire. Pas d'héritage, pas de piston — juste une méthode rigoureuse et l'examen AMF pour valider mes connaissances.
+          </p>
+          <p style="color:var(--dim);font-size:16px;line-height:1.75">
+            Aujourd'hui j'accompagne des milliers de personnes à franchir le pas avec confiance. Ce guide condense l'essentiel de ce que j'aurais aimé avoir au départ.
+          </p>
+          <div class="il-tags">
+            <span class="il-tag">Certifié AMF</span>
+            <span class="il-tag">Toulouse</span>
+            <span class="il-tag">4 800+ abonnés</span>
+            <span class="il-tag">Indépendant</span>
+          </div>
+        </div>
+        <div class="il-reveal d2">
+          <div class="il-photo-card">
+            <div class="il-photo-inner">
+              <div class="il-photo-placeholder">
+                <div class="il-photo-icon">
+                  <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                </div>
+                <div class="il-photo-label">Photo de Louis<br>à intégrer</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="il-section alt">
+    <div class="il-container">
+      <div style="text-align:center;margin-bottom:48px" class="il-reveal">
+        <p class="il-eyebrow-sm">Ils ont franchi le pas</p>
+        <h2 class="il-h2">Ils ont changé leur façon<br><span>de lire les marchés</span></h2>
+      </div>
+      <div class="il-testi-grid">
+        <!-- Large -->
+        <div class="il-testi-card il-testi-large il-reveal">
+          <div>
+            <div class="il-stars">
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <p class="il-testi-text-lg" style="margin-top:20px;margin-bottom:24px">"Le Volume Profile et le VWAP ont complètement changé ma lecture du marché. Je comprends enfin pourquoi le prix réagit à certains niveaux."</p>
+          </div>
+          <div class="il-testi-footer">
+            <div class="il-avatar">T</div>
+            <div>
+              <div class="il-testi-name">Thomas M.</div>
+              <div class="il-testi-role">Trader indépendant · Lyon</div>
+            </div>
+          </div>
+        </div>
+        <!-- Stack -->
+        <div class="il-testi-stack">
+          <div class="il-testi-card il-reveal d1">
+            <div class="il-stars">
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <p class="il-testi-text">"J'avais regardé des dizaines de vidéos sur les SMC sans vraiment comprendre. Louis a mis les choses dans l'ordre en 30 pages."</p>
+            <div class="il-testi-footer">
+              <div class="il-avatar" style="width:30px;height:30px;font-size:11px">J</div>
+              <div>
+                <div class="il-testi-name" style="font-size:12px">Julien K.</div>
+                <div class="il-testi-role" style="font-size:10px">Ingénieur reconverti · Paris</div>
+              </div>
+            </div>
+          </div>
+          <div class="il-testi-card il-reveal d2">
+            <div class="il-stars">
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <p class="il-testi-text">"Le COT Report, j'entendais ce terme depuis des mois. Maintenant je le lis chaque vendredi. Ça a changé mes biais directionnels."</p>
+            <div class="il-testi-footer">
+              <div class="il-avatar" style="width:30px;height:30px;font-size:11px">S</div>
+              <div>
+                <div class="il-testi-name" style="font-size:12px">Sarah D.</div>
+                <div class="il-testi-role" style="font-size:10px">Trader forex · Bordeaux</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Social proof -->
+      <div class="il-social-proof il-reveal">
+        <div class="il-avatars">
+          <div class="il-avatar-sm">T</div>
+          <div class="il-avatar-sm">J</div>
+          <div class="il-avatar-sm">S</div>
+          <div class="il-avatar-sm">M</div>
+          <div class="il-avatar-sm">A</div>
+        </div>
+        <p class="il-social-text"><b>4 800+</b> traders ont déjà téléchargé le guide</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCARCITY -->
+  <section class="il-section">
+    <div class="il-container">
+      <div class="il-scarcity-wrap il-reveal">
+        <div class="il-scarcity-card">
+          <span class="il-scarcity-badge">Disponible maintenant</span>
+          <p class="il-scarcity-text">Ce guide est distribué gratuitement tant que la liste est ouverte. Je me réserve le droit de le passer en version payante à tout moment.</p>
+          <div class="il-scarcity-note">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Accès limité · Profites-en maintenant
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section id="il-cta-final">
+    <div class="il-cta-glow"><div class="il-cta-glow-orb"></div></div>
+    <div class="il-cta-inner">
+      <div class="il-reveal">
+        <p class="il-eyebrow-sm" style="text-align:center">Dernière chance</p>
+        <h2 class="il-h2">Tu perds contre des algos<br><span>armés de ces outils.</span><br>Maintenant tu les as aussi.</h2>
+        <p class="il-cta-sub">4 800 traders ont déjà changé leur façon de lire le marché. Le guide est gratuit. L'avantage, lui, ne l'est pas.</p>
+      </div>
+      <div class="il-cta-form-wrap il-reveal d2">
+        <form class="il-form" onsubmit="ilSubmit2(event)">
+          <div class="il-field">
+            <div class="il-field-icon">
+              <svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+            <input id="il-prenom2" class="il-input" type="text" placeholder="Ton prénom" autocomplete="given-name">
+            <div class="il-error" id="il-prenom-err2">Entre ton prénom</div>
+          </div>
+          <div class="il-field">
+            <div class="il-field-icon">
+              <svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            </div>
+            <input id="il-email2" class="il-input" type="email" placeholder="Ton adresse email" autocomplete="email">
+            <div class="il-error" id="il-email-err2">Adresse email invalide</div>
+          </div>
+          <button type="submit" class="il-btn">Je Télécharge La Clé de la Rentabilité →</button>
+          <p class="il-trust-note">
+            <svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            Aucun spam · Désabonnement en 1 clic
+          </p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="il-footer">
+    <div class="inner">
+      <div class="il-footer-brand">
+        <div class="il-logo">INVEST<span>LOUIS</span></div>
+        <svg viewBox="0 0 220 110" style="width:48px;opacity:.6">
+          <text x="110" y="74" font-family="Arial Black,sans-serif" font-weight="900" font-size="70" letter-spacing="-2" fill="#E2001A" text-anchor="middle">AMF</text>
+          <rect x="0" y="80" width="220" height="5" fill="#003189"/>
+          <text x="110" y="104" font-family="Arial,sans-serif" font-size="11" fill="#003189" text-anchor="middle">Autorité des marchés financiers</text>
+        </svg>
+      </div>
+      <div class="il-footer-disclaimer">
+        © 2024 InvestLouis · Louis Ronchet · Toulouse<br>
+        Ce contenu est à visée éducative et ne constitue pas un conseil en investissement.
+      </div>
+      <div class="il-footer-links">
+        <a href="#">Confidentialité</a>
+        <a href="#">Mentions légales</a>
+      </div>
+    </div>
+  </footer>
+
+</div><!-- /#il-wrap -->
+
+<script>
+(function() {
+  /* ── TICKER ── */
+  var items = [
+    {l:'CAC 40',v:'+1.24%',u:true},{l:'S&P 500',v:'+0.87%',u:true},
+    {l:'BTC/USD',v:'+3.41%',u:true},{l:'EUR/USD',v:'-0.12%',u:false},
+    {l:'OR (XAU)',v:'+0.56%',u:true},{l:'NASDAQ',v:'+1.09%',u:true},
+    {l:'LVMH',v:'-0.33%',u:false},{l:'APPLE',v:'+2.15%',u:true},
+    {l:'DAX 40',v:'+0.74%',u:true},{l:'WTI',v:'-1.02%',u:false}
+  ];
+  var track = document.getElementById('il-ticker-track');
+  var html = '';
+  [items,items].forEach(function(arr){
+    arr.forEach(function(it){
+      html += '<span class="il-ticker-item">'
+        + '<span class="tk-label">'+it.l+'</span>'
+        + '<span class="tk-val '+(it.u?'tk-up':'tk-dn')+'">'+it.v+'</span>'
+        + '<span class="tk-sep">·</span>'
+        + '</span>';
+    });
+  });
+  track.innerHTML = html;
+
+  /* ── SCROLL REVEAL ── */
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('vis'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.il-reveal').forEach(function(el){ obs.observe(el); });
+
+  /* ── FORM VALIDATION ── */
+  function validateForm(prenomId, emailId, prenomErrId, emailErrId) {
+    var prenom = document.getElementById(prenomId);
+    var email  = document.getElementById(emailId);
+    var pErr   = document.getElementById(prenomErrId);
+    var eErr   = document.getElementById(emailErrId);
+    var ok = true;
+    if (!prenom.value.trim()) {
+      prenom.classList.add('error'); pErr.classList.add('show'); ok = false;
+    } else {
+      prenom.classList.remove('error'); pErr.classList.remove('show');
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
+      email.classList.add('error'); eErr.classList.add('show'); ok = false;
+    } else {
+      email.classList.remove('error'); eErr.classList.remove('show');
+    }
+    return ok;
+  }
+
+  window.ilSubmit = function(e) {
+    e.preventDefault();
+    if (validateForm('il-prenom','il-email','il-prenom-err','il-email-err')) {
+      /* → intégrer l'action Systeme.io ici */
+    }
+  };
+  window.ilSubmit2 = function(e) {
+    e.preventDefault();
+    if (validateForm('il-prenom2','il-email2','il-prenom-err2','il-email-err2')) {
+      /* → intégrer l'action Systeme.io ici */
+    }
+  };
+
+  /* live clear errors */
+  ['il-prenom','il-email','il-prenom2','il-email2'].forEach(function(id){
+    var el = document.getElementById(id);
+    if(el) el.addEventListener('input', function(){
+      el.classList.remove('error');
+      var errId = id.replace('il-','il-').replace('prenom','prenom-err').replace('email','email-err');
+      var err = document.getElementById(errId);
+      if(err) err.classList.remove('show');
+    });
+  });
+})();
+</script>
