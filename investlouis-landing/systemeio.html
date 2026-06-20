@@ -607,7 +607,7 @@
 
   <!-- HERO -->
   <section id="il-hero">
-    <canvas id="il-chart-bg" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0.38;"></canvas>
+    <canvas id="il-chart-bg" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0.28;"></canvas>
     <div class="il-glow-tr"></div>
     <div class="inner">
 
@@ -1217,10 +1217,10 @@
   var price = 100;
   for (var i = 0; i < TOTAL; i++) {
     var open  = price;
-    var move  = (rng() - 0.46) * 3.5;
+    var move  = (rng() - 0.46) * 6;
     var close = open + move;
-    var hi    = Math.max(open, close) + rng() * 2;
-    var lo    = Math.min(open, close) - rng() * 2;
+    var hi    = Math.max(open, close) + rng() * 4.5;
+    var lo    = Math.min(open, close) - rng() * 4.5;
     candles.push({ o: open, c: close, h: hi, l: lo });
     price = close;
   }
@@ -1274,7 +1274,7 @@
     var minP = range.min - 2, maxP = range.max + 2;
 
     var cw  = (W - padL - padR) / visible;
-    var bw  = cw * 0.52;
+    var bw  = cw * 0.60;
 
     /* ── GRID LINES ── */
     ctx.strokeStyle = 'rgba(148,163,184,0.06)';
@@ -1320,34 +1320,33 @@
 
       var alpha = Math.min(1, (j + 1 - frac) * 0.18 + 0.5);
 
+      // couleurs bleu — haussier bleu vif, baissier bleu foncé
+      var bullColor  = bull ? 'rgba(99,160,246,' : 'rgba(37,78,180,';
+      var wickAlpha  = alpha * 0.55;
+      var bodyAlpha  = alpha * 0.75;
+
       // wick
-      ctx.strokeStyle = bull
-        ? 'rgba(99,202,183,' + alpha + ')'
-        : 'rgba(239,83,80,' + alpha + ')';
+      ctx.strokeStyle = bullColor + wickAlpha + ')';
       ctx.lineWidth = 1;
+      ctx.shadowColor = 'rgba(59,130,246,0.25)';
+      ctx.shadowBlur  = 4;
       ctx.beginPath();
       ctx.moveTo(xc, yH);
       ctx.lineTo(xc, yL);
       ctx.stroke();
+      ctx.shadowBlur = 0;
 
-      // glow
-      if (bull) {
-        ctx.shadowColor  = 'rgba(59,130,246,0.5)';
-        ctx.shadowBlur   = 8;
-      } else {
-        ctx.shadowColor  = 'rgba(239,83,80,0.3)';
-        ctx.shadowBlur   = 4;
-      }
+      // body glow discret
+      ctx.shadowColor = bull ? 'rgba(99,160,246,0.25)' : 'rgba(29,78,216,0.15)';
+      ctx.shadowBlur  = bull ? 6 : 3;
 
       // body
       var bodyTop = Math.min(yO, yCl);
       var bodyH   = Math.max(1.5, Math.abs(yO - yCl));
-      ctx.fillStyle = bull
-        ? 'rgba(99,202,183,' + (alpha * 0.9) + ')'
-        : 'rgba(239,83,80,' + (alpha * 0.9) + ')';
+      ctx.fillStyle = bullColor + bodyAlpha + ')';
       ctx.beginPath();
       ctx.roundRect
-        ? ctx.roundRect(xc - bw / 2, bodyTop, bw, bodyH, 1.5)
+        ? ctx.roundRect(xc - bw / 2, bodyTop, bw, bodyH, 2)
         : ctx.rect(xc - bw / 2, bodyTop, bw, bodyH);
       ctx.fill();
       ctx.shadowBlur = 0;
@@ -1361,10 +1360,10 @@
 
     ctx.beginPath();
     ctx.setLineDash([6, 4]);
-    ctx.strokeStyle = 'rgba(59,130,246,0.35)';
+    ctx.strokeStyle = 'rgba(99,160,246,0.28)';
     ctx.lineWidth   = 1.5;
-    ctx.shadowColor = 'rgba(59,130,246,0.5)';
-    ctx.shadowBlur  = 10;
+    ctx.shadowColor = 'rgba(59,130,246,0.3)';
+    ctx.shadowBlur  = 8;
     ctx.moveTo(tx1, ty1);
     ctx.lineTo(tx2, ty2);
     ctx.stroke();
