@@ -80,8 +80,8 @@ export default function Problem() {
         {/* Pullquote */}
         <div className="mt-12 pl-6 border-l-2 border-[#B8963E]/40">
           <p className="font-['Playfair_Display'] italic text-[#94A3B8] text-[18px] leading-relaxed">
-            "Les institutionnels ne sont pas plus intelligents que toi. Ils ont juste accès
-            à des outils que personne ne t'a montrés — jusqu'à maintenant."
+            "Ce n'est pas une question de talent. C'est une question d'information.
+            Les institutions gagnent parce qu'elles voient ce que tu ne vois pas encore."
           </p>
           <p className="mt-3 font-['Montserrat'] font-bold text-[10px] tracking-[1.5px] uppercase text-[#475569]">
             Louis Ronchet · InvestLouis

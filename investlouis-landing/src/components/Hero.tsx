@@ -30,15 +30,15 @@ export default function Hero() {
 
             <h1 className="font-['Montserrat'] font-black text-white leading-[1.08]
                            text-[42px] lg:text-[54px] tracking-[-1.5px]">
-              Les Outils des<br />
-              <span className="text-[#3B82F6]">Traders Institutionnels</span><br />
-              — Enfin Accessibles
+              Arrête de trader<br />
+              <span className="text-[#3B82F6]">contre les institutions.</span><br />
+              Trade avec elles.
             </h1>
 
             <p className="text-[#94A3B8] text-[17px] leading-[1.65] font-light max-w-[480px]">
-              Les salles de marché utilisent des outils d'analyse que
-              90% des traders retail ignorent. Ce guide te révèle lesquels —
-              et comment les intégrer dans ta stratégie dès aujourd'hui.
+              Order flow, Volume Profile, COT Report — les outils
+              des salles de marché, expliqués pour un trader retail.
+              Gratuit, certifié AMF, applicable cette semaine.
             </p>
           </div>
 
@@ -87,10 +87,10 @@ export default function Hero() {
 
             <div className="mb-5">
               <h2 className="font-['Montserrat'] font-black text-white text-[18px] leading-tight mb-1">
-                Reçois "La Clé de la Rentabilité"
+                Accède au guide — gratuitement
               </h2>
               <p className="text-[#475569] text-[13px]">
-                Gratuit · Dans ta boîte mail en moins de 2 minutes.
+                Dans ta boîte mail en 2 minutes. Zéro spam.
               </p>
             </div>
 

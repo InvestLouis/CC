@@ -17,17 +17,18 @@ export default function CtaFinal() {
           </p>
           <h2 className="font-['Montserrat'] font-black text-white text-[36px] lg:text-[44px]
                          leading-[1.1] tracking-[-1px] mb-4">
-            Les institutions tradent.<br />
-            <span className="text-[#3B82F6]">Et toi ?</span>
+            Tu perds contre des algos<br />
+            <span className="text-[#3B82F6]">armés de ces outils.</span><br />
+            Maintenant tu les as aussi.
           </h2>
           <p className="text-[#475569] text-[16px] leading-relaxed">
-            Rejoins 4 800 traders qui ont arrêté de se battre contre le marché
-            et ont commencé à lire ce que les institutionnels font vraiment.
+            4 800 traders ont déjà changé leur façon de lire le marché.
+            Le guide est gratuit. L'avantage, lui, ne l'est pas.
           </p>
         </div>
 
         <div className="w-full max-w-[380px]">
-          <LeadForm ctaLabel="Je Veux Mon Guide Gratuit →" />
+          <LeadForm ctaLabel="Je Télécharge La Clé de la Rentabilité →" />
         </div>
 
       </div>

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-export default function LeadForm({ ctaLabel = 'Recevoir Mon Guide Gratuit →' }: { ctaLabel?: string }) {
+export default function LeadForm({ ctaLabel = 'Télécharger La Clé de la Rentabilité →' }: { ctaLabel?: string }) {
   const [prenom, setPrenom] = useState('')
   const [email, setEmail]   = useState('')
 

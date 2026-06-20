@@ -1,23 +1,27 @@
 const chapters = [
   {
     num: '01',
-    title: 'Order Flow & DOM',
-    desc: 'Lire le carnet d\'ordres comme un trader de salle de marché. Identifier les zones d\'absorption et les déséquilibres acheteurs/vendeurs avant que le prix réagisse.',
+    title: 'Lire les intentions du marché',
+    tool: 'Order Flow & DOM',
+    desc: 'Tu verras les zones où les gros acheteurs s\'accumulent — avant que le prix réagisse. Finis les entrées en retard.',
   },
   {
     num: '02',
-    title: 'Volume Profile & VWAP',
-    desc: 'Les deux outils que tout institutionnel utilise pour trouver sa valeur juste. Comment les appliquer sur n\'importe quel marché pour optimiser tes entrées.',
+    title: 'Entrer au bon prix, pas au mauvais moment',
+    tool: 'Volume Profile & VWAP',
+    desc: 'Les institutionnels ont une valeur juste en tête. Ce chapitre t\'apprend à la calculer toi aussi, et à l\'utiliser pour optimiser chaque entrée.',
   },
   {
     num: '03',
-    title: 'Smart Money Concepts',
-    desc: 'Comprendre comment les gros acteurs accumulent avant de bouger. Zones de liquidité, manipulation de marché, et comment en profiter plutôt qu\'en être victime.',
+    title: 'Arrêter de te faire chasser',
+    tool: 'Smart Money Concepts',
+    desc: 'Tes stops se déclenchent juste avant que le prix parte dans ton sens ? Ce n\'est pas de la malchance. Ce chapitre t\'explique pourquoi — et comment l\'éviter.',
   },
   {
     num: '04',
-    title: 'COT Report & Macro',
-    desc: 'Le rapport que les hedge funds lisent chaque vendredi. Décoder le positionnement des institutionnels pour anticiper les grands mouvements directionnels.',
+    title: 'Savoir dans quel sens souffle le vent',
+    tool: 'COT Report & Macro',
+    desc: 'Les hedge funds publient leur positionnement chaque vendredi. Ce chapitre t\'apprend à le lire en 10 minutes et à aligner tes trades sur la tendance de fond.',
   },
 ]
 
@@ -55,9 +59,12 @@ export default function Benefits() {
                   {ch.num}
                 </span>
                 <div>
-                  <h3 className="font-['Montserrat'] font-bold text-white text-[16px] mb-1.5">
+                  <h3 className="font-['Montserrat'] font-bold text-white text-[16px] mb-0.5">
                     {ch.title}
                   </h3>
+                  <p className="font-['Montserrat'] text-[10px] tracking-[1px] uppercase text-[#1D4ED8] mb-2">
+                    {ch.tool}
+                  </p>
                   <p className="text-[#475569] text-[14px] leading-relaxed">{ch.desc}</p>
                 </div>
               </div>
