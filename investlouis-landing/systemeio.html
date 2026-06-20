@@ -607,7 +607,7 @@
 
   <!-- HERO -->
   <section id="il-hero">
-    <canvas id="il-chart-bg" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0.28;"></canvas>
+    <canvas id="il-chart-bg" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0.22;"></canvas>
     <div class="il-glow-tr"></div>
     <div class="inner">
 
@@ -1209,7 +1209,7 @@
   window.addEventListener('resize', function() { resize(); });
 
   // --- candle data ---
-  var TOTAL = 60;
+  var TOTAL = 120;
   var candles = [];
   var seed = 42;
   function rng() { seed = (seed * 1664525 + 1013904223) & 0xffffffff; return (seed >>> 0) / 0xffffffff; }
@@ -1217,10 +1217,10 @@
   var price = 100;
   for (var i = 0; i < TOTAL; i++) {
     var open  = price;
-    var move  = (rng() - 0.46) * 6;
+    var move  = (rng() - 0.44) * 9;
     var close = open + move;
-    var hi    = Math.max(open, close) + rng() * 4.5;
-    var lo    = Math.min(open, close) - rng() * 4.5;
+    var hi    = Math.max(open, close) + rng() * 7;
+    var lo    = Math.min(open, close) - rng() * 7;
     candles.push({ o: open, c: close, h: hi, l: lo });
     price = close;
   }
@@ -1259,8 +1259,8 @@
 
     ctx.clearRect(0, 0, W, H);
 
-    var padL = 20, padR = 30, padT = 40, padB = 50;
-    var visible = Math.min(28, Math.floor(W / 28));
+    var padL = 0, padR = 0, padT = 20, padB = 20;
+    var visible = Math.min(70, Math.floor(W / 14));
     var startIdx = Math.floor(offset) % TOTAL;
     var frac = offset - Math.floor(offset);
 
@@ -1274,7 +1274,7 @@
     var minP = range.min - 2, maxP = range.max + 2;
 
     var cw  = (W - padL - padR) / visible;
-    var bw  = cw * 0.60;
+    var bw  = Math.max(1.5, cw * 0.45);
 
     /* ── GRID LINES ── */
     ctx.strokeStyle = 'rgba(148,163,184,0.06)';
@@ -1300,8 +1300,8 @@
     ctx.lineTo(padL + (0 - frac) * cw + cw / 2, H - padB);
     ctx.closePath();
     var grad = ctx.createLinearGradient(0, padT, 0, H - padB);
-    grad.addColorStop(0, 'rgba(59,130,246,0.10)');
-    grad.addColorStop(1, 'rgba(59,130,246,0.00)');
+    grad.addColorStop(0, 'rgba(80,140,255,0.07)');
+    grad.addColorStop(1, 'rgba(80,140,255,0.00)');
     ctx.fillStyle = grad;
     ctx.fill();
 
@@ -1321,32 +1321,31 @@
       var alpha = Math.min(1, (j + 1 - frac) * 0.18 + 0.5);
 
       // couleurs bleu — haussier bleu vif, baissier bleu foncé
-      var bullColor  = bull ? 'rgba(99,160,246,' : 'rgba(37,78,180,';
-      var wickAlpha  = alpha * 0.55;
-      var bodyAlpha  = alpha * 0.75;
+      // nuances de bleu — haussier clair, baissier sombre
+      var bullColor = bull ? 'rgba(120,170,255,' : 'rgba(50,90,180,';
+      var wickAlpha = alpha * 0.35;
+      var bodyAlpha = alpha * 0.55;
 
-      // wick
+      // wick — très fin, discret
       ctx.strokeStyle = bullColor + wickAlpha + ')';
-      ctx.lineWidth = 1;
-      ctx.shadowColor = 'rgba(59,130,246,0.25)';
-      ctx.shadowBlur  = 4;
+      ctx.lineWidth = 0.8;
+      ctx.shadowBlur = 0;
       ctx.beginPath();
       ctx.moveTo(xc, yH);
       ctx.lineTo(xc, yL);
       ctx.stroke();
-      ctx.shadowBlur = 0;
 
-      // body glow discret
-      ctx.shadowColor = bull ? 'rgba(99,160,246,0.25)' : 'rgba(29,78,216,0.15)';
-      ctx.shadowBlur  = bull ? 6 : 3;
-
-      // body
+      // body — glow doux sur les haussières seulement
+      if (bull) {
+        ctx.shadowColor = 'rgba(100,160,255,0.18)';
+        ctx.shadowBlur  = 5;
+      }
       var bodyTop = Math.min(yO, yCl);
       var bodyH   = Math.max(1.5, Math.abs(yO - yCl));
       ctx.fillStyle = bullColor + bodyAlpha + ')';
       ctx.beginPath();
       ctx.roundRect
-        ? ctx.roundRect(xc - bw / 2, bodyTop, bw, bodyH, 2)
+        ? ctx.roundRect(xc - bw / 2, bodyTop, bw, bodyH, 1)
         : ctx.rect(xc - bw / 2, bodyTop, bw, bodyH);
       ctx.fill();
       ctx.shadowBlur = 0;
