@@ -1,441 +1,405 @@
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700;800;900&family=Barlow:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
-<style> *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}:root{--ink:#05080D;--surface:#0B1120;--panel:#101828;--blue:#1D4ED8;--blue-hi:#3B82F6;--gold:#B8963E;--text:#94A3B8;--muted:#475569;--dim:#334155;--ease:cubic-bezier(0.32,0.72,0,1);}#il-wrap{background:#05080D!important;color:#94A3B8!important;scroll-behavior:smooth;font-family:'Barlow',system-ui,sans-serif;font-weight:300!important;font-size:16px!important;line-height:1.7;overflow-x:hidden;}#il-wrap h1,#il-wrap h2,#il-wrap h3,#il-wrap h4{font-family:'Montserrat',sans-serif;text-wrap:balance;}#il-wrap p{text-wrap:pretty;}#il-wrap a{text-decoration:none;color:inherit;}#il-hero{position:relative;min-height:100dvh;display:flex;align-items:center;overflow:hidden;}#il-candles{position:absolute;inset:0;pointer-events:none;z-index:0;opacity:0.22;}.il-glow-tr{position:absolute;top:-100px;right:-100px;width:700px;height:700px;border-radius:50%;background:#1D4ED8!important;opacity:0.055;filter:blur(140px);pointer-events:none;}#il-hero .inner{position:relative;z-index:1;width:100%;max-width:1060px;margin:0 auto;padding:80px 32px;display:grid;grid-template-columns:1fr 420px;gap:56px;align-items:center;}.il-hero-left{display:flex;flex-direction:column;gap:28px;}.il-eyebrow{display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:20px;border:1px solid rgba(184,150,62,0.25);background:rgba(184,150,62,0.05)!important;font-family:'Montserrat',sans-serif;font-weight:700!important;font-size:9px!important;letter-spacing:1.5px;text-transform:uppercase;color:#B8963E!important;width:fit-content;}.il-eyebrow i{display:inline-block;width:5px;height:5px;border-radius:50%;background:#B8963E!important;}#il-hero h1{font-size:clamp(36px,4.5vw,52px)!important;font-weight:900!important;color:#fff!important;line-height:1.07;letter-spacing:-0.03em;}#il-hero h1 span{color:#3B82F6!important;}.il-sub{color:#94A3B8!important;font-size:17px!important;line-height:1.7;font-weight:300!important;max-width:460px;}.il-trust{display:flex;align-items:center;gap:20px;}.il-trust-item{display:flex;flex-direction:column;}.il-trust-item b{font-family:'Montserrat',sans-serif;font-weight:900!important;font-size:21px!important;color:#fff!important;font-variant-numeric:tabular-nums;}.il-trust-item small{font-size:11px!important;color:#475569!important;letter-spacing:0.3px;}.il-trust-sep{width:1px;height:30px;background:rgba(255,255,255,0.07)!important;}.il-hero-card{position:relative;padding:1.5px;border-radius:14px;background:linear-gradient(180deg,rgba(255,255,255,0.1) 0%,rgba(255,255,255,0.03) 100%)!important;box-shadow:0 8px 32px rgba(29,78,216,0.18);}.il-hero-card-inner{background:#0D1526!important;border-radius:12px;padding:28px;box-shadow:inset 0 1px 1px rgba(255,255,255,0.06);}.il-pdf-mock{width:100%;height:140px;background:#05080D!important;border:1px solid rgba(255,255,255,0.05);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;}.il-pdf-mock .il-pdf-icon{display:flex;flex-direction:column;align-items:center;gap:10px;}.il-pdf-icon-circle{width:36px;height:36px;border-radius:8px;background:rgba(29,78,216,0.15)!important;border:1px solid rgba(29,78,216,0.2);display:flex;align-items:center;justify-content:center;}.il-pdf-icon-circle svg{width:16px;height:16px;stroke:#3B82F6;fill:none;stroke-width:1.5;}.il-pdf-title{color:#fff!important;font-family:'Montserrat',sans-serif;font-weight:700!important;font-size:12px!important;text-align:center;}.il-pdf-sub{color:#334155!important;font-size:10px!important;text-transform:uppercase;letter-spacing:1px;text-align:center;margin-top:2px;}.il-form-heading{font-family:'Montserrat',sans-serif;font-weight:900!important;color:#fff!important;font-size:16px!important;margin-bottom:4px;}.il-form-sub{color:#334155!important;font-size:12px!important;margin-bottom:16px;}.il-form{display:flex;flex-direction:column;gap:10px;}.il-field{position:relative;}.il-field-icon{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:#334155!important;pointer-events:none;display:flex;}.il-field-icon svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.5;}.il-input{width:100%;height:46px;background:rgba(255,255,255,0.03)!important;border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:0 12px 0 38px;color:#fff!important;font-size:14px!important;font-weight:300!important;font-family:'Barlow',sans-serif;outline:none;transition:all 0.3s cubic-bezier(0.32,0.72,0,1);}.il-input::placeholder{color:#334155!important;}.il-input:focus{border-color:#1D4ED8!important;background:rgba(29,78,216,0.05)!important;}.il-input.error{border-color:rgba(239,68,68,0.5)!important;}.il-error{font-size:11px!important;color:#F87171!important;margin-top:3px;display:none;}.il-error.show{display:block;}.il-btn{margin-top:4px;width:100%;height:50px;border-radius:8px;border:none;background:#1D4ED8!important;color:#fff!important;cursor:pointer;font-family:'Montserrat',sans-serif;font-weight:800!important;font-size:10px!important;letter-spacing:1.5px;text-transform:uppercase;position:relative;overflow:hidden;box-shadow:0 4px 24px rgba(29,78,216,0.3),inset 0 1px 1px rgba(255,255,255,0.12);transition:all 0.4s cubic-bezier(0.32,0.72,0,1);}.il-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(255,255,255,0.08),transparent)!important;pointer-events:none;}.il-btn:hover{background:#2563EB!important;transform:translateY(-1px);}.il-btn:active{transform:scale(0.98);}.il-trust-note{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:4px;font-size:11px!important;color:#334155!important;}.il-trust-note svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2;}#il-ticker{border-top:1px solid rgba(255,255,255,0.05);border-bottom:1px solid rgba(255,255,255,0.05);background:#0B1120!important;padding:12px 0;overflow:hidden;position:relative;}#il-ticker::before,#il-ticker::after{content:'';position:absolute;inset-block:0;z-index:2;width:60px;pointer-events:none;}#il-ticker::before{left:0;background:linear-gradient(to right,#0B1120,transparent)!important;}#il-ticker::after{right:0;background:linear-gradient(to left,#0B1120,transparent)!important;}.il-ticker-track{display:flex;will-change:transform;animation:il-tick 36s linear infinite;}.il-ticker-item{display:flex;align-items:center;gap:8px;padding:0 24px;white-space:nowrap;}.il-ticker-item .tk-label{font-family:'Montserrat',sans-serif;font-weight:600!important;font-size:11px!important;letter-spacing:0.5px;text-transform:uppercase;color:#64748B!important;}.il-ticker-item .tk-val{font-family:'Montserrat',sans-serif;font-weight:700!important;font-size:11px!important;}.tk-up{color:#22C55E!important;}.tk-dn{color:#EF4444!important;}.tk-sep{color:rgba(255,255,255,0.1)!important;font-size:10px!important;}@keyframes il-tick{from{transform:translateX(0);}to{transform:translateX(-50%);}}.il-section{padding:100px 32px;}.il-section.alt{background:#080E1A!important;}.il-container{max-width:1060px;margin:0 auto;}.il-eyebrow-sm{font-family:'Montserrat',sans-serif;font-weight:600!important;font-size:9px!important;letter-spacing:1.5px;text-transform:uppercase;color:#475569!important;margin-bottom:10px;}.il-h2{font-size:clamp(28px,3vw,40px)!important;font-weight:900!important;color:#fff!important;line-height:1.1;letter-spacing:-0.02em;margin-bottom:20px;}.il-h2 span{color:#3B82F6!important;}.il-table{border:1px solid rgba(255,255,255,0.07);border-radius:12px;overflow:hidden;margin-bottom:40px;}.il-table-head{display:grid;grid-template-columns:1fr 1fr 1fr;background:#0B1120!important;border-bottom:1px solid rgba(255,255,255,0.07);}.il-table-head div{padding:10px 20px;font-family:'Montserrat',sans-serif;font-weight:700!important;font-size:9px!important;letter-spacing:2px;text-transform:uppercase;color:#334155!important;}.il-table-head div:nth-child(3){color:#B8963E!important;}.il-table-head div:not(:first-child){border-left:1px solid rgba(255,255,255,0.07);}.il-table-row{display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1px solid rgba(255,255,255,0.04);transition:background 0.25s;}.il-table-row:last-child{border-bottom:none;}.il-table-row:hover{background:rgba(255,255,255,0.018)!important;}.il-table-cell{padding:18px 20px;font-size:14px!important;line-height:1.45;}.il-table-cell:not(:first-child){border-left:1px solid rgba(255,255,255,0.04);}.il-table-cell.pain{color:#CBD5E1!important;display:flex;align-items:flex-start;gap:10px;}.il-table-cell.cost{color:#475569!important;font-style:italic;}.il-table-cell.fix{color:#CBD5E1!important;display:flex;align-items:flex-start;gap:10px;}.il-dot{width:6px;height:6px;border-radius:50%;margin-top:7px;flex-shrink:0;}.il-dot.red{background:rgba(239,68,68,0.5)!important;}.il-dot.green{background:rgba(34,197,94,0.6)!important;}.il-pullquote{padding-left:20px;border-left:2px solid rgba(184,150,62,0.3);margin-top:40px;}.il-pullquote p{font-family:'Georgia',serif;font-style:italic;color:#475569!important;font-size:18px!important;line-height:1.65;}.il-pullquote cite{display:block;margin-top:12px;font-family:'Montserrat',sans-serif;font-weight:700!important;font-size:9px!important;letter-spacing:1.5px;text-transform:uppercase;color:#334155!important;font-style:normal;}.il-benefits-grid{display:grid;grid-template-columns:300px 1fr;gap:56px;align-items:start;}.il-chapter{display:flex;gap:22px;padding:18px 20px;border-radius:10px;border:1px solid transparent;transition:all 0.4s cubic-bezier(0.32,0.72,0,1);cursor:default;}.il-chapter:hover{background:rgba(255,255,255,0.025)!important;border-color:rgba(255,255,255,0.06)!important;}.il-chapter-num{width:40px;height:40px;border-radius:10px;flex-shrink:0;background:rgba(29,78,216,0.12)!important;border:1px solid rgba(29,78,216,0.2);display:flex;align-items:center;justify-content:center;transition:background 0.4s,border-color 0.4s;}.il-chapter-num svg{width:20px;height:20px;stroke:#3B82F6;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}.il-chapter:hover .il-chapter-num{background:rgba(29,78,216,0.22)!important;border-color:rgba(59,130,246,0.4)!important;}.il-chapter-title{font-family:'Montserrat',sans-serif;font-weight:700!important;color:#fff!important;font-size:15px!important;margin-bottom:2px;}.il-chapter-tool{font-family:'Montserrat',sans-serif;font-weight:700!important;font-size:9px!important;letter-spacing:1px;text-transform:uppercase;color:#1D4ED8!important;margin-bottom:8px;}.il-chapter-desc{font-size:14px!important;color:#64748B!important;line-height:1.65;}.il-about-grid{display:grid;grid-template-columns:1fr 360px;gap:56px;align-items:center;}.il-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px;}.il-tag{padding:6px 12px;border:1px solid rgba(255,255,255,0.07);border-radius:20px;font-family:'Montserrat',sans-serif;font-weight:700!important;font-size:10px!important;letter-spacing:0.5px;text-transform:uppercase;color:#334155!important;transition:all 0.25s;}.il-tag:hover{border-color:rgba(255,255,255,0.12)!important;color:#475569!important;}.il-photo-card{padding:1px;border-radius:14px;background:linear-gradient(180deg,rgba(255,255,255,0.08) 0%,rgba(255,255,255,0.02) 100%)!important;}.il-photo-inner{aspect-ratio:3/4;background:#0B1120!important;border-radius:17px;display:flex;align-items:center;justify-content:center;}.il-photo-placeholder{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;padding:32px;}.il-photo-icon{width:56px;height:56px;border-radius:50%;background:rgba(29,78,216,0.15)!important;border:1px solid rgba(29,78,216,0.2);display:flex;align-items:center;justify-content:center;}.il-photo-icon svg{width:22px;height:22px;stroke:#3B82F6;fill:none;stroke-width:1.5;}.il-photo-label{font-size:12px!important;color:#334155!important;}.il-tp-header{display:flex;flex-direction:column;align-items:center;gap:16px;margin-bottom:48px;}.il-tp-logo{display:flex;align-items:center;gap:10px;}.il-tp-logo-text{font-family:'Montserrat',sans-serif;font-weight:900!important;font-size:22px!important;color:#fff!important;}.il-tp-logo-text span{color:#00B67A!important;}.il-tp-score-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:center;}.il-tp-score-num{font-family:'Montserrat',sans-serif;font-weight:900!important;font-size:36px!important;color:#fff!important;line-height:1;}.il-tp-stars-lg{display:flex;}.il-tp-count{font-size:13px!important;color:#475569!important;}.il-tp-count a{color:#00B67A!important;text-decoration:underline;text-underline-offset:2px;}.il-carousel-wrap{position:relative;perspective:1200px;height:420px;overflow:visible;}.il-carousel-stage{position:relative;width:100%;height:100%;transform-style:preserve-3d;}.il-testi-card{position:absolute;width:360px;left:50%;top:0;margin-left:-180px;background:#0F172A!important;border:1px solid rgba(255,255,255,0.09);border-radius:12px;padding:28px;display:flex;flex-direction:column;backface-visibility:hidden;will-change:transform,opacity;transition:transform 0.6s cubic-bezier(0.32,0.72,0,1),opacity 0.6s cubic-bezier(0.32,0.72,0,1),box-shadow 0.6s cubic-bezier(0.32,0.72,0,1);cursor:pointer;user-select:none;}.il-testi-card[data-pos="0"]{transform:translateX(0) translateZ(0) rotateY(0deg) scale(1);opacity:1;z-index:5;box-shadow:0 0 0 1px rgba(255,255,255,0.1),0 40px 80px rgba(0,0,0,0.6),0 8px 24px rgba(29,78,216,0.2);border-color:rgba(255,255,255,0.14)!important;}.il-testi-card[data-pos="-1"],.il-testi-card[data-pos="1"]{transform:translateX(var(--tx,0)) translateZ(-180px) rotateY(var(--ry,0)) scale(0.82);opacity:0.55;z-index:3;box-shadow:none;}.il-testi-card[data-pos="-1"]{--tx:-310px;--ry:28deg;}.il-testi-card[data-pos="1"]{--tx:310px;--ry:-28deg;}.il-testi-card[data-pos="-2"],.il-testi-card[data-pos="2"]{transform:translateX(var(--tx2,0)) translateZ(-350px) rotateY(var(--ry2,0)) scale(0.65);opacity:0.22;z-index:1;}.il-testi-card[data-pos="-2"]{--tx2:-480px;--ry2:42deg;}.il-testi-card[data-pos="2"]{--tx2:480px;--ry2:-42deg;}.il-testi-card[data-pos="-3"],.il-testi-card[data-pos="3"],.il-testi-card[data-pos="-4"],.il-testi-card[data-pos="4"]{opacity:0;pointer-events:none;transform:translateX(0) translateZ(-500px) scale(0.5);}.il-tp-badge{display:inline-flex;align-items:center;gap:5px;background:#00B67A10!important;border:1px solid #00B67A33;border-radius:6px;padding:2px 8px;margin-bottom:10px;width:fit-content;}.il-tp-badge{font-size:11px!important;color:#00B67A!important;}.il-tp-badge span{font-size:10px!important;font-weight:700!important;color:#00B67A!important;letter-spacing:0.5px;text-transform:uppercase;}.il-stars{display:flex;gap:2px;margin-bottom:10px;}.il-stars{color:#00B67A!important;font-size:13px!important;letter-spacing:1px;}.il-testi-title{font-family:'Montserrat',sans-serif;font-weight:700!important;font-size:14px!important;color:#fff!important;margin-bottom:8px;}.il-testi-date{font-size:11px!important;color:#334155!important;}.il-testi-body{position:relative;flex:1;}.il-testi-body.collapsed{max-height:110px;overflow:hidden;}.il-testi-body.collapsed::after{content:'';position:absolute;bottom:0;left:0;right:0;height:44px;background:linear-gradient(transparent,#0B1120)!important;}.il-voir-plus{background:none!important;border:none;color:#00B67A!important;font-family:inherit;font-size:11px!important;font-weight:700!important;cursor:pointer;padding:6px 0 0;display:block;letter-spacing:0.3px;}.il-voir-plus:hover{text-decoration:underline;}.il-testi-text{color:#94A3B8!important;font-size:13.5px!important;line-height:1.65;}.il-testi-footer{display:flex;align-items:center;gap:10px;padding-top:14px;margin-top:14px;border-top:1px solid rgba(255,255,255,0.05);}.il-avatar{width:34px;height:34px;border-radius:50%;flex-shrink:0;background:rgba(29,78,216,0.2)!important;border:1px solid rgba(29,78,216,0.2);display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;font-weight:700!important;font-size:12px!important;color:#3B82F6!important;}.il-testi-name{font-family:'Montserrat',sans-serif;font-weight:700!important;color:#fff!important;font-size:13px!important;}.il-carousel-nav{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:36px;}.il-nav-btn{width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.04)!important;color:#94A3B8!important;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s;flex-shrink:0;}.il-nav-btn:hover{background:rgba(255,255,255,0.1)!important;color:#fff!important;border-color:rgba(255,255,255,0.2)!important;}.il-nav-dots{display:flex;gap:6px;align-items:center;}.il-nav-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.15)!important;cursor:pointer;transition:all 0.3s cubic-bezier(0.32,0.72,0,1);}.il-nav-dot.active{width:20px;border-radius:3px;background:#00B67A!important;}.il-testi-role{font-size:11px!important;color:#475569!important;margin-top:1px;}.il-social-proof{display:flex;align-items:center;justify-content:center;gap:12px;border-top:1px solid rgba(255,255,255,0.05);padding-top:28px;margin-top:24px;}.il-avatars{display:flex;}.il-avatars .il-avatar-sm{width:28px;height:28px;border-radius:50%;margin-left:-8px;background:rgba(29,78,216,0.3)!important;border:2px solid #05080D;display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;font-weight:700!important;font-size:10px!important;color:#3B82F6!important;}.il-avatars .il-avatar-sm:first-child{margin-left:0;}.il-social-text{font-size:13px!important;color:#475569!important;}.il-social-text b{color:#fff!important;font-weight:500!important;}.il-scarcity-wrap{max-width:680px;margin:0 auto;}.il-scarcity-card{position:relative;overflow:visible;border:1px solid rgba(184,150,62,0.15);background:rgba(184,150,62,0.025)!important;border-radius:12px;padding:40px;text-align:center;box-shadow:inset 0 0 0 1px rgba(184,150,62,0.06);}.il-scarcity-badge{position:absolute;top:0;left:50%;transform:translate(-50%,-50%);display:inline-block;background:#B8963E!important;color:#05080D!important;font-family:'Montserrat',sans-serif;font-weight:900!important;font-size:9px!important;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:20px;}.il-scarcity-text{color:#475569!important;font-size:15px!important;line-height:1.7;max-width:440px;margin:0 auto 16px;}.il-scarcity-note{display:inline-flex;align-items:center;gap:8px;color:#B8963E!important;font-family:'Montserrat',sans-serif;font-weight:700!important;font-size:10px!important;letter-spacing:1.5px;text-transform:uppercase;}.il-scarcity-note svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;}#il-cta-final{position:relative;padding:120px 32px;overflow:hidden;}.il-cta-glow{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;}.il-cta-glow-orb{width:800px;height:500px;border-radius:50%;background:#1D4ED8!important;opacity:0.05;filter:blur(130px);}.il-cta-inner{position:relative;max-width:520px;margin:0 auto;text-align:center;}.il-cta-inner .il-h2{font-size:clamp(30px,3.5vw,44px)!important;margin-bottom:16px;}.il-cta-sub{color:#475569!important;font-size:16px!important;line-height:1.7;margin-bottom:36px;}.il-cta-form-wrap{max-width:400px;margin:0 auto;}#il-footer{border-top:1px solid rgba(255,255,255,0.05);padding:40px 32px;}#il-footer .inner{max-width:1060px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px;}.il-footer-brand{display:flex;align-items:center;gap:16px;}.il-footer-disclaimer{font-size:11px!important;color:#475569!important;text-align:center;max-width:440px;line-height:1.6;}.il-footer-links{display:flex;gap:14px;}.il-footer-links a{font-size:11px!important;color:#475569!important;text-transform:uppercase;letter-spacing:0.5px;font-family:'Montserrat',sans-serif;font-weight:700!important;transition:color 0.2s;}.il-footer-links a:hover{color:#334155!important;}.il-reveal{opacity:1;transform:translateY(0);transition:opacity 0.7s cubic-bezier(0.19,1,0.22,1),transform 0.7s cubic-bezier(0.19,1,0.22,1);}.il-reveal.d1{transition-delay:0.1s;}.il-reveal.d2{transition-delay:0.22s;}.il-reveal.d3{transition-delay:0.36s;}.il-reveal.vis{opacity:1;transform:translateY(0);}.il-yt-more-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border:1px solid rgba(255,255,255,0.1);border-radius:8px;color:#94A3B8!important;font-family:'Montserrat',sans-serif;font-weight:700!important;font-size:10px!important;letter-spacing:1px;text-transform:uppercase;transition:all 0.2s;}.il-yt-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;}.il-yt-card{display:flex;flex-direction:column;border-radius:10px;overflow:hidden;background:#0B1120!important;border:1px solid rgba(255,255,255,0.07);text-decoration:none;transition:transform 0.25s,border-color 0.25s;}.il-yt-card:hover{transform:translateY(-3px);border-color:rgba(59,130,246,0.3)!important;}.il-yt-thumb{position:relative;aspect-ratio:16/9;overflow:hidden;background:#05080D!important;}.il-yt-thumb img{width:100%;height:100%;object-fit:cover;display:block;}.il-yt-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.35)!important;opacity:0;transition:opacity 0.2s;font-size:36px!important;color:#fff!important;text-shadow:0 2px 8px rgba(0,0,0,0.5);}.il-yt-card:hover .il-yt-play{opacity:1;}.il-yt-info{padding:12px 14px;}.il-yt-title{color:#CBD5E1!important;font-size:13px!important;font-weight:500!important;line-height:1.4;margin:0;}@media (max-width:900px){#il-hero .inner{grid-template-columns:1fr;}.il-benefits-grid{grid-template-columns:1fr;}.il-about-grid{grid-template-columns:1fr;}.il-tp-score-num{font-size:28px!important;}.il-tp-stars-lg svg{width:24px;height:24px;}.il-testi-card{width:300px;margin-left:-150px;}.il-testi-card[data-pos="-1"]{--tx:-240px;}.il-testi-card[data-pos="1"]{--tx:240px;}.il-testi-card[data-pos="-2"]{--tx2:-360px;}.il-testi-card[data-pos="2"]{--tx2:360px;}.il-carousel-wrap{height:480px;}.il-table-head,.il-table-row{grid-template-columns:1fr;}.il-table-head div:not(:first-child),.il-table-cell:not(:first-child){border-left:none;border-top:1px solid rgba(255,255,255,0.04);}}@media (max-width:600px){.il-section{padding:64px 16px;}#il-hero .inner{padding:60px 16px;}}</style>
-<div id="il-wrap">
-  <section id="il-hero">
-    <canvas id="il-candles"></canvas>
-  <div class="il-glow-tr"></div>
-    <div class="inner">
-      <div class="il-hero-left">
-        <div class="il-reveal d1">
-          <div class="il-eyebrow"><i></i> Guide Gratuit</div>
-          <h1 style="margin-top:16px">
-            Arrête de trader<br>
-            <span>contre les institutions.</span><br>
-            Trade avec elles.
-          </h1>
-          <p class="il-sub" style="margin-top:18px">
-            Order flow, Volume Profile, COT Report — les outils des salles de
-            marché, expliqués pour un trader retail. Gratuit,
-            applicable cette semaine.
-          </p>
-        </div>
-        <div class="il-trust il-reveal d2">
-          <div class="il-trust-item">
-            <b>4 800+</b><small>lecteurs actifs</small>
-          </div>
-          <div class="il-trust-sep"></div>
-          <div class="il-trust-item">
-            <b>4.9 / 5</b><small>note moyenne</small>
-          </div>
-          <div class="il-trust-sep"></div>
-          <div class="il-trust-item">
-            <b>100%</b><small>gratuit</small>
-          </div>
-        </div>
-      </div>
-      <div id="il-hero-form" class="il-hero-card il-reveal d1">
-        <div class="il-hero-card-inner">
-          <div class="il-pdf-mock">
-            <div class="il-pdf-icon">
-              <div class="il-pdf-icon-circle">
-                <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-              </div>
-              <div class="il-pdf-title">La Clé de la Rentabilité</div>
-              <div class="il-pdf-sub">Guide PDF · Couverture à venir</div>
-            </div>
-          </div>
-          <p class="il-form-heading">Accède au guide — gratuitement</p>
-          <p class="il-form-sub">Dans ta boîte mail en 2 minutes. Zéro spam.</p>
-          <form class="il-form" onsubmit="ilSubmit(event)">
-            <div class="il-field">
-              <div class="il-field-icon">
-                <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-              </div>
-              <input id="il-prenom" class="il-input" type="text" placeholder="Ton prénom" autocomplete="given-name">
-              <div class="il-error" id="il-prenom-err">Entre ton prénom</div>
-            </div>
-            <div class="il-field">
-              <div class="il-field-icon">
-                <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-              </div>
-              <input id="il-email" class="il-input" type="email" placeholder="Ton adresse email" autocomplete="email">
-              <div class="il-error" id="il-email-err">Adresse email invalide</div>
-            </div>
-            <button type="submit" class="il-btn">Télécharger La Clé de la Rentabilité →</button>
-            <p class="il-trust-note">
-              <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-              Aucun spam · Désabonnement en 1 clic
-            </p>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
-  <div id="il-ticker" aria-hidden="true">
-    <div class="il-ticker-track" id="il-ticker-track"></div>
-  </div>
-  <section class="il-section">
-    <div class="il-container">
-      <div class="il-reveal">
-        <p class="il-eyebrow-sm">Le diagnostic</p>
-        <h2 class="il-h2">Pourquoi 90% des traders retail<br><span>perdent face aux institutions</span></h2>
-      </div>
-      <div class="il-table il-reveal">
-        <div class="il-table-head">
-          <div>Problème actuel</div>
-          <div>Coût réel</div>
-          <div>Dans le guide</div>
-        </div>
-        <div class="il-table-row">
-          <div class="il-table-cell pain"><span class="il-dot red"></span>Tu trades sans lire le flux des ordres institutionnels</div>
-          <div class="il-table-cell cost">Tu te bats contre les pros — et tu perds</div>
-          <div class="il-table-cell fix"><span class="il-dot green"></span>Order flow & DOM :lire les intentions du marché</div>
-        </div>
-        <div class="il-table-row">
-          <div class="il-table-cell pain"><span class="il-dot red"></span>Tes indicateurs retardent sur le prix</div>
-          <div class="il-table-cell cost">Tu entres trop tard, tu sors trop tôt</div>
-          <div class="il-table-cell fix"><span class="il-dot green"></span>Volume Profile & VWAP institutionnel</div>
-        </div>
-        <div class="il-table-row">
-          <div class="il-table-cell pain"><span class="il-dot red"></span>Tu ignores les zones de liquidité des gros acteurs</div>
-          <div class="il-table-cell cost">Tes stops sont chassés systématiquement</div>
-          <div class="il-table-cell fix"><span class="il-dot green"></span>Smart Money Concepts & zones d'accumulation</div>
-        </div>
-        <div class="il-table-row">
-          <div class="il-table-cell pain"><span class="il-dot red"></span>Pas de contexte macro dans ton analyse</div>
-          <div class="il-table-cell cost">Tu trades contre la tendance de fond</div>
-          <div class="il-table-cell fix"><span class="il-dot green"></span>COT Report & positionnement des institutionnels</div>
-        </div>
-      </div>
-      <div class="il-pullquote il-reveal d2">
-        <p>"Ce n'est pas une question de talent. C'est une question d'information. Les institutions gagnent parce qu'elles voient ce que tu ne vois pas encore."</p>
-        <cite>Louis Ronchet · InvestLouis</cite>
-      </div>
-    </div>
-  </section>
-  <section class="il-section alt">
-    <div class="il-container">
-      <div class="il-benefits-grid">
-        <div class="il-reveal">
-          <p class="il-eyebrow-sm">Ce que contient le guide</p>
-          <h2 class="il-h2">4 outils pro.<br><span>Applicables demain.</span></h2>
-          <p style="color:#475569;font-size:15px;line-height:1.7">Chaque outil est expliqué avec des cas concrets sur des marchés réels. Comment le configurer, comment le lire, quand agir.</p>
-        </div>
-        <div>
-          <div class="il-chapter il-reveal">
-            <div class="il-chapter-num">
-              <svg viewBox="0 0 24 24"><path d="M3 12h4M3 6h8M3 18h6"/><rect x="9" y="9" width="12" height="10" rx="1.5"/><path d="M9 13h12M13 9v10"/></svg>
-            </div>
-            <div>
-              <div class="il-chapter-title">Lire les intentions du marché</div>
-              <div class="il-chapter-tool">Order Flow & DOM</div>
-              <div class="il-chapter-desc">Tu verras les zones où les gros acheteurs s'accumulent — avant que le prix réagisse. Finis les entrées en retard.</div>
-            </div>
-          </div>
-          <div class="il-chapter il-reveal d1">
-            <div class="il-chapter-num">
-              <svg viewBox="0 0 24 24"><rect x="3" y="14" width="3" height="7" rx="1"/><rect x="8" y="9" width="3" height="12" rx="1"/><rect x="13" y="5" width="3" height="16" rx="1"/><rect x="18" y="11" width="3" height="10" rx="1"/><path d="M2 9l20-5" stroke-dasharray="3 2"/></svg>
-            </div>
-            <div>
-              <div class="il-chapter-title">Entrer au bon prix, pas au mauvais moment</div>
-              <div class="il-chapter-tool">Volume Profile & VWAP</div>
-              <div class="il-chapter-desc">Les institutionnels ont une valeur juste en tête. Ce chapitre t'apprend à la calculer toi aussi.</div>
-            </div>
-          </div>
-          <div class="il-chapter il-reveal d2">
-            <div class="il-chapter-num">
-              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="8"/><path d="M12 4v2M12 18v2M4 12h2M18 12h2"/><path d="M6.3 6.3l1.4 1.4M16.3 16.3l1.4 1.4M16.3 7.7l-1.4 1.4M7.7 16.3l-1.4 1.4"/></svg>
-            </div>
-            <div>
-              <div class="il-chapter-title">Arrêter de te faire chasser</div>
-              <div class="il-chapter-tool">Smart Money Concepts</div>
-              <div class="il-chapter-desc">Tes stops se déclenchent juste avant que le prix parte dans ton sens ? Ce n'est pas de la malchance.</div>
-            </div>
-          </div>
-          <div class="il-chapter il-reveal d3">
-            <div class="il-chapter-num">
-              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2"/><path d="M16 8l-4 4-4 4 4-4 4-4z" stroke-width="0" fill="#3B82F6"/><path d="M16 8l-4 4M12 12l-4 4"/></svg>
-            </div>
-            <div>
-              <div class="il-chapter-title">Savoir dans quel sens souffle le vent</div>
-              <div class="il-chapter-tool">COT Report & Macro</div>
-              <div class="il-chapter-desc">Les hedge funds publient leur positionnement chaque vendredi. Ce chapitre t'apprend à le lire en 10 minutes.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section class="il-section">
-    <div class="il-container">
-      <div class="il-about-grid">
-        <div class="il-reveal">
-          <p class="il-eyebrow-sm">Qui je suis</p>
-          <h2 class="il-h2">Louis Ronchet,<br><span>trader & formateur</span></h2>
-          <p style="color:#334155;font-size:16px;line-height:1.75;margin-bottom:16px">
-            Basé à Toulouse, j'ai commencé à investir avec un salaire ordinaire. Pas d'héritage, pas de piston — juste une méthode rigoureuse et des années passées à comprendre comment les institutionnels opèrent vraiment.
-          </p>
-          <p style="color:#334155;font-size:16px;line-height:1.75;margin-bottom:24px">
-            Aujourd'hui j'accompagne des milliers de personnes à franchir le pas avec confiance. Ce guide condense l'essentiel de ce que j'aurais aimé avoir au départ.
-          </p>
-          <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:28px">
-            <div style="display:flex;align-items:flex-start;gap:12px">
-              <div style="width:44px;height:44px;border-radius:9px;overflow:hidden;flex-shrink:0;background:#000;display:flex;align-items:center;justify-content:center;">
-                <img src="data:image/jpeg;base64,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" alt="Breakout TV" style="width:44px;height:44px;object-fit:cover;border-radius:9px;">
-              </div>
-              <div>
-                <div style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;color:#fff!important;margin-bottom:2px">Co-fondateur · Breakout TV</div>
-                <div style="font-size:13px;color:#475569;line-height:1.5">Chaîne dédiée à l'analyse des marchés financiers et à la formation des traders francophones.</div>
-              </div>
-            </div>
-            <div style="display:flex;align-items:flex-start;gap:12px">
-              <div style="width:44px;height:44px;border-radius:9px;overflow:hidden;flex-shrink:0;background:#000;display:flex;align-items:center;justify-content:center;">
-                <img src="data:image/jpeg;base64,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" alt="BTF" style="width:44px;height:44px;object-fit:cover;border-radius:9px;">
-              </div>
-              <div>
-                <div style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;color:#fff!important;margin-bottom:2px">Co-fondateur · Breakout Trading Fight</div>
-                <div style="font-size:13px;color:#475569;line-height:1.5">Le premier événement de trading façon esport — des traders s'affrontent en direct sur les marchés.</div>
-              </div>
-            </div>
-          </div>
-          <div class="il-tags">
-            <span class="il-tag">Toulouse</span>
-            <span class="il-tag">Breakout TV</span>
-            <span class="il-tag">Breakout Trading Fight</span>
-            <span class="il-tag">4 800+ abonnés</span>
-          </div>
-        </div>
-        <div class="il-reveal d2">
-          <div class="il-photo-card">
-            <div class="il-photo-inner">
-              <div class="il-photo-placeholder">
-                <div class="il-photo-icon">
-                  <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                </div>
-                <div class="il-photo-label">Photo de Louis<br>à intégrer</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section><section class="il-section">
-    <div class="il-container">
-      <div class="il-reveal" style="margin-bottom:40px">
-        <p class="il-eyebrow-sm">Breakout TV</p>
-        <h2 class="il-h2">Le trading institutionnel,<br><span>expliqué sur YouTube</span></h2>
-        
-      </div>
-      <div class="il-yt-grid il-reveal d1">
-        <a class="il-yt-card" href="https://www.youtube.com/watch?v=jg0HCpGWauU&t=1053s" target="_blank" rel="noopener">
-          <div class="il-yt-thumb"><img src="https://i.ytimg.com/vi/jg0HCpGWauU/hqdefault.jpg"><div class="il-yt-play">▶</div></div>
-          <div class="il-yt-info"><p class="il-yt-title">Vidéo 1</p></div>
-        </a>
-        <a class="il-yt-card" href="https://www.youtube.com/watch?v=bBNxc5Qwrv0&t=534s" target="_blank" rel="noopener">
-          <div class="il-yt-thumb"><img src="https://i.ytimg.com/vi/bBNxc5Qwrv0/hqdefault.jpg"><div class="il-yt-play">▶</div></div>
-          <div class="il-yt-info"><p class="il-yt-title">Vidéo 2</p></div>
-        </a>
-        <a class="il-yt-card" href="https://www.youtube.com/watch?v=l_I3HwcbkvU&t=619s" target="_blank" rel="noopener">
-          <div class="il-yt-thumb"><img src="https://i.ytimg.com/vi/l_I3HwcbkvU/hqdefault.jpg"><div class="il-yt-play">▶</div></div>
-          <div class="il-yt-info"><p class="il-yt-title">Vidéo 3</p></div>
-        </a>
-        <a class="il-yt-card" href="https://www.youtube.com/watch?v=IDhOq7JAbUs" target="_blank" rel="noopener">
-          <div class="il-yt-thumb"><img src="https://i.ytimg.com/vi/IDhOq7JAbUs/hqdefault.jpg"><div class="il-yt-play">▶</div></div>
-          <div class="il-yt-info"><p class="il-yt-title">Vidéo 4</p></div>
-        </a>
-      </div>
-      <div style="text-align:center;margin-top:32px">
-        <a href="https://www.youtube.com/@breakout-tv-off" target="_blank" rel="noopener" class="il-yt-more-btn">
-          ▶
-          Voir toutes les vidéos
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <section class="il-section alt">
-    <div class="il-container">
-      <div class="il-tp-header il-reveal">
-        <div class="il-tp-logo">
-          <svg width="36" height="36" viewBox="0 0 126 126" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="126" height="126" rx="12" fill="#00B67A"/>
-            <path d="M63 18L75.7 50.6H110.4L82.8 69.7L95.5 102.3L63 83.2L30.5 102.3L43.2 69.7L15.6 50.6H50.3L63 18Z" fill="white"/>
-          </svg>
-          <div class="il-tp-logo-text">Trust<span>pilot</span></div>
-        </div>
-        <div class="il-tp-score-row">
-          <div class="il-tp-score-num">5,0</div>
-          <div class="il-tp-stars-lg">
-            <svg viewBox="0 0 24 24" fill="#00B67A"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg viewBox="0 0 24 24" fill="#00B67A"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg viewBox="0 0 24 24" fill="#00B67A"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg viewBox="0 0 24 24" fill="#00B67A"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg viewBox="0 0 24 24" fill="#00B67A"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          </div>
-          <div class="il-tp-count">Excellent · <a href="https://fr.trustpilot.com/review/investlouis.com" target="_blank" rel="noopener">Voir tous les avis sur Trustpilot</a></div>
-        </div>
-      </div>
-      <div class="il-carousel-wrap il-reveal" id="il-carousel">
-        <div class="il-carousel-stage" id="il-stage">
-          <div class="il-testi-card" data-idx="0">
-            <div class="il-tp-badge">★<span>Trustpilot</span></div>
-            <div class="il-stars">★★★★★</div>
-            <div class="il-testi-title">Une formation d'exception</div>
-            <div class="il-testi-body collapsed" id="tc0"><p class="il-testi-text">J'ai rejoint le groupe en octobre, j'ai connu Louis sur d'autres groupes Telegram. Il a su répondre à mes questions de manière précise et simple. Par la suite j'ai décidé de rejoindre son groupe pour structurer mon trading. J'étais perdu entre les différentes stratégies et je n'avais aucune connaissance fondamentale. Dès mon arrivée Louis ainsi que les autres élèves m'ont beaucoup aidé, j'ai pu créer ma stratégie avec laquelle je suis à l'aise. Le groupe m'a permis de comprendre la fondamentale grâce aux lives de Louis.</p></div>
-            <button class="il-voir-plus" onclick="ilToggle('tc0',this)">Voir plus ▾</button>
-            <div class="il-testi-footer"><div class="il-avatar">V</div><div><div class="il-testi-name">Vk</div><div class="il-testi-date">3 juin 2024 · Avis spontané</div></div></div>
-          </div>
-          <div class="il-testi-card" data-idx="1">
-            <div class="il-tp-badge">★<span>Trustpilot</span></div>
-            <div class="il-stars">★★★★★</div>
-            <div class="il-testi-title">Bonjour à tous.</div>
-            <div class="il-testi-body collapsed" id="tc1"><p class="il-testi-text">Il y a un an, j'ai intégré le groupe de Louis. Avant, mon trading était désorganisé, sans structure ni compréhension des marchés. Rejoindre ce groupe a été un tournant. La découverte de l'analyse fondamentale a été marquante. J'ai appris à décrypter les indicateurs économiques et à intégrer cette analyse dans ma stratégie. L'esprit de cohésion et d'entraide du groupe est à souligner. Je témoigne pour encourager ceux qui hésitent à se lancer — cela a transformé mon trading et m'a offert une communauté de soutien.</p></div>
-            <button class="il-voir-plus" onclick="ilToggle('tc1',this)">Voir plus ▾</button>
-            <div class="il-testi-footer"><div class="il-avatar">J</div><div><div class="il-testi-name">James</div><div class="il-testi-date">2 juin 2024 · Avis spontané</div></div></div>
-          </div>
-          <div class="il-testi-card" data-idx="2">
-            <div class="il-tp-badge">★<span>Trustpilot</span></div>
-            <div class="il-stars">★★★★★</div>
-            <div class="il-testi-title">Sincérité, Professionnalisme et Passion !</div>
-            <div class="il-testi-body collapsed" id="tc2"><p class="il-testi-text">Louis est un trader professionnel passionné par le trading et l'investissement financier. Au delà de la stratégie technique, c'est un plaisir d'apprendre l'importance du fondamental et de l'économie en trading. Il est très ouvert à tous les styles de trading :une seule règle ici, la passion ! Il accompagne également le trader sur d'autres aspects :psychologie, nutrition, sport, diversification, fiscalité. Débutant comme avancé, chacun peut y trouver une vraie plus-value. Ce groupe est un vrai lieu de partage au sein d'une communauté bienveillante.</p></div>
-            <button class="il-voir-plus" onclick="ilToggle('tc2',this)">Voir plus ▾</button>
-            <div class="il-testi-footer"><div class="il-avatar">C</div><div><div class="il-testi-name">Carole Rosazza</div><div class="il-testi-date">27 mai 2024 · Avis spontané</div></div></div>
-          </div>
-          <div class="il-testi-card" data-idx="3">
-            <div class="il-tp-badge">★<span>Trustpilot</span></div>
-            <div class="il-stars">★★★★★</div>
-            <div class="il-testi-title">Simple et efficace, il vend pas du rêve...</div>
-            <div class="il-testi-body"><p class="il-testi-text">Simple et efficace. Il vend pas du rêve mais de très belles connaissances. Je recommande.</p></div>
-            <div class="il-testi-footer"><div class="il-avatar">J</div><div><div class="il-testi-name">Jess Jess</div><div class="il-testi-date">27 mai 2024 · Avis spontané</div></div></div>
-          </div>
-          <div class="il-testi-card" data-idx="4">
-            <div class="il-tp-badge">★<span>Trustpilot</span></div>
-            <div class="il-stars">★★★★★</div>
-            <div class="il-testi-title">Je recommande les yeux fermés</div>
-            <div class="il-testi-body collapsed" id="tc4"><p class="il-testi-text">J'ai rejoint la formation et le groupe de trading et je suis extrêmement satisfait. Le programme est bien structuré pour répondre aux besoins des traders de tous niveaux. Un des points forts :l'accent mis sur la gestion des risques, un aspect crucial souvent négligé. J'ai pu appliquer directement ce que j'avais appris et constater les résultats. La formation offre également un accès à des outils et ressources de trading de pointe. En résumé, cette formation a largement dépassé mes attentes. Je la recommande vivement.</p></div>
-            <button class="il-voir-plus" onclick="ilToggle('tc4',this)">Voir plus ▾</button>
-            <div class="il-testi-footer"><div class="il-avatar">L</div><div><div class="il-testi-name">Lucas Birot</div><div class="il-testi-date">26 mai 2024 · Avis spontané</div></div></div>
-          </div>
-          <div class="il-testi-card" data-idx="5">
-            <div class="il-tp-badge">★<span>Trustpilot</span></div>
-            <div class="il-stars">★★★★★</div>
-            <div class="il-testi-title">Du trading en famille</div>
-            <div class="il-testi-body collapsed" id="tc5"><p class="il-testi-text">J'ai rejoint cette grande famille depuis 5 mois ! Depuis que je suis dedans j'ai énormément appris niveau fondamental, j'ai aussi évolué dans mes analyses techniques. Ce n'est pas seulement un groupe qui envoie des signaux, c'est une communauté bienveillante qui s'aide mutuellement à évoluer ! Tous les matins notre mentor est en live pour l'ouverture de la bourse de Londres. Louis est une personne très professionnelle et extrêmement réactive. TOI, qui lis ce message, N'HÉSITE PLUS.</p></div>
-            <button class="il-voir-plus" onclick="ilToggle('tc5',this)">Voir plus ▾</button>
-            <div class="il-testi-footer"><div class="il-avatar">T</div><div><div class="il-testi-name">Thomas Zamuner</div><div class="il-testi-date">27 mai 2024 · Avis spontané</div></div></div>
-          </div>
-          <div class="il-testi-card" data-idx="6">
-            <div class="il-tp-badge">★<span>Trustpilot</span></div>
-            <div class="il-stars">★★★★★</div>
-            <div class="il-testi-title">Merci Louis</div>
-            <div class="il-testi-body collapsed" id="tc6"><p class="il-testi-text">Avec Louis, cela fait plus d'un an que je me forme à tes côtés. Je pense que ça a été pour moi la meilleure des choses pour apprendre le trading. Cela fait 2 ans que je suis dans ce monde. Au début j'ai commencé par le copy trading — j'ai tout perdu ou presque. Depuis que j'ai rejoint le groupe, j'ai su ce qu'est vraiment le trading. On partage tous les jours nos analyses et on les corrige ensemble. Grâce à toi, aujourd'hui je suis rentable. Je te remercie et je lâche rien.</p></div>
-            <button class="il-voir-plus" onclick="ilToggle('tc6',this)">Voir plus ▾</button>
-            <div class="il-testi-footer"><div class="il-avatar">E</div><div><div class="il-testi-name">Elyes Krichene</div><div class="il-testi-date">27 mai 2024 · Avis spontané</div></div></div>
-          </div>
-          <div class="il-testi-card" data-idx="7">
-            <div class="il-tp-badge">★<span>Trustpilot</span></div>
-            <div class="il-stars">★★★★★</div>
-            <div class="il-testi-title">Trading</div>
-            <div class="il-testi-body"><p class="il-testi-text">Je conseille à 100% cette société, car vous serez accompagné de A à Z. Si vous souhaitez apprendre le métier de Trader, c'est avec Louis. Pour ma part je suis passé de 10 euros de gain à 200 euros et une équipe qui soutient les uns les autres — on apprend bien plus.</p></div>
-            <div class="il-testi-footer"><div class="il-avatar">D</div><div><div class="il-testi-name">David</div><div class="il-testi-date">26 mai 2024 · Avis spontané</div></div></div>
-          </div>
-          <div class="il-testi-card" data-idx="8">
-            <div class="il-tp-badge">★<span>Trustpilot</span></div>
-            <div class="il-stars">★★★★★</div>
-            <div class="il-testi-title">Efficience 🔥</div>
-            <div class="il-testi-body collapsed" id="tc8"><p class="il-testi-text">Il y a maintenant plus d'un an que j'ai intégré ton groupe, aucun regret je recommande même à mes amis. Nous nous entraînons mutuellement en partageant nos points de vue ainsi que des contenus intéressants. Ce que j'apprécie c'est la clarté dans tes explications lors de tes lives réguliers. Mon évolution grâce à toi :la compréhension de l'analyse fondamentale, ce qui m'a donné un boost à mon trading. Le soutien et l'encouragement que tu nous apportes est incroyablement positif psychologiquement.</p></div>
-            <button class="il-voir-plus" onclick="ilToggle('tc8',this)">Voir plus ▾</button>
-            <div class="il-testi-footer"><div class="il-avatar">J</div><div><div class="il-testi-name">Jeremie Leblan</div><div class="il-testi-date">26 mai 2024 · Avis spontané</div></div></div>
-          </div>
-        </div>
-      </div>
-      <div class="il-carousel-nav">
-        <button class="il-nav-btn" onclick="ilCarousel(-1)" aria-label="Précédent">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
-        </button>
-        <div class="il-nav-dots" id="il-dots"></div>
-        <button class="il-nav-btn" onclick="ilCarousel(1)" aria-label="Suivant">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
-        </button>
-      </div>
-      <div style="text-align:center;margin-top:28px">
-        <a href="https://fr.trustpilot.com/review/investlouis.com" target="_blank" rel="noopener"
-           style="display:inline-flex;align-items:center;gap:8px;border:1px solid #00B67A33;border-radius:10px;padding:10px 20px;font-size:13px;font-weight:700;color:#00B67A;transition:background 0.2s;"
-           onmouseover="this.style.background='#00B67A15'" onmouseout="this.style.background='transparent'">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="#00B67A"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          Voir tous les avis sur Trustpilot
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#00B67A" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-        </a>
-      </div>
-    </div>
-  </section>
-  <section class="il-section">
-    <div class="il-container">
-      <div class="il-scarcity-wrap il-reveal">
-        <div class="il-scarcity-card">
-          <span class="il-scarcity-badge">Disponible maintenant</span>
-          <p class="il-scarcity-text">Ce guide est distribué gratuitement tant que la liste est ouverte. Je me réserve le droit de le passer en version payante à tout moment.</p>
-          <div class="il-scarcity-note">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            Accès limité · Profites-en maintenant
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section id="il-cta-final">
-    <div class="il-cta-glow"><div class="il-cta-glow-orb"></div></div>
-    <div class="il-cta-inner">
-      <div class="il-reveal">
-        <p class="il-eyebrow-sm" style="text-align:center">Dernière chance</p>
-        <h2 class="il-h2">Tu perds contre des algos<br><span>armés de ces outils.</span><br>Maintenant tu les as aussi.</h2>
-        <p class="il-cta-sub">4 800 traders ont déjà changé leur façon de lire le marché. Le guide est gratuit. L'avantage, lui, ne l'est pas.</p>
-      </div>
-      <div class="il-cta-form-wrap il-reveal d2">
-        <form class="il-form" onsubmit="ilSubmit2(event)">
-          <div class="il-field">
-            <div class="il-field-icon">
-              <svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            </div>
-            <input id="il-prenom2" class="il-input" type="text" placeholder="Ton prénom" autocomplete="given-name">
-            <div class="il-error" id="il-prenom-err2">Entre ton prénom</div>
-          </div>
-          <div class="il-field">
-            <div class="il-field-icon">
-              <svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-            </div>
-            <input id="il-email2" class="il-input" type="email" placeholder="Ton adresse email" autocomplete="email">
-            <div class="il-error" id="il-email-err2">Adresse email invalide</div>
-          </div>
-          <button type="submit" class="il-btn">Je Télécharge La Clé de la Rentabilité →</button>
-          <p class="il-trust-note">
-            <svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-            Aucun spam · Désabonnement en 1 clic
-          </p>
-        </form>
-      </div>
-    </div>
-  </section>
-  <footer id="il-footer">
-    <div class="inner">
-      <div class="il-footer-brand">
-        <div class="il-logo">INVEST<span>LOUIS</span></div>
-        <img src="data:image/jpeg;base64,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" alt="AMF" style="height:36px;width:auto;opacity:0.7;">
-      </div>
-      <div class="il-footer-disclaimer">
-        © 2024 InvestLouis · Louis Ronchet · Toulouse<br>
-        Ce contenu est à visée éducative et ne constitue pas un conseil en investissement.
-      </div>
-      <div class="il-footer-links">
-        <a href="#">Confidentialité</a>
-        <a href="#">Mentions légales</a>
-      </div>
-    </div>
-  </footer>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700;800;900&family=Barlow:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet"><style> *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}:root{--ink:#05080D;--surface:#0B1120;--panel:#101828;--blue:#1D4ED8;--blue-hi:#3B82F6;--gold:#B8963E;--text:#94A3B8;--muted:#475569;--dim:#334155;--ease:cubic-bezier(0.32,0.72,0,1);}#il-wrap{background:#05080D!important;color:#94A3B8!important;scroll-behavior:smooth;font-family:'Barlow',system-ui,sans-serif;font-weight:300!important;font-size:16px!important;line-height:1.7;overflow-x:hidden;}#il-wrap h1,#il-wrap h2,#il-wrap h3,#il-wrap h4{font-family:'Montserrat',sans-serif;text-wrap:balance;}#il-wrap p{text-wrap:pretty;}#il-wrap a{text-decoration:none;color:inherit;}#il-hero{position:relative;min-height:100dvh;display:flex;align-items:center;overflow:hidden;}#il-candles{position:absolute;inset:0;pointer-events:none;z-index:0;opacity:0.22;}.il-glow-tr{position:absolute;top:-100px;right:-100px;width:700px;height:700px;border-radius:50%;background:#1D4ED8!important;opacity:0.055;filter:blur(140px);pointer-events:none;}#il-hero .inner{position:relative;z-index:1;width:100%;max-width:1060px;margin:0 auto;padding:80px 32px;display:grid;grid-template-columns:1fr 420px;gap:56px;align-items:center;}.il-hero-left{display:flex;flex-direction:column;gap:28px;}.il-eyebrow{display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:20px;border:1px solid rgba(184,150,62,0.25);background:rgba(184,150,62,0.05)!important;font-family:'Montserrat',sans-serif;font-weight:700!important;font-size:9px!important;letter-spacing:1.5px;text-transform:uppercase;color:#B8963E!important;width:fit-content;}.il-eyebrow i{display:inline-block;width:5px;height:5px;border-radius:50%;background:#B8963E!important;}#il-hero h1{font-size:clamp(36px,4.5vw,52px)!important;font-weight:900!important;color:#fff!important;line-height:1.07;letter-spacing:-0.03em;}#il-hero h1 span{color:#3B82F6!important;}.il-sub{color:#94A3B8!important;font-size:17px!important;line-height:1.7;font-weight:300!important;max-width:460px;}.il-trust{display:flex;align-items:center;gap:20px;}.il-trust-item{display:flex;flex-direction:column;}.il-trust-item b{font-family:'Montserrat',sans-serif;font-weight:900!important;font-size:21px!important;color:#fff!important;font-variant-numeric:tabular-nums;}.il-trust-item small{font-size:11px!important;color:#475569!important;letter-spacing:0.3px;}.il-trust-sep{width:1px;height:30px;background:rgba(255,255,255,0.07)!important;}.il-hero-card{position:relative;padding:1.5px;border-radius:14px;background:linear-gradient(180deg,rgba(255,255,255,0.1) 0%,rgba(255,255,255,0.03) 100%)!important;box-shadow:0 8px 32px rgba(29,78,216,0.18);}.il-hero-card-inner{background:#0D1526!important;border-radius:12px;padding:28px;box-shadow:inset 0 1px 1px rgba(255,255,255,0.06);}.il-pdf-mock{width:100%;height:140px;background:#05080D!important;border:1px solid rgba(255,255,255,0.05);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;}.il-pdf-mock .il-pdf-icon{display:flex;flex-direction:column;align-items:center;gap:10px;}.il-pdf-icon-circle{width:36px;height:36px;border-radius:8px;background:rgba(29,78,216,0.15)!important;border:1px solid rgba(29,78,216,0.2);display:flex;align-items:center;justify-content:center;}.il-pdf-icon-circle svg{width:16px;height:16px;stroke:#3B82F6;fill:none;stroke-width:1.5;}.il-pdf-title{color:#fff!important;font-family:'Montserrat',sans-serif;font-weight:700!important;font-size:12px!important;text-align:center;}.il-pdf-sub{color:#334155!important;font-size:10px!important;text-transform:uppercase;letter-spacing:1px;text-align:center;margin-top:2px;}.il-form-heading{font-family:'Montserrat',sans-serif;font-weight:900!important;color:#fff!important;font-size:16px!important;margin-bottom:4px;}.il-form-sub{color:#334155!important;font-size:12px!important;margin-bottom:16px;}.il-form{display:flex;flex-direction:column;gap:10px;}.il-field{position:relative;}.il-field-icon{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:#334155!important;pointer-events:none;display:flex;}.il-field-icon svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.5;}.il-input{width:100%;height:46px;background:rgba(255,255,255,0.03)!important;border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:0 12px 0 38px;color:#fff!important;font-size:14px!important;font-weight:300!important;font-family:'Barlow',sans-serif;outline:none;transition:all 0.3s cubic-bezier(0.32,0.72,0,1);}.il-input::placeholder{color:#334155!important;}.il-input:focus{border-color:#1D4ED8!important;background:rgba(29,78,216,0.05)!important;}.il-input.error{border-color:rgba(239,68,68,0.5)!important;}.il-error{font-size:11px!important;color:#F87171!important;margin-top:3px;display:none;}.il-error.show{display:block;}.il-btn{margin-top:4px;width:100%;height:50px;border-radius:8px;border:none;background:#1D4ED8!important;color:#fff!important;cursor:pointer;font-family:'Montserrat',sans-serif;font-weight:800!important;font-size:10px!important;letter-spacing:1.5px;text-transform:uppercase;position:relative;overflow:hidden;box-shadow:0 4px 24px rgba(29,78,216,0.3),inset 0 1px 1px rgba(255,255,255,0.12);transition:all 0.4s cubic-bezier(0.32,0.72,0,1);}.il-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(255,255,255,0.08),transparent)!important;pointer-events:none;}.il-btn:hover{background:#2563EB!important;transform:translateY(-1px);}.il-btn:active{transform:scale(0.98);}.il-trust-note{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:4px;font-size:11px!important;color:#334155!important;}.il-trust-note svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2;}#il-ticker{border-top:1px solid rgba(255,255,255,0.05);border-bottom:1px solid rgba(255,255,255,0.05);background:#0B1120!important;padding:12px 0;overflow:hidden;position:relative;}#il-ticker::before,#il-ticker::after{content:'';position:absolute;inset-block:0;z-index:2;width:60px;pointer-events:none;}#il-ticker::before{left:0;background:linear-gradient(to right,#0B1120,transparent)!important;}#il-ticker::after{right:0;background:linear-gradient(to left,#0B1120,transparent)!important;}.il-ticker-track{display:flex;will-change:transform;animation:il-tick 36s linear infinite;}.il-ticker-item{display:flex;align-items:center;gap:8px;padding:0 24px;white-space:nowrap;}.il-ticker-item .tk-label{font-family:'Montserrat',sans-serif;font-weight:600!important;font-size:11px!important;letter-spacing:0.5px;text-transform:uppercase;color:#64748B!important;}.il-ticker-item .tk-val{font-family:'Montserrat',sans-serif;font-weight:700!important;font-size:11px!important;}.tk-up{color:#22C55E!important;}.tk-dn{color:#EF4444!important;}.tk-sep{color:rgba(255,255,255,0.1)!important;font-size:10px!important;}@keyframes il-tick{from{transform:translateX(0);}to{transform:translateX(-50%);}}.il-section{padding:100px 32px;}.il-section.alt{background:#080E1A!important;}.il-container{max-width:1060px;margin:0 auto;}.il-eyebrow-sm{font-family:'Montserrat',sans-serif;font-weight:600!important;font-size:9px!important;letter-spacing:1.5px;text-transform:uppercase;color:#475569!important;margin-bottom:10px;}.il-h2{font-size:clamp(28px,3vw,40px)!important;font-weight:900!important;color:#fff!important;line-height:1.1;letter-spacing:-0.02em;margin-bottom:20px;}.il-h2 span{color:#3B82F6!important;}.il-table{border:1px solid rgba(255,255,255,0.07);border-radius:12px;overflow:hidden;margin-bottom:40px;}.il-table-head{display:grid;grid-template-columns:1fr 1fr 1fr;background:#0B1120!important;border-bottom:1px solid rgba(255,255,255,0.07);}.il-table-head div{padding:10px 20px;font-family:'Montserrat',sans-serif;font-weight:700!important;font-size:9px!important;letter-spacing:2px;text-transform:uppercase;color:#334155!important;}.il-table-head div:nth-child(3){color:#B8963E!important;}.il-table-head div:not(:first-child){border-left:1px solid rgba(255,255,255,0.07);}.il-table-row{display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1px solid rgba(255,255,255,0.04);transition:background 0.25s;}.il-table-row:last-child{border-bottom:none;}.il-table-row:hover{background:rgba(255,255,255,0.018)!important;}.il-table-cell{padding:18px 20px;font-size:14px!important;line-height:1.45;}.il-table-cell:not(:first-child){border-left:1px solid rgba(255,255,255,0.04);}.il-table-cell.pain{color:#CBD5E1!important;display:flex;align-items:flex-start;gap:10px;}.il-table-cell.cost{color:#475569!important;font-style:italic;}.il-table-cell.fix{color:#CBD5E1!important;display:flex;align-items:flex-start;gap:10px;}.il-dot{width:6px;height:6px;border-radius:50%;margin-top:7px;flex-shrink:0;}.il-dot.red{background:rgba(239,68,68,0.5)!important;}.il-dot.green{background:rgba(34,197,94,0.6)!important;}.il-pullquote{padding-left:20px;border-left:2px solid rgba(184,150,62,0.3);margin-top:40px;}.il-pullquote p{font-family:'Georgia',serif;font-style:italic;color:#475569!important;font-size:18px!important;line-height:1.65;}.il-pullquote cite{display:block;margin-top:12px;font-family:'Montserrat',sans-serif;font-weight:700!important;font-size:9px!important;letter-spacing:1.5px;text-transform:uppercase;color:#334155!important;font-style:normal;}.il-benefits-grid{display:grid;grid-template-columns:300px 1fr;gap:56px;align-items:start;}.il-chapter{display:flex;gap:22px;padding:18px 20px;border-radius:10px;border:1px solid transparent;transition:all 0.4s cubic-bezier(0.32,0.72,0,1);cursor:default;}.il-chapter:hover{background:rgba(255,255,255,0.025)!important;border-color:rgba(255,255,255,0.06)!important;}.il-chapter-num{width:40px;height:40px;border-radius:10px;flex-shrink:0;background:rgba(29,78,216,0.12)!important;border:1px solid rgba(29,78,216,0.2);display:flex;align-items:center;justify-content:center;transition:background 0.4s,border-color 0.4s;}.il-chapter-num svg{width:20px;height:20px;stroke:#3B82F6;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}.il-chapter:hover .il-chapter-num{background:rgba(29,78,216,0.22)!important;border-color:rgba(59,130,246,0.4)!important;}.il-chapter-title{font-family:'Montserrat',sans-serif;font-weight:700!important;color:#fff!important;font-size:15px!important;margin-bottom:2px;}.il-chapter-tool{font-family:'Montserrat',sans-serif;font-weight:700!important;font-size:9px!important;letter-spacing:1px;text-transform:uppercase;color:#1D4ED8!important;margin-bottom:8px;}.il-chapter-desc{font-size:14px!important;color:#64748B!important;line-height:1.65;}.il-about-grid{display:grid;grid-template-columns:1fr 360px;gap:56px;align-items:center;}.il-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px;}.il-tag{padding:6px 12px;border:1px solid rgba(255,255,255,0.07);border-radius:20px;font-family:'Montserrat',sans-serif;font-weight:700!important;font-size:10px!important;letter-spacing:0.5px;text-transform:uppercase;color:#334155!important;transition:all 0.25s;}.il-tag:hover{border-color:rgba(255,255,255,0.12)!important;color:#475569!important;}.il-photo-card{padding:1px;border-radius:14px;background:linear-gradient(180deg,rgba(255,255,255,0.08) 0%,rgba(255,255,255,0.02) 100%)!important;}.il-photo-inner{aspect-ratio:3/4;background:#0B1120!important;border-radius:17px;display:flex;align-items:center;justify-content:center;}.il-photo-placeholder{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;padding:32px;}.il-photo-icon{width:56px;height:56px;border-radius:50%;background:rgba(29,78,216,0.15)!important;border:1px solid rgba(29,78,216,0.2);display:flex;align-items:center;justify-content:center;}.il-photo-icon svg{width:22px;height:22px;stroke:#3B82F6;fill:none;stroke-width:1.5;}.il-photo-label{font-size:12px!important;color:#334155!important;}.il-tp-header{display:flex;flex-direction:column;align-items:center;gap:16px;margin-bottom:48px;}.il-tp-logo{display:flex;align-items:center;gap:10px;}.il-tp-logo-text{font-family:'Montserrat',sans-serif;font-weight:900!important;font-size:22px!important;color:#fff!important;}.il-tp-logo-text span{color:#00B67A!important;}.il-tp-score-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:center;}.il-tp-score-num{font-family:'Montserrat',sans-serif;font-weight:900!important;font-size:36px!important;color:#fff!important;line-height:1;}.il-tp-stars-lg{display:flex;}.il-tp-count{font-size:13px!important;color:#475569!important;}.il-tp-count a{color:#00B67A!important;text-decoration:underline;text-underline-offset:2px;}.il-carousel-wrap{position:relative;perspective:1200px;height:420px;overflow:visible;}.il-carousel-stage{position:relative;width:100%;height:100%;transform-style:preserve-3d;}.il-testi-card{position:absolute;width:360px;left:50%;top:0;margin-left:-180px;background:#0F172A!important;border:1px solid rgba(255,255,255,0.09);border-radius:12px;padding:28px;display:flex;flex-direction:column;backface-visibility:hidden;will-change:transform,opacity;transition:transform 0.6s cubic-bezier(0.32,0.72,0,1),opacity 0.6s cubic-bezier(0.32,0.72,0,1),box-shadow 0.6s cubic-bezier(0.32,0.72,0,1);cursor:pointer;user-select:none;}.il-testi-card[data-pos="0"]{transform:translateX(0) translateZ(0) rotateY(0deg) scale(1);opacity:1;z-index:5;box-shadow:0 0 0 1px rgba(255,255,255,0.1),0 40px 80px rgba(0,0,0,0.6),0 8px 24px rgba(29,78,216,0.2);border-color:rgba(255,255,255,0.14)!important;}.il-testi-card[data-pos="-1"],.il-testi-card[data-pos="1"]{transform:translateX(var(--tx,0)) translateZ(-180px) rotateY(var(--ry,0)) scale(0.82);opacity:0.55;z-index:3;box-shadow:none;}.il-testi-card[data-pos="-1"]{--tx:-310px;--ry:28deg;}.il-testi-card[data-pos="1"]{--tx:310px;--ry:-28deg;}.il-testi-card[data-pos="-2"],.il-testi-card[data-pos="2"]{transform:translateX(var(--tx2,0)) translateZ(-350px) rotateY(var(--ry2,0)) scale(0.65);opacity:0.22;z-index:1;}.il-testi-card[data-pos="-2"]{--tx2:-480px;--ry2:42deg;}.il-testi-card[data-pos="2"]{--tx2:480px;--ry2:-42deg;}.il-testi-card[data-pos="-3"],.il-testi-card[data-pos="3"],.il-testi-card[data-pos="-4"],.il-testi-card[data-pos="4"]{opacity:0;pointer-events:none;transform:translateX(0) translateZ(-500px) scale(0.5);}.il-tp-badge{display:inline-flex;align-items:center;gap:5px;background:#00B67A10!important;border:1px solid #00B67A33;border-radius:6px;padding:2px 8px;margin-bottom:10px;width:fit-content;}.il-tp-badge{font-size:11px!important;color:#00B67A!important;}.il-tp-badge span{font-size:10px!important;font-weight:700!important;color:#00B67A!important;letter-spacing:0.5px;text-transform:uppercase;}.il-stars{display:flex;gap:2px;margin-bottom:10px;}.il-stars{color:#00B67A!important;font-size:13px!important;letter-spacing:1px;}.il-testi-title{font-family:'Montserrat',sans-serif;font-weight:700!important;font-size:14px!important;color:#fff!important;margin-bottom:8px;}.il-testi-date{font-size:11px!important;color:#334155!important;}.il-testi-body{position:relative;flex:1;}.il-testi-body.collapsed{max-height:110px;overflow:hidden;}.il-testi-body.collapsed::after{content:'';position:absolute;bottom:0;left:0;right:0;height:44px;background:linear-gradient(transparent,#0B1120)!important;}.il-voir-plus{background:none!important;border:none;color:#00B67A!important;font-family:inherit;font-size:11px!important;font-weight:700!important;cursor:pointer;padding:6px 0 0;display:block;letter-spacing:0.3px;}.il-voir-plus:hover{text-decoration:underline;}.il-testi-text{color:#94A3B8!important;font-size:13.5px!important;line-height:1.65;}.il-testi-footer{display:flex;align-items:center;gap:10px;padding-top:14px;margin-top:14px;border-top:1px solid rgba(255,255,255,0.05);}.il-avatar{width:34px;height:34px;border-radius:50%;flex-shrink:0;background:rgba(29,78,216,0.2)!important;border:1px solid rgba(29,78,216,0.2);display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;font-weight:700!important;font-size:12px!important;color:#3B82F6!important;}.il-testi-name{font-family:'Montserrat',sans-serif;font-weight:700!important;color:#fff!important;font-size:13px!important;}.il-carousel-nav{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:36px;}.il-nav-btn{width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.04)!important;color:#94A3B8!important;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s;flex-shrink:0;}.il-nav-btn:hover{background:rgba(255,255,255,0.1)!important;color:#fff!important;border-color:rgba(255,255,255,0.2)!important;}.il-nav-dots{display:flex;gap:6px;align-items:center;}.il-nav-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.15)!important;cursor:pointer;transition:all 0.3s cubic-bezier(0.32,0.72,0,1);}.il-nav-dot.active{width:20px;border-radius:3px;background:#00B67A!important;}.il-testi-role{font-size:11px!important;color:#475569!important;margin-top:1px;}.il-social-proof{display:flex;align-items:center;justify-content:center;gap:12px;border-top:1px solid rgba(255,255,255,0.05);padding-top:28px;margin-top:24px;}.il-avatars{display:flex;}.il-avatars .il-avatar-sm{width:28px;height:28px;border-radius:50%;margin-left:-8px;background:rgba(29,78,216,0.3)!important;border:2px solid #05080D;display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;font-weight:700!important;font-size:10px!important;color:#3B82F6!important;}.il-avatars .il-avatar-sm:first-child{margin-left:0;}.il-social-text{font-size:13px!important;color:#475569!important;}.il-social-text b{color:#fff!important;font-weight:500!important;}.il-scarcity-wrap{max-width:680px;margin:0 auto;}.il-scarcity-card{position:relative;overflow:visible;border:1px solid rgba(184,150,62,0.15);background:rgba(184,150,62,0.025)!important;border-radius:12px;padding:40px;text-align:center;box-shadow:inset 0 0 0 1px rgba(184,150,62,0.06);}.il-scarcity-badge{position:absolute;top:0;left:50%;transform:translate(-50%,-50%);display:inline-block;background:#B8963E!important;color:#05080D!important;font-family:'Montserrat',sans-serif;font-weight:900!important;font-size:9px!important;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:20px;}.il-scarcity-text{color:#475569!important;font-size:15px!important;line-height:1.7;max-width:440px;margin:0 auto 16px;}.il-scarcity-note{display:inline-flex;align-items:center;gap:8px;color:#B8963E!important;font-family:'Montserrat',sans-serif;font-weight:700!important;font-size:10px!important;letter-spacing:1.5px;text-transform:uppercase;}.il-scarcity-note svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;}#il-cta-final{position:relative;padding:120px 32px;overflow:hidden;}.il-cta-glow{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;}.il-cta-glow-orb{width:800px;height:500px;border-radius:50%;background:#1D4ED8!important;opacity:0.05;filter:blur(130px);}.il-cta-inner{position:relative;max-width:520px;margin:0 auto;text-align:center;}.il-cta-inner .il-h2{font-size:clamp(30px,3.5vw,44px)!important;margin-bottom:16px;}.il-cta-sub{color:#475569!important;font-size:16px!important;line-height:1.7;margin-bottom:36px;}.il-cta-form-wrap{max-width:400px;margin:0 auto;}#il-footer{border-top:1px solid rgba(255,255,255,0.05);padding:40px 32px;}#il-footer .inner{max-width:1060px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px;}.il-footer-brand{display:flex;align-items:center;gap:16px;}.il-footer-disclaimer{font-size:11px!important;color:#475569!important;text-align:center;max-width:440px;line-height:1.6;}.il-footer-links{display:flex;gap:14px;}.il-footer-links a{font-size:11px!important;color:#475569!important;text-transform:uppercase;letter-spacing:0.5px;font-family:'Montserrat',sans-serif;font-weight:700!important;transition:color 0.2s;}.il-footer-links a:hover{color:#334155!important;}.il-reveal{opacity:1;transform:translateY(0);transition:opacity 0.7s cubic-bezier(0.19,1,0.22,1),transform 0.7s cubic-bezier(0.19,1,0.22,1);}.il-reveal.d1{transition-delay:0.1s;}.il-reveal.d2{transition-delay:0.22s;}.il-reveal.d3{transition-delay:0.36s;}.il-reveal.vis{opacity:1;transform:translateY(0);}.il-yt-more-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border:1px solid rgba(255,255,255,0.1);border-radius:8px;color:#94A3B8!important;font-family:'Montserrat',sans-serif;font-weight:700!important;font-size:10px!important;letter-spacing:1px;text-transform:uppercase;transition:all 0.2s;}.il-yt-wrap{position:relative;perspective:1100px;height:265px;overflow:visible;}.il-yt-stage{position:relative;width:100%;height:100%;transform-style:preserve-3d;}.il-yt-card{position:absolute;width:360px;left:50%;margin-left:-180px;top:0;display:flex;flex-direction:column;border-radius:10px;overflow:hidden;background:#0B1120!important;border:1px solid rgba(255,255,255,0.07);text-decoration:none;backface-visibility:hidden;transition:transform 0.6s cubic-bezier(0.32,0.72,0,1),opacity 0.6s,box-shadow 0.6s;user-select:none;cursor:pointer;}.il-yt-card[data-pos="0"]{transform:translateX(0) translateZ(0) scale(1);opacity:1;z-index:5;box-shadow:0 0 0 1px rgba(255,255,255,0.12),0 20px 50px rgba(0,0,0,0.5);border-color:rgba(255,255,255,0.14)!important;pointer-events:auto;}.il-yt-card[data-pos="-1"],.il-yt-card[data-pos="1"]{opacity:0.5;z-index:3;pointer-events:none;}.il-yt-card[data-pos="-1"]{transform:translateX(-310px) translateZ(-150px) rotateY(26deg) scale(0.82);}.il-yt-card[data-pos="1"]{transform:translateX(310px) translateZ(-150px) rotateY(-26deg) scale(0.82);}.il-yt-card[data-pos="-2"],.il-yt-card[data-pos="2"]{opacity:0.18;z-index:1;pointer-events:none;}.il-yt-card[data-pos="-2"]{transform:translateX(-490px) translateZ(-290px) rotateY(40deg) scale(0.65);}.il-yt-card[data-pos="2"]{transform:translateX(490px) translateZ(-290px) rotateY(-40deg) scale(0.65);}.il-yt-card[data-pos="-3"],.il-yt-card[data-pos="3"]{opacity:0;pointer-events:none;}.il-yt-thumb{position:relative;aspect-ratio:16/9;overflow:hidden;background:#05080D!important;}.il-yt-thumb img{width:100%;height:100%;object-fit:cover;display:block;}.il-yt-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3)!important;opacity:0;transition:opacity 0.2s;font-size:32px!important;color:#fff!important;}.il-yt-card[data-pos="0"]:hover .il-yt-play{opacity:1;}.il-yt-info{padding:10px 14px;}.il-yt-title{color:#CBD5E1!important;font-size:13px!important;font-weight:500!important;line-height:1.4;margin:0;}@media (max-width:900px){#il-hero .inner{grid-template-columns:1fr;}.il-benefits-grid{grid-template-columns:1fr;}.il-about-grid{grid-template-columns:1fr;}.il-tp-score-num{font-size:28px!important;}.il-tp-stars-lg svg{width:24px;height:24px;}.il-testi-card{width:300px;margin-left:-150px;}.il-testi-card[data-pos="-1"]{--tx:-240px;}.il-testi-card[data-pos="1"]{--tx:240px;}.il-testi-card[data-pos="-2"]{--tx2:-360px;}.il-testi-card[data-pos="2"]{--tx2:360px;}.il-carousel-wrap{height:480px;}.il-table-head,.il-table-row{grid-template-columns:1fr;}.il-table-head div:not(:first-child),.il-table-cell:not(:first-child){border-left:none;border-top:1px solid rgba(255,255,255,0.04);}}@media (max-width:600px){.il-section{padding:64px 16px;}#il-hero .inner{padding:60px 16px;}}</style><div id="il-wrap">
+<section id="il-hero">
+<canvas id="il-candles"></canvas>
+<div class="il-glow-tr"></div>
+<div class="inner">
+<div class="il-hero-left">
+<div class="il-reveal d1">
+<div class="il-eyebrow"><i></i> Guide Gratuit</div>
+<h1 style="margin-top:16px">
+Arrête de trader<br>
+<span>contre les institutions.</span><br>
+Trade avec elles.
+</h1>
+<p class="il-sub" style="margin-top:18px">
+Order flow, Volume Profile, COT Report — les outils des salles de
+marché, expliqués pour un trader retail. Gratuit,
+applicable cette semaine.
+</p>
 </div>
-<script>
+<div class="il-trust il-reveal d2">
+<div class="il-trust-item">
+<b>4 800+</b><small>lecteurs actifs</small>
+</div>
+<div class="il-trust-sep"></div>
+<div class="il-trust-item">
+<b>4.9 / 5</b><small>note moyenne</small>
+</div>
+<div class="il-trust-sep"></div>
+<div class="il-trust-item">
+<b>100%</b><small>gratuit</small>
+</div>
+</div>
+</div>
+<div id="il-hero-form" class="il-hero-card il-reveal d1">
+<div class="il-hero-card-inner">
+<div class="il-pdf-mock">
+<div class="il-pdf-icon">
+<div class="il-pdf-icon-circle">
+<svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+</div>
+<div class="il-pdf-title">La Clé de la Rentabilité</div>
+<div class="il-pdf-sub">Guide PDF · Couverture à venir</div>
+</div>
+</div>
+<p class="il-form-heading">Accède au guide — gratuitement</p>
+<p class="il-form-sub">Dans ta boîte mail en 2 minutes. Zéro spam.</p>
+<form class="il-form" onsubmit="ilSubmit(event)">
+<div class="il-field">
+<div class="il-field-icon">
+<svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+</div>
+<input id="il-prenom" class="il-input" type="text" placeholder="Ton prénom" autocomplete="given-name">
+<div class="il-error" id="il-prenom-err">Entre ton prénom</div>
+</div>
+<div class="il-field">
+<div class="il-field-icon">
+<svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+</div>
+<input id="il-email" class="il-input" type="email" placeholder="Ton adresse email" autocomplete="email">
+<div class="il-error" id="il-email-err">Adresse email invalide</div>
+</div>
+<button type="submit" class="il-btn">Télécharger La Clé de la Rentabilité →</button>
+<p class="il-trust-note">
+<svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+Aucun spam · Désabonnement en 1 clic
+</p>
+</form>
+</div>
+</div>
+</div>
+</section>
+<div id="il-ticker" aria-hidden="true">
+<div class="il-ticker-track" id="il-ticker-track"></div>
+</div>
+<section class="il-section">
+<div class="il-container">
+<div class="il-reveal">
+<p class="il-eyebrow-sm">Le diagnostic</p>
+<h2 class="il-h2">Pourquoi 90% des traders retail<br><span>perdent face aux institutions</span></h2>
+</div>
+<div class="il-table il-reveal">
+<div class="il-table-head">
+<div>Problème actuel</div>
+<div>Coût réel</div>
+<div>Dans le guide</div>
+</div>
+<div class="il-table-row">
+<div class="il-table-cell pain"><span class="il-dot red"></span>Tu trades sans lire le flux des ordres institutionnels</div>
+<div class="il-table-cell cost">Tu te bats contre les pros — et tu perds</div>
+<div class="il-table-cell fix"><span class="il-dot green"></span>Order flow & DOM :lire les intentions du marché</div>
+</div>
+<div class="il-table-row">
+<div class="il-table-cell pain"><span class="il-dot red"></span>Tes indicateurs retardent sur le prix</div>
+<div class="il-table-cell cost">Tu entres trop tard, tu sors trop tôt</div>
+<div class="il-table-cell fix"><span class="il-dot green"></span>Volume Profile & VWAP institutionnel</div>
+</div>
+<div class="il-table-row">
+<div class="il-table-cell pain"><span class="il-dot red"></span>Tu ignores les zones de liquidité des gros acteurs</div>
+<div class="il-table-cell cost">Tes stops sont chassés systématiquement</div>
+<div class="il-table-cell fix"><span class="il-dot green"></span>Smart Money Concepts & zones d'accumulation</div>
+</div>
+<div class="il-table-row">
+<div class="il-table-cell pain"><span class="il-dot red"></span>Pas de contexte macro dans ton analyse</div>
+<div class="il-table-cell cost">Tu trades contre la tendance de fond</div>
+<div class="il-table-cell fix"><span class="il-dot green"></span>COT Report & positionnement des institutionnels</div>
+</div>
+</div>
+<div class="il-pullquote il-reveal d2">
+<p>"Ce n'est pas une question de talent. C'est une question d'information. Les institutions gagnent parce qu'elles voient ce que tu ne vois pas encore."</p>
+<cite>Louis Ronchet · InvestLouis</cite>
+</div>
+</div>
+</section>
+<section class="il-section alt">
+<div class="il-container">
+<div class="il-benefits-grid">
+<div class="il-reveal">
+<p class="il-eyebrow-sm">Ce que contient le guide</p>
+<h2 class="il-h2">4 outils pro.<br><span>Applicables demain.</span></h2>
+<p style="color:#475569;font-size:15px;line-height:1.7">Chaque outil est expliqué avec des cas concrets sur des marchés réels. Comment le configurer, comment le lire, quand agir.</p>
+</div>
+<div>
+<div class="il-chapter il-reveal">
+<div class="il-chapter-num">
+<svg viewBox="0 0 24 24"><path d="M3 12h4M3 6h8M3 18h6"/><rect x="9" y="9" width="12" height="10" rx="1.5"/><path d="M9 13h12M13 9v10"/></svg>
+</div>
+<div>
+<div class="il-chapter-title">Lire les intentions du marché</div>
+<div class="il-chapter-tool">Order Flow & DOM</div>
+<div class="il-chapter-desc">Tu verras les zones où les gros acheteurs s'accumulent — avant que le prix réagisse. Finis les entrées en retard.</div>
+</div>
+</div>
+<div class="il-chapter il-reveal d1">
+<div class="il-chapter-num">
+<svg viewBox="0 0 24 24"><rect x="3" y="14" width="3" height="7" rx="1"/><rect x="8" y="9" width="3" height="12" rx="1"/><rect x="13" y="5" width="3" height="16" rx="1"/><rect x="18" y="11" width="3" height="10" rx="1"/><path d="M2 9l20-5" stroke-dasharray="3 2"/></svg>
+</div>
+<div>
+<div class="il-chapter-title">Entrer au bon prix, pas au mauvais moment</div>
+<div class="il-chapter-tool">Volume Profile & VWAP</div>
+<div class="il-chapter-desc">Les institutionnels ont une valeur juste en tête. Ce chapitre t'apprend à la calculer toi aussi.</div>
+</div>
+</div>
+<div class="il-chapter il-reveal d2">
+<div class="il-chapter-num">
+<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="8"/><path d="M12 4v2M12 18v2M4 12h2M18 12h2"/><path d="M6.3 6.3l1.4 1.4M16.3 16.3l1.4 1.4M16.3 7.7l-1.4 1.4M7.7 16.3l-1.4 1.4"/></svg>
+</div>
+<div>
+<div class="il-chapter-title">Arrêter de te faire chasser</div>
+<div class="il-chapter-tool">Smart Money Concepts</div>
+<div class="il-chapter-desc">Tes stops se déclenchent juste avant que le prix parte dans ton sens ? Ce n'est pas de la malchance.</div>
+</div>
+</div>
+<div class="il-chapter il-reveal d3">
+<div class="il-chapter-num">
+<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2"/><path d="M16 8l-4 4-4 4 4-4 4-4z" stroke-width="0" fill="#3B82F6"/><path d="M16 8l-4 4M12 12l-4 4"/></svg>
+</div>
+<div>
+<div class="il-chapter-title">Savoir dans quel sens souffle le vent</div>
+<div class="il-chapter-tool">COT Report & Macro</div>
+<div class="il-chapter-desc">Les hedge funds publient leur positionnement chaque vendredi. Ce chapitre t'apprend à le lire en 10 minutes.</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="il-section">
+<div class="il-container">
+<div class="il-about-grid">
+<div class="il-reveal">
+<p class="il-eyebrow-sm">Qui je suis</p>
+<h2 class="il-h2">Louis Ronchet,<br><span>trader & formateur</span></h2>
+<p style="color:#334155;font-size:16px;line-height:1.75;margin-bottom:16px">
+Basé à Toulouse, j'ai commencé à investir avec un salaire ordinaire. Pas d'héritage, pas de piston — juste une méthode rigoureuse et des années passées à comprendre comment les institutionnels opèrent vraiment.
+</p>
+<p style="color:#334155;font-size:16px;line-height:1.75;margin-bottom:24px">
+Aujourd'hui j'accompagne des milliers de personnes à franchir le pas avec confiance. Ce guide condense l'essentiel de ce que j'aurais aimé avoir au départ.
+</p>
+<div style="display:flex;flex-direction:column;gap:12px;margin-bottom:28px">
+<div style="display:flex;align-items:flex-start;gap:12px">
+<div style="width:44px;height:44px;border-radius:9px;overflow:hidden;flex-shrink:0;background:#000;display:flex;align-items:center;justify-content:center;">
+<img src="data:image/jpeg;base64,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" alt="Breakout TV" style="width:44px;height:44px;object-fit:cover;border-radius:9px;">
+</div>
+<div>
+<div style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;color:#fff!important;margin-bottom:2px">Co-fondateur · Breakout TV</div>
+<div style="font-size:13px;color:#475569;line-height:1.5">Chaîne dédiée à l'analyse des marchés financiers et à la formation des traders francophones.</div>
+</div>
+</div>
+<div style="display:flex;align-items:flex-start;gap:12px">
+<div style="width:44px;height:44px;border-radius:9px;overflow:hidden;flex-shrink:0;background:#000;display:flex;align-items:center;justify-content:center;">
+<img src="data:image/jpeg;base64,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" alt="BTF" style="width:44px;height:44px;object-fit:cover;border-radius:9px;">
+</div>
+<div>
+<div style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;color:#fff!important;margin-bottom:2px">Co-fondateur · Breakout Trading Fight</div>
+<div style="font-size:13px;color:#475569;line-height:1.5">Le premier événement de trading façon esport — des traders s'affrontent en direct sur les marchés.</div>
+</div>
+</div>
+</div>
+<div class="il-tags">
+<span class="il-tag">Toulouse</span>
+<span class="il-tag">Breakout TV</span>
+<span class="il-tag">Breakout Trading Fight</span>
+<span class="il-tag">4 800+ abonnés</span>
+</div>
+</div>
+<div class="il-reveal d2">
+<div class="il-photo-card">
+<div class="il-photo-inner">
+<div class="il-photo-placeholder">
+<div class="il-photo-icon">
+<svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+</div>
+<div class="il-photo-label">Photo de Louis<br>à intégrer</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><section class="il-section">
+<div class="il-container">
+<div class="il-reveal" style="margin-bottom:40px">
+<p class="il-eyebrow-sm">Breakout TV</p>
+<h2 class="il-h2">Le trading institutionnel,<br><span>expliqué sur YouTube</span></h2>
+</div>
+<div class="il-yt-wrap il-reveal d1" id="il-yt-carousel">
+<div class="il-yt-stage" id="il-yt-stage">
+<a class="il-yt-card" href="https://www.youtube.com/watch?v=jg0HCpGWauU&t=1053s" target="_blank" rel="noopener"><div class="il-yt-thumb"><img src="https://i.ytimg.com/vi/jg0HCpGWauU/hqdefault.jpg"><div class="il-yt-play">▶</div></div><div class="il-yt-info"><p class="il-yt-title">Vidéo 1</p></div></a>
+<a class="il-yt-card" href="https://www.youtube.com/watch?v=bBNxc5Qwrv0&t=534s" target="_blank" rel="noopener"><div class="il-yt-thumb"><img src="https://i.ytimg.com/vi/bBNxc5Qwrv0/hqdefault.jpg"><div class="il-yt-play">▶</div></div><div class="il-yt-info"><p class="il-yt-title">Vidéo 2</p></div></a>
+<a class="il-yt-card" href="https://www.youtube.com/watch?v=l_I3HwcbkvU&t=619s" target="_blank" rel="noopener"><div class="il-yt-thumb"><img src="https://i.ytimg.com/vi/l_I3HwcbkvU/hqdefault.jpg"><div class="il-yt-play">▶</div></div><div class="il-yt-info"><p class="il-yt-title">Vidéo 3</p></div></a>
+<a class="il-yt-card" href="https://www.youtube.com/watch?v=IDhOq7JAbUs" target="_blank" rel="noopener"><div class="il-yt-thumb"><img src="https://i.ytimg.com/vi/IDhOq7JAbUs/hqdefault.jpg"><div class="il-yt-play">▶</div></div><div class="il-yt-info"><p class="il-yt-title">Vidéo 4</p></div></a>
+<a class="il-yt-card" href="https://www.youtube.com/watch?v=nMZc51OQkbU" target="_blank" rel="noopener"><div class="il-yt-thumb"><img src="https://i.ytimg.com/vi/nMZc51OQkbU/hqdefault.jpg"><div class="il-yt-play">▶</div></div><div class="il-yt-info"><p class="il-yt-title">Vidéo 5</p></div></a>
+<a class="il-yt-card" href="https://www.youtube.com/watch?v=UO1FbGNSHo0&t=1371s" target="_blank" rel="noopener"><div class="il-yt-thumb"><img src="https://i.ytimg.com/vi/UO1FbGNSHo0/hqdefault.jpg"><div class="il-yt-play">▶</div></div><div class="il-yt-info"><p class="il-yt-title">Vidéo 6</p></div></a>
+</div>
+</div>
+<div class="il-carousel-nav" style="margin-top:24px">
+<button class="il-nav-btn" onclick="ilYtC(-1)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
+<div class="il-nav-dots" id="il-yt-dots"></div>
+<button class="il-nav-btn" onclick="ilYtC(1)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></button>
+</div>
+<div style="text-align:center;margin-top:20px"><a href="https://www.youtube.com/@breakout-tv-off" target="_blank" rel="noopener" class="il-yt-more-btn">▶ Voir toutes les vidéos</a></div>
+</div>
+</div>
+<div class="il-carousel-wrap il-reveal" id="il-carousel">
+<div class="il-carousel-stage" id="il-stage">
+<div class="il-testi-card" data-idx="0">
+<div class="il-tp-badge">★<span>Trustpilot</span></div>
+<div class="il-stars">★★★★★</div>
+<div class="il-testi-title">Une formation d'exception</div>
+<div class="il-testi-body collapsed" id="tc0"><p class="il-testi-text">J'ai rejoint le groupe en octobre, j'ai connu Louis sur d'autres groupes Telegram. Il a su répondre à mes questions de manière précise et simple. Par la suite j'ai décidé de rejoindre son groupe pour structurer mon trading. J'étais perdu entre les différentes stratégies et je n'avais aucune connaissance fondamentale. Dès mon arrivée Louis ainsi que les autres élèves m'ont beaucoup aidé, j'ai pu créer ma stratégie avec laquelle je suis à l'aise. Le groupe m'a permis de comprendre la fondamentale grâce aux lives de Louis.</p></div>
+<button class="il-voir-plus" onclick="ilToggle('tc0',this)">Voir plus ▾</button>
+<div class="il-testi-footer"><div class="il-avatar">V</div><div><div class="il-testi-name">Vk</div><div class="il-testi-date">3 juin 2024 · Avis spontané</div></div></div>
+</div>
+<div class="il-testi-card" data-idx="1">
+<div class="il-tp-badge">★<span>Trustpilot</span></div>
+<div class="il-stars">★★★★★</div>
+<div class="il-testi-title">Bonjour à tous.</div>
+<div class="il-testi-body collapsed" id="tc1"><p class="il-testi-text">Il y a un an, j'ai intégré le groupe de Louis. Avant, mon trading était désorganisé, sans structure ni compréhension des marchés. Rejoindre ce groupe a été un tournant. La découverte de l'analyse fondamentale a été marquante. J'ai appris à décrypter les indicateurs économiques et à intégrer cette analyse dans ma stratégie. L'esprit de cohésion et d'entraide du groupe est à souligner. Je témoigne pour encourager ceux qui hésitent à se lancer — cela a transformé mon trading et m'a offert une communauté de soutien.</p></div>
+<button class="il-voir-plus" onclick="ilToggle('tc1',this)">Voir plus ▾</button>
+<div class="il-testi-footer"><div class="il-avatar">J</div><div><div class="il-testi-name">James</div><div class="il-testi-date">2 juin 2024 · Avis spontané</div></div></div>
+</div>
+<div class="il-testi-card" data-idx="2">
+<div class="il-tp-badge">★<span>Trustpilot</span></div>
+<div class="il-stars">★★★★★</div>
+<div class="il-testi-title">Sincérité, Professionnalisme et Passion !</div>
+<div class="il-testi-body collapsed" id="tc2"><p class="il-testi-text">Louis est un trader professionnel passionné par le trading et l'investissement financier. Au delà de la stratégie technique, c'est un plaisir d'apprendre l'importance du fondamental et de l'économie en trading. Il est très ouvert à tous les styles de trading :une seule règle ici, la passion ! Il accompagne également le trader sur d'autres aspects :psychologie, nutrition, sport, diversification, fiscalité. Débutant comme avancé, chacun peut y trouver une vraie plus-value. Ce groupe est un vrai lieu de partage au sein d'une communauté bienveillante.</p></div>
+<button class="il-voir-plus" onclick="ilToggle('tc2',this)">Voir plus ▾</button>
+<div class="il-testi-footer"><div class="il-avatar">C</div><div><div class="il-testi-name">Carole Rosazza</div><div class="il-testi-date">27 mai 2024 · Avis spontané</div></div></div>
+</div>
+<div class="il-testi-card" data-idx="3">
+<div class="il-tp-badge">★<span>Trustpilot</span></div>
+<div class="il-stars">★★★★★</div>
+<div class="il-testi-title">Simple et efficace, il vend pas du rêve...</div>
+<div class="il-testi-body"><p class="il-testi-text">Simple et efficace. Il vend pas du rêve mais de très belles connaissances. Je recommande.</p></div>
+<div class="il-testi-footer"><div class="il-avatar">J</div><div><div class="il-testi-name">Jess Jess</div><div class="il-testi-date">27 mai 2024 · Avis spontané</div></div></div>
+</div>
+<div class="il-testi-card" data-idx="4">
+<div class="il-tp-badge">★<span>Trustpilot</span></div>
+<div class="il-stars">★★★★★</div>
+<div class="il-testi-title">Je recommande les yeux fermés</div>
+<div class="il-testi-body collapsed" id="tc4"><p class="il-testi-text">J'ai rejoint la formation et le groupe de trading et je suis extrêmement satisfait. Le programme est bien structuré pour répondre aux besoins des traders de tous niveaux. Un des points forts :l'accent mis sur la gestion des risques, un aspect crucial souvent négligé. J'ai pu appliquer directement ce que j'avais appris et constater les résultats. La formation offre également un accès à des outils et ressources de trading de pointe. En résumé, cette formation a largement dépassé mes attentes. Je la recommande vivement.</p></div>
+<button class="il-voir-plus" onclick="ilToggle('tc4',this)">Voir plus ▾</button>
+<div class="il-testi-footer"><div class="il-avatar">L</div><div><div class="il-testi-name">Lucas Birot</div><div class="il-testi-date">26 mai 2024 · Avis spontané</div></div></div>
+</div>
+<div class="il-testi-card" data-idx="5">
+<div class="il-tp-badge">★<span>Trustpilot</span></div>
+<div class="il-stars">★★★★★</div>
+<div class="il-testi-title">Du trading en famille</div>
+<div class="il-testi-body collapsed" id="tc5"><p class="il-testi-text">J'ai rejoint cette grande famille depuis 5 mois ! Depuis que je suis dedans j'ai énormément appris niveau fondamental, j'ai aussi évolué dans mes analyses techniques. Ce n'est pas seulement un groupe qui envoie des signaux, c'est une communauté bienveillante qui s'aide mutuellement à évoluer ! Tous les matins notre mentor est en live pour l'ouverture de la bourse de Londres. Louis est une personne très professionnelle et extrêmement réactive. TOI, qui lis ce message, N'HÉSITE PLUS.</p></div>
+<button class="il-voir-plus" onclick="ilToggle('tc5',this)">Voir plus ▾</button>
+<div class="il-testi-footer"><div class="il-avatar">T</div><div><div class="il-testi-name">Thomas Zamuner</div><div class="il-testi-date">27 mai 2024 · Avis spontané</div></div></div>
+</div>
+<div class="il-testi-card" data-idx="6">
+<div class="il-tp-badge">★<span>Trustpilot</span></div>
+<div class="il-stars">★★★★★</div>
+<div class="il-testi-title">Merci Louis</div>
+<div class="il-testi-body collapsed" id="tc6"><p class="il-testi-text">Avec Louis, cela fait plus d'un an que je me forme à tes côtés. Je pense que ça a été pour moi la meilleure des choses pour apprendre le trading. Cela fait 2 ans que je suis dans ce monde. Au début j'ai commencé par le copy trading — j'ai tout perdu ou presque. Depuis que j'ai rejoint le groupe, j'ai su ce qu'est vraiment le trading. On partage tous les jours nos analyses et on les corrige ensemble. Grâce à toi, aujourd'hui je suis rentable. Je te remercie et je lâche rien.</p></div>
+<button class="il-voir-plus" onclick="ilToggle('tc6',this)">Voir plus ▾</button>
+<div class="il-testi-footer"><div class="il-avatar">E</div><div><div class="il-testi-name">Elyes Krichene</div><div class="il-testi-date">27 mai 2024 · Avis spontané</div></div></div>
+</div>
+<div class="il-testi-card" data-idx="7">
+<div class="il-tp-badge">★<span>Trustpilot</span></div>
+<div class="il-stars">★★★★★</div>
+<div class="il-testi-title">Trading</div>
+<div class="il-testi-body"><p class="il-testi-text">Je conseille à 100% cette société, car vous serez accompagné de A à Z. Si vous souhaitez apprendre le métier de Trader, c'est avec Louis. Pour ma part je suis passé de 10 euros de gain à 200 euros et une équipe qui soutient les uns les autres — on apprend bien plus.</p></div>
+<div class="il-testi-footer"><div class="il-avatar">D</div><div><div class="il-testi-name">David</div><div class="il-testi-date">26 mai 2024 · Avis spontané</div></div></div>
+</div>
+<div class="il-testi-card" data-idx="8">
+<div class="il-tp-badge">★<span>Trustpilot</span></div>
+<div class="il-stars">★★★★★</div>
+<div class="il-testi-title">Efficience 🔥</div>
+<div class="il-testi-body collapsed" id="tc8"><p class="il-testi-text">Il y a maintenant plus d'un an que j'ai intégré ton groupe, aucun regret je recommande même à mes amis. Nous nous entraînons mutuellement en partageant nos points de vue ainsi que des contenus intéressants. Ce que j'apprécie c'est la clarté dans tes explications lors de tes lives réguliers. Mon évolution grâce à toi :la compréhension de l'analyse fondamentale, ce qui m'a donné un boost à mon trading. Le soutien et l'encouragement que tu nous apportes est incroyablement positif psychologiquement.</p></div>
+<button class="il-voir-plus" onclick="ilToggle('tc8',this)">Voir plus ▾</button>
+<div class="il-testi-footer"><div class="il-avatar">J</div><div><div class="il-testi-name">Jeremie Leblan</div><div class="il-testi-date">26 mai 2024 · Avis spontané</div></div></div>
+</div>
+</div>
+</div>
+<div class="il-carousel-nav">
+<button class="il-nav-btn" onclick="ilCarousel(-1)" aria-label="Précédent">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+</button>
+<div class="il-nav-dots" id="il-dots"></div>
+<button class="il-nav-btn" onclick="ilCarousel(1)" aria-label="Suivant">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+</button>
+</div>
+<div style="text-align:center;margin-top:28px">
+<a href="https://fr.trustpilot.com/review/investlouis.com" target="_blank" rel="noopener"
+style="display:inline-flex;align-items:center;gap:8px;border:1px solid #00B67A33;border-radius:10px;padding:10px 20px;font-size:13px;font-weight:700;color:#00B67A;transition:background 0.2s;"
+onmouseover="this.style.background='#00B67A15'" onmouseout="this.style.background='transparent'">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="#00B67A"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+Voir tous les avis sur Trustpilot
+<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#00B67A" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+</a>
+</div>
+</div>
+</section>
+<section class="il-section">
+<div class="il-container">
+<div class="il-scarcity-wrap il-reveal">
+<div class="il-scarcity-card">
+<span class="il-scarcity-badge">Disponible maintenant</span>
+<p class="il-scarcity-text">Ce guide est distribué gratuitement tant que la liste est ouverte. Je me réserve le droit de le passer en version payante à tout moment.</p>
+<div class="il-scarcity-note">
+<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+Accès limité · Profites-en maintenant
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="il-cta-final">
+<div class="il-cta-glow"><div class="il-cta-glow-orb"></div></div>
+<div class="il-cta-inner">
+<div class="il-reveal">
+<p class="il-eyebrow-sm" style="text-align:center">Dernière chance</p>
+<h2 class="il-h2">Tu perds contre des algos<br><span>armés de ces outils.</span><br>Maintenant tu les as aussi.</h2>
+<p class="il-cta-sub">4 800 traders ont déjà changé leur façon de lire le marché. Le guide est gratuit. L'avantage, lui, ne l'est pas.</p>
+</div>
+<div class="il-cta-form-wrap il-reveal d2">
+<form class="il-form" onsubmit="ilSubmit2(event)">
+<div class="il-field">
+<div class="il-field-icon">
+<svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+</div>
+<input id="il-prenom2" class="il-input" type="text" placeholder="Ton prénom" autocomplete="given-name">
+<div class="il-error" id="il-prenom-err2">Entre ton prénom</div>
+</div>
+<div class="il-field">
+<div class="il-field-icon">
+<svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+</div>
+<input id="il-email2" class="il-input" type="email" placeholder="Ton adresse email" autocomplete="email">
+<div class="il-error" id="il-email-err2">Adresse email invalide</div>
+</div>
+<button type="submit" class="il-btn">Je Télécharge La Clé de la Rentabilité →</button>
+<p class="il-trust-note">
+<svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+Aucun spam · Désabonnement en 1 clic
+</p>
+</form>
+</div>
+</div>
+</section>
+<footer id="il-footer">
+<div class="inner">
+<div class="il-footer-brand">
+<div class="il-logo">INVEST<span>LOUIS</span></div>
+<img src="data:image/jpeg;base64,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" alt="AMF" style="height:36px;width:auto;opacity:0.7;">
+</div>
+<div class="il-footer-disclaimer">
+© 2024 InvestLouis · Louis Ronchet · Toulouse<br>
+Ce contenu est à visée éducative et ne constitue pas un conseil en investissement.
+</div>
+<div class="il-footer-links">
+<a href="#">Confidentialité</a>
+<a href="#">Mentions légales</a>
+</div>
+</div>
+</footer>
+</div><script>
 (function() {var items = [
     {l:'CAC 40',v:'+1.24%',u:true},{l:'S&P 500',v:'+0.87%',u:true},
     {l:'BTC/USD',v:'+3.41%',u:true},{l:'EUR/USD',v:'-0.12%',u:false},
@@ -447,18 +411,18 @@
         + '<span class="tk-val '+(it.u?'tk-up':'tk-dn')+'">'+it.v+'</span>'
         + '<span class="tk-sep">·</span>'
         + '</span>';});});track.innerHTML = html;function ilToggle(id, btn) {var el = document.getElementById(id);var collapsed = el.classList.toggle('collapsed');btn.textContent = collapsed ? 'Voir plus ▾' :'Voir moins ▴';}
-  (function() {var cards = Array.from(document.querySelectorAll('#il-stage .il-testi-card'));var N = cards.length;var cur = 0;var dotsEl = document.getElementById('il-dots');// build dots
+  (function() {var cards = Array.from(document.querySelectorAll('#il-stage .il-testi-card'));var N = cards.length;var cur = 0;var dotsEl = document.getElementById('il-dots');
     cards.forEach(function(_, i) {var d = document.createElement('div');d.className = 'il-nav-dot' + (i === 0 ? ' active' :'');d.onclick = function() {ilGoto(i);};dotsEl.appendChild(d);});function render() {var dots = dotsEl.querySelectorAll('.il-nav-dot');dots.forEach(function(d, i) {d.classList.toggle('active', i === cur);});cards.forEach(function(card, i) {var rel = ((i - cur) % N + N) % N;if (rel > N / 2) rel -= N;var clamped = Math.max(-4, Math.min(4, rel));card.setAttribute('data-pos', clamped);card.style.pointerEvents = (rel === 0) ? 'auto' :'none';});}
-    window.ilCarousel = function(dir) {cur = (cur + dir + N) % N;render();};window.ilGoto = function(i) {cur = i;render();};// click side cards to advance
-    cards.forEach(function(card, i) {card.addEventListener('click', function() {var pos = parseInt(card.getAttribute('data-pos') || '0');if (pos !== 0) ilCarousel(pos > 0 ? 1 :-1);});});// swipe / drag
-    var startX = 0;var wrap = document.getElementById('il-carousel');wrap.addEventListener('pointerdown', function(e) {startX = e.clientX;});wrap.addEventListener('pointerup', function(e) {var dx = e.clientX - startX;if (Math.abs(dx) > 40) ilCarousel(dx < 0 ? 1 :-1);});// keyboard
-    document.addEventListener('keydown', function(e) {if (e.key === 'ArrowLeft')  ilCarousel(-1);if (e.key === 'ArrowRight') ilCarousel(1);});// auto-advance
+    window.ilCarousel = function(dir) {cur = (cur + dir + N) % N;render();};window.ilGoto = function(i) {cur = i;render();};
+    cards.forEach(function(card, i) {card.addEventListener('click', function() {var pos = parseInt(card.getAttribute('data-pos') || '0');if (pos !== 0) ilCarousel(pos > 0 ? 1 :-1);});});
+    var startX = 0;var wrap = document.getElementById('il-carousel');wrap.addEventListener('pointerdown', function(e) {startX = e.clientX;});wrap.addEventListener('pointerup', function(e) {var dx = e.clientX - startX;if (Math.abs(dx) > 40) ilCarousel(dx < 0 ? 1 :-1);});
+    document.addEventListener('keydown', function(e) {if (e.key === 'ArrowLeft')  ilCarousel(-1);if (e.key === 'ArrowRight') ilCarousel(1);});
     var timer = setInterval(function() {ilCarousel(1);}, 5000);wrap.addEventListener('pointerdown', function() {clearInterval(timer);});render();})();var obs = new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target);}});}, {threshold:0.1});document.querySelectorAll('.il-reveal').forEach(function(el){obs.observe(el);});function validateForm(prenomId, emailId, prenomErrId, emailErrId) {var prenom = document.getElementById(prenomId);var email  = document.getElementById(emailId);var pErr   = document.getElementById(prenomErrId);var eErr   = document.getElementById(emailErrId);var ok = true;if (!prenom.value.trim()) {prenom.classList.add('error');pErr.classList.add('show');ok = false;} else {prenom.classList.remove('error');pErr.classList.remove('show');}
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {email.classList.add('error');eErr.classList.add('show');ok = false;} else {email.classList.remove('error');eErr.classList.remove('show');}
     return ok;}
-  window.ilSubmit = function(e) {e.preventDefault();if (validateForm('il-prenom','il-email','il-prenom-err','il-email-err')) {/* → intégrer l'action Systeme.io ici */}};window.ilSubmit2 = function(e) {e.preventDefault();if (validateForm('il-prenom2','il-email2','il-prenom-err2','il-email-err2')) {/* → intégrer l'action Systeme.io ici */}};/* live clear errors */
+  window.ilSubmit = function(e) {e.preventDefault();if (validateForm('il-prenom','il-email','il-prenom-err','il-email-err')) {}};window.ilSubmit2 = function(e) {e.preventDefault();if (validateForm('il-prenom2','il-email2','il-prenom-err2','il-email-err2')) {}};
   ['il-prenom','il-email','il-prenom2','il-email2'].forEach(function(id){var el = document.getElementById(id);if(el) el.addEventListener('input', function(){el.classList.remove('error');var errId = id.replace('il-','il-').replace('prenom','prenom-err').replace('email','email-err');var err = document.getElementById(errId);if(err) err.classList.remove('show');});});
-  /* Candlestick background */
+  (function(){var yc=Array.from(document.querySelectorAll('#il-yt-stage .il-yt-card'));var yn=yc.length,yp=0,yd=document.getElementById('il-yt-dots');yc.forEach(function(_,i){var d=document.createElement('div');d.className='il-nav-dot'+(i===0?' active':'');d.onclick=function(){yp=i;yr();};yd.appendChild(d);});function yr(){yd.querySelectorAll('.il-nav-dot').forEach(function(d,i){d.classList.toggle('active',i===yp);});yc.forEach(function(c,i){var r=((i-yp)%yn+yn)%yn;if(r>yn/2)r-=yn;c.setAttribute('data-pos',Math.max(-3,Math.min(3,r)));c.style.pointerEvents=(r===0)?'auto':'none';});}window.ilYtC=function(d){yp=(yp+d+yn)%yn;yr();};yc.forEach(function(c){c.addEventListener('click',function(){var p=parseInt(c.getAttribute('data-pos')||'0');if(p!==0)ilYtC(p>0?1:-1);});});var sx=0,yw=document.getElementById('il-yt-carousel');yw.addEventListener('pointerdown',function(e){sx=e.clientX;});yw.addEventListener('pointerup',function(e){if(Math.abs(e.clientX-sx)>40)ilYtC(e.clientX<sx?1:-1);});yr();})();
   (function(){var cv=document.getElementById('il-candles');if(!cv)return;var ctx=cv.getContext('2d');var W,H,candles=[];var BLUES=['#1D4ED8','#2563EB','#3B82F6','#1E40AF','#60A5FA','#93C5FD'];function resize(){var hero=document.getElementById('il-hero');W=cv.width=hero?hero.offsetWidth:window.innerWidth;H=cv.height=hero?hero.offsetHeight:window.innerHeight;init();}
   function rnd(a,b){return a+Math.random()*(b-a);}
   function init(){candles=[];var cols=Math.floor(W/16);for(var i=0;i<cols;i++){candles.push({x:i*16+8,bodyH:rnd(60,260),wickT:rnd(15,50),wickB:rnd(15,50),bull:Math.random()>0.42,color:BLUES[Math.floor(Math.random()*BLUES.length)],speed:rnd(0.15,0.5),phase:rnd(0,Math.PI*2),baseY:rnd(H*0.15,H*0.85)});}}
